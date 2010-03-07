@@ -44,7 +44,7 @@ import conf # variables used by the program
 NB_BITS = 256
 # stronger RSA keys implies lower performance :-(
 
-print(("Generating", NB_BITS, "bits RSA keys ..."))
+print("Generating", NB_BITS, "bits RSA keys ...")
 key = rsa.RSA(nb_bits = NB_BITS)
 pub, priv = (key.b, key.n), (key.a, key.n)
 

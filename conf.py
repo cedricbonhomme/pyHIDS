@@ -36,17 +36,19 @@ __copyright__ = "Copyright (c) 2010 Cedric Bonhomme"
 __license__ = "GPL v3"
 
 
+pyhids_location = "/home/cedric/prog/python/pyhids/"
+
 # address of the log file :
-log_location = "/home/cedric/pyHIDS/log"
+log_location = pyhids_location + "log"
 # address of the saved base of hash values :
-base_location = "/home/cedric/pyHIDS/base"
+base_location = pyhids_location + "base"
 
 
 # address of the private key
 # (used only genBase.py by to crypt the base of hash values) :
-priv_key_location = "/home/cedric/pyHIDS/cle_priv"
+priv_key_location = pyhids_location + "cle_priv"
 # address of the public key (used to decrypt the base of hash values) :
-pub_key_location = "/home/cedric/pyHIDS/cle_pub"
+pub_key_location = pyhids_location + "cle_pub"
 
 # mail of admins
 admin_mail = ["yourmail@mail.com"]
@@ -56,9 +58,9 @@ sender = "sendermail@mail.com"
 
 # specific files to scan :
 specific_files_to_scan = [ \
-        "/home/cedric/pyHIDS/pyHIDS.py",
-        "/home/cedric/pyHIDS/conf.py",
-        "/home/cedric/pyHIDS/rsa/__init__.py",
+        pyhids_location + "pyHIDS.py",
+        pyhids_location + "conf.py",
+        pyhids_location + "rsa/__init__.py",
         #"/home/cedric/pyHIDS/genBase.py", (genBase.py should not stay on the computer)
         "/etc/cron.hourly/pyHIDS", \
         "/boot/grub/menu.lst", \
