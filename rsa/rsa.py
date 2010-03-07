@@ -100,12 +100,12 @@ class RSA(object):
     def picklechops(self, chops):
         """Serializes and transforms 'chops' in base 64."""
         value = zlib.compress(dumps(chops))
-        encoded = base64.encodestring(value)
+        encoded = base64.encodebytes(value)
         return encoded.strip()
 
     def unpicklechops(self, string):
         """Deserializes 'string'."""
-        return loads(zlib.decompress(base64.decodestring(string)))
+        return loads(zlib.decompress(base64.decodebytes(string)))
 
     def __str__(self):
         """Pretty print of keys."""
