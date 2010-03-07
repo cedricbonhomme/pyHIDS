@@ -1,8 +1,6 @@
 #! /usr/local/bin/python
 #-*- coding: utf-8 -*-
 
-
-
 """This script generates the base of hash values.
 """
 
@@ -34,8 +32,6 @@ __author__ = "Cedric Bonhomme"
 __date__ = "$Date: 2010/03/06 $"
 __copyright__ = "Copyright (c) 2010 Cedric Bonhomme"
 __license__ = "GPL v3"
-
-
 
 import hashlib
 import pickle
@@ -76,7 +72,7 @@ def hash_file(target_file):
     except:
         # The specified file does not exist,
         # remove from the list.
-        print(("File", target_file, "does not exist."))
+        print("File", target_file, "does not exist.")
         globals()['number_of_files_to_scan'] = \
             globals()['number_of_files_to_scan'] - 1
         del list_of_files[list_of_files.index(target_file)]
@@ -100,14 +96,13 @@ if __name__ == '__main__':
     with open(conf.pub_key_location, "rb") as key:
         pub_key = pickle.load(key)
         key = rsa.RSA()
-        print(pub_key)
         key.b, key.n = pub_key[0], pub_key[1]
 
     # Open the base of hash values
     try:
         base = open(conf.base_location, "w")
     except Exception as e:
-        print(("Error :", e))
+        print("Error :", e)
         exit(0)
 
 
@@ -129,5 +124,5 @@ if __name__ == '__main__':
             encrypted_line = key.encrypt_text(line)
             encrypted_line = encrypted_line.decode().replace('\n', '')
             base.write(encrypted_line+"\n")
-    print((number_of_files_to_scan, "files in the base."))
+    print(number_of_files_to_scan, "files in the base.")
     base.close()
