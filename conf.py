@@ -36,7 +36,7 @@ __copyright__ = "Copyright (c) 2010 Cedric Bonhomme"
 __license__ = "GPL v3"
 
 
-pyhids_location = "/home/cedric/prog/python/pyhids/"
+pyhids_location = "/home/cedric/programming/python/projects/pyhids/"
 
 # address of the log file :
 log_location = pyhids_location + "log"

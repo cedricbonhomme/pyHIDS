@@ -64,7 +64,7 @@ def load_base():
     # try to open the saved base of hash values
     base_file = None
     try:
-        base_file = open(conf.base_location, "rb")
+        base_file = open(conf.base_location, "r")
     except:
         globals()['warning'] = globals()['warning'] + 1
         log("Base file " + conf.base_location + " does no exist.")
@@ -73,8 +73,9 @@ def load_base():
         # dictionnary containing the files and hash values
         result = {}
         for line in base_file:
-            clearLine = key.decrypt_text(line)
-            (address, sha256, _) = clearLine.split(":")
+            #clearLine = key.decrypt_text(line)
+            #(address, sha256, _) = clearLine.split(":")
+            (address, sha256, _) = str(line).split(":")
             result[address] = sha256
         base_file.close()
         return result
@@ -209,7 +210,7 @@ if __name__ == "__main__":
             list_of_threads.append(thread)
         else:
             error = error + 1
-            log(file + "does not exist. " + \
+            log(file + " does not exist. " + \
                   "Or not enought privilege to read it.")
 
     # blocks the calling thread until the thread

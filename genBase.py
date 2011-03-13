@@ -40,6 +40,7 @@ import glob
 import re
 
 from rsa import rsa
+from rsa import authentication
 import conf  # variables used by the program
 
 def search_files(motif, root_path):
@@ -64,6 +65,7 @@ def hash_file(target_file):
     sha256_hash = hashlib.sha256()
     opened_file = None
     hashed_data = None
+    data = None
 
     # Handle the errors that may happen
     try:
@@ -77,10 +79,10 @@ def hash_file(target_file):
             globals()['number_of_files_to_scan'] - 1
         del list_of_files[list_of_files.index(target_file)]
     finally:
-        if opened_file is not None:
+        if data is not None:
             opened_file.close()
 
-    if opened_file is not None:
+    if data is not None:
         sha256_hash.update(data.encode('utf-8'))
         hashed_data = sha256_hash.hexdigest()
 
@@ -121,8 +123,6 @@ if __name__ == '__main__':
         hash_value = hash_file(a_file)
         if hash_value is not None:
             line = a_file + ":" + hash_value + ":"
-            encrypted_line = key.encrypt_text(line)
-            encrypted_line = encrypted_line.decode().replace('\n', '')
-            base.write(encrypted_line+"\n")
+            base.write(line+"\n")
     print(number_of_files_to_scan, "files in the base.")
     base.close()
