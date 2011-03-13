@@ -45,7 +45,6 @@ import threading
 
 from email import *
 
-from rsa import rsa
 import conf # variables used by the program
 
 def load_base():
@@ -55,11 +54,7 @@ def load_base():
     and theirs hash value.
     """
     # load the private key (to decrypt the base)
-    priv_key = None
-    with open(conf.priv_key_location, "rb") as rsa_key:
-        priv_key = pickle.load(rsa_key)
-        key = rsa.RSA()
-        key.a, key.n = priv_key[0], priv_key[1]
+    
 
     # try to open the saved base of hash values
     base_file = None
@@ -69,7 +64,7 @@ def load_base():
         globals()['warning'] = globals()['warning'] + 1
         log("Base file " + conf.base_location + " does no exist.")
 
-    if base_file is not None and priv_key is not None:
+    if base_file is not None:
         # dictionnary containing the files and hash values
         result = {}
         for line in base_file:

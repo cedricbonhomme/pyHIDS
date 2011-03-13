@@ -39,8 +39,6 @@ import os
 import glob
 import re
 
-from rsa import rsa
-from rsa import authentication
 import conf  # variables used by the program
 
 def search_files(motif, root_path):
@@ -95,10 +93,7 @@ if __name__ == '__main__':
     print("Loading public key")
 
     # Load the public key to crypt the result.
-    with open(conf.pub_key_location, "rb") as key:
-        pub_key = pickle.load(key)
-        key = rsa.RSA()
-        key.b, key.n = pub_key[0], pub_key[1]
+    
 
     # Open the base of hash values
     try:
