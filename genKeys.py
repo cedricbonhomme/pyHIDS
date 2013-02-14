@@ -38,15 +38,14 @@ __license__ = "GPL v3"
 
 import pickle
 
-from rsa import rsa
+import rsa
 import conf # variables used by the program
 
 NB_BITS = 256
 # stronger RSA keys implies lower performance :-(
 
 print("Generating", NB_BITS, "bits RSA keys ...")
-key = rsa.RSA(nb_bits = NB_BITS)
-pub, priv = (key.b, key.n), (key.a, key.n)
+pub, priv = rsa.newkeys(NB_BITS)
 
 cle_pub = open(conf.pub_key_location, "wb")
 cle_priv = open(conf.priv_key_location, "wb")
