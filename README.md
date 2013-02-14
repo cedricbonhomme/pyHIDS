@@ -146,7 +146,7 @@ Thank you!
 
 License
 -------
-[pyHIDS](https://bitbucket.org/cedricbonhomme/pyaggr3g470r/) is under [GPLv3](http://www.gnu.org/licenses/gpl-3.0.txt) license.
+[pyHIDS](https://bitbucket.org/cedricbonhomme/pyhids/) is under [GPLv3](http://www.gnu.org/licenses/gpl-3.0.txt) license.
 
 
 
