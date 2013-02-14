@@ -38,6 +38,7 @@ import pickle
 import os
 import glob
 import re
+import rsa
 
 import conf  # variables used by the program
 
@@ -90,10 +91,6 @@ def hash_file(target_file):
 
 if __name__ == '__main__':
     # Point of entry in execution mode.
-    print("Loading public key")
-
-    # Load the public key to encrypt the result.
-    
 
     # Open the base of hash values
     try:
@@ -101,7 +98,6 @@ if __name__ == '__main__':
     except Exception as e:
         print("Error :", e)
         exit(0)
-
 
     # load the specific files to scan
     list_of_files = conf.specific_files_to_scan
@@ -121,3 +117,14 @@ if __name__ == '__main__':
             base.write(line+"\n")
     print(number_of_files_to_scan, "files in the base.")
     base.close()
+
+    # Loads the private key
+    with open(conf.priv_key_location, "rb") as private_key_dump:
+        private_key = pickle.load(private_key_dump)
+
+    # Sign the base of hash
+    signature = rsa.sign(open(conf.base_location, "r").read().encode(), private_key, 'SHA-256')
+
+    # Writes the signature in a file.
+    with open("./signature", "w") as signature_file:
+        signature_file.write(str(signature))

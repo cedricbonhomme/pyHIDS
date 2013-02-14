@@ -41,7 +41,7 @@ import pickle
 import rsa
 import conf # variables used by the program
 
-NB_BITS = 256
+NB_BITS = 752
 # stronger RSA keys implies lower performance :-(
 
 print("Generating", NB_BITS, "bits RSA keys ...")
