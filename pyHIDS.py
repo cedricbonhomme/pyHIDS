@@ -191,7 +191,7 @@ if __name__ == "__main__":
         public_key = pickle.load(public_key_dump)
     with open("./signature", "rb") as signature_file:
         signature = signature_file.read()
-    with open(conf.log_location, 'rb') as msgfile:
+    with open(conf.base_location, 'rb') as msgfile:
         rsa.verify(msgfile, signature, public_key)
 
 
