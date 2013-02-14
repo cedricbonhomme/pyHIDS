@@ -176,9 +176,22 @@ def log_mail(mfrom, mto, message):
 if __name__ == "__main__":
     # Point of entry in execution mode
 
+
+    # Verify the integrity of the base of hashes
+    with open(conf.pub_key_location, "rb") as public_key_dump:
+        public_key = pickle.load(public_key_dump)
+    with open("./signature", "rb") as signature_file:
+        signature = signature_file.read()
+    with open(conf.base_location, 'rb') as msgfile:
+        try:
+            rsa.verify(msgfile, signature, public_key)
+        except rsa.pkcs1.VerificationError as e:
+            print("Verification of the base of hashes failed!")
+            exit(0)
+
+
     # lock object to protect the log file during the writing
     lock = threading.Lock()
-
     # open the log file
     log_file = None
     try:
@@ -186,17 +199,9 @@ if __name__ == "__main__":
     except Exception as e:
         print(("Something wrong happens when opening the logs :-(", e))
 
-    # Loads the public key
-    with open(conf.pub_key_location, "rb") as public_key_dump:
-        public_key = pickle.load(public_key_dump)
-    with open("./signature", "rb") as signature_file:
-        signature = signature_file.read()
-    with open(conf.base_location, 'rb') as msgfile:
-        rsa.verify(msgfile, signature, public_key)
-
-
     log(time.strftime("[%d/%m/%y %H:%M:%S] HIDS starting.", \
                            time.localtime()))
+
 
     warning, error = 0, 0
 
