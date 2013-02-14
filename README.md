@@ -6,7 +6,7 @@ Presentation
 pyHIDS is a little [HIDS](http://en.wikipedia.org/wiki/Host-based_intrusion_detection_system)
 (written for my personal needs) for verifying the integrity of a system.
 
-
+Tested with Python 3.2.
 
 
 Configuration
@@ -64,17 +64,15 @@ This list contains people to prevent when a file has been modified. It must also
 If you do not want to receive email alerts, simply leave the list empty.
 
 
-=== General configuration ===
+General configuration
+---------------------
 
-    * address of pyHIDS on your system: **pyhids_location**.
-
-
-=== So, you just have to configure ===
 * the address of pyHIDS on your system;
 * email(s) for alerts;
 * if needed: folder_rules.
 
-== Test ==
+Test
+----
 To test the program, enter the commands:
 
     python genKeys.py
@@ -82,7 +80,8 @@ To test the program, enter the commands:
     python pyHIDS.py
 
 
-=== Example ===
+Example
+-------
 
     [cedric@localhost pyhids]$ python3.1 genKeys.py
     Generating 256 bits RSA keys ...
