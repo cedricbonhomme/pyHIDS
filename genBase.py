@@ -123,8 +123,9 @@ if __name__ == '__main__':
         private_key = pickle.load(private_key_dump)
 
     # Sign the base of hash
-    signature = rsa.sign(open(conf.base_location, "r").read().encode(), private_key, 'SHA-256')
+    with open(conf.base_location, 'rb') as msgfile:
+        signature = rsa.sign(msgfile, private_key, 'SHA-1')
 
     # Writes the signature in a file.
-    with open("./signature", "w") as signature_file:
-        signature_file.write(str(signature))
+    with open("./signature", "wb") as signature_file:
+        signature_file.write(signature)

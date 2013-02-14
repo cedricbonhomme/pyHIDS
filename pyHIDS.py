@@ -42,6 +42,7 @@ import pickle
 import smtplib
 import hashlib
 import threading
+import rsa
 
 from email import *
 
@@ -184,6 +185,15 @@ if __name__ == "__main__":
         log_file = open(conf.log_location, "a")
     except Exception as e:
         print(("Something wrong happens when opening the logs :-(", e))
+
+    # Loads the public key
+    with open(conf.pub_key_location, "rb") as public_key_dump:
+        public_key = pickle.load(public_key_dump)
+    with open("./signature", "rb") as signature_file:
+        signature = signature_file.read()
+    with open(conf.log_location, 'rb') as msgfile:
+        rsa.verify(msgfile, signature, public_key)
+
 
     log(time.strftime("[%d/%m/%y %H:%M:%S] HIDS starting.", \
                            time.localtime()))
