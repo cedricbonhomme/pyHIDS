@@ -35,8 +35,9 @@ __date__ = "$Date: 2013/02/14 $"
 __copyright__ = "Copyright (c) 2010-2013-2013 Cedric Bonhomme"
 __license__ = "GPL v3"
 
+import os
 
-pyhids_location = "/home/cedric/programming/python/pyhids/"
+pyhids_location = os.path.abspath(".")
 
 # address of the log file :
 log_location = pyhids_location + "log"
