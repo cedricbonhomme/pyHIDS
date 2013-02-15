@@ -40,16 +40,16 @@ import os
 pyhids_location = os.path.abspath(".")
 
 # address of the log file :
-log_location = pyhids_location + "log"
+log_location = os.path.join(pyhids_location, "log")
 # address of the saved base of hash values :
-base_location = pyhids_location + "base"
+base_location = os.path.join(pyhids_location, "base")
 
 
 # address of the private key
 # (used only genBase.py by to crypt the base of hash values) :
-priv_key_location = pyhids_location + "cle_priv"
+priv_key_location = os.path.join(pyhids_location, "cle_priv")
 # address of the public key (used to decrypt the base of hash values) :
-pub_key_location = pyhids_location + "cle_pub"
+pub_key_location = os.path.join(pyhids_location, "cle_pub")
 
 # mail of admins
 admin_mail = ["yourmail@mail.com"]
@@ -59,8 +59,8 @@ sender = "sendermail@mail.com"
 
 # specific files to scan :
 specific_files_to_scan = [ \
-        pyhids_location + "pyHIDS.py",
-        pyhids_location + "conf.py",
+        os.path.join(pyhids_location, "pyHIDS.py"),
+        os.path.join(pyhids_location, "conf.py"),
         #"/home/cedric/pyHIDS/genBase.py", (genBase.py should not stay on the computer)
         "/etc/cron.hourly/pyHIDS", \
         "/boot/grub/menu.lst", \
