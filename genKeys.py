@@ -37,14 +37,10 @@ __revesion__ = "$Date: 2013/02/16 $"
 __copyright__ = "Copyright (c) 2010-2013 Cedric Bonhomme"
 __license__ = "GPL v3"
 
-
 import pickle
-
 import rsa
-import conf # variables used by the program
 
-
-# stronger RSA keys implies lower performance :-(
+import conf
 
 print("Generating", conf.NB_BITS, "bits RSA keys ...")
 pub, priv = rsa.newkeys(conf.NB_BITS)

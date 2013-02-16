@@ -62,14 +62,10 @@ LOGS = os.path.join(PATH, "log")
 # address of the saved base of hash values :
 DATABASE = os.path.join(PATH, "base")
 
-
-# address of the private key
-# used only genBase.py by to sign the database of hash values :
+# path of the private key (to sign the database of hash values) :
 PRIVATE_KEY = os.path.join(PATH, "pyhids_rsa")
-# address of the public key (used to decrypt the base of hash values) :
+# path of the public key (to check the integrity of the database) :
 PUBLIC_KEY = os.path.join(PATH, "pyhids_rsa.pub")
-
-
 
 
 # specific files to scan :
@@ -88,4 +84,3 @@ FOLDER_RULES = [ \
                 ("conf", "/etc"), \
                 ("list", "/etc/apt") \
                 ]
-# used by search_files() in genBase.py

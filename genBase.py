@@ -42,10 +42,11 @@ import glob
 import re
 import rsa
 
-import conf  # variables used by the program
+import conf
 
 def search_files(motif, root_path):
-    """Return a list of files.
+    """
+    Return a list of files.
 
     Search fo files containing 'motif' that
     aren't symbolic links.
@@ -61,7 +62,8 @@ def search_files(motif, root_path):
     return result
 
 def hash_file(target_file):
-    """Hash the file given in parameter.
+    """
+    Hash the file given in parameter.
     """
     sha256_hash = hashlib.sha256()
     opened_file = None

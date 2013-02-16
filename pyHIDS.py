@@ -77,7 +77,8 @@ def load_base():
     return None
 
 def compare_hash(target_file, expected_hash):
-    """Compare 2 hash values.
+    """
+    Compare 2 hash values.
 
     Compare the hash value of the target file
     with the expected hash value.
@@ -136,7 +137,6 @@ def compare_hash(target_file, expected_hash):
                         local_time+"\n"+message+"\n\nHave a nice day !\n\n" + \
                         "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))
 
-
 def log(message, display=False):
     """
     Print and save the log in the log file.
@@ -173,12 +173,8 @@ def log_mail(mfrom, mto, message):
     server.quit()
 
 
-
-
 if __name__ == "__main__":
     # Point of entry in execution mode
-
-
     # Verify the integrity of the base of hashes
     with open(conf.PUBLIC_KEY, "rb") as public_key_dump:
         public_key = pickle.load(public_key_dump)
@@ -204,7 +200,6 @@ if __name__ == "__main__":
 
     log(time.strftime("[%d/%m/%y %H:%M:%S] HIDS starting.", \
                            time.localtime()))
-
 
     warning, error = 0, 0
 
