@@ -45,7 +45,8 @@ import hashlib
 import threading
 import rsa
 
-from email import *
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 import conf # variables used by the program
 
@@ -59,10 +60,10 @@ def load_base():
     # try to open the saved base of hash values
     base_file = None
     try:
-        base_file = open(conf.base_location, "r")
+        base_file = open(conf.DATABASE, "r")
     except:
         globals()['warning'] = globals()['warning'] + 1
-        log("Base file " + conf.base_location + " does no exist.")
+        log("Base file " + conf.DATABASE + " does no exist.")
 
     if base_file is not None:
         # dictionnary containing the files and hash values
@@ -128,11 +129,11 @@ def compare_hash(target_file, expected_hash):
 
             # reporting alert via mail
             # this list contains the admins to prevent
-            for admin in conf.admin_mail:
-                log_mail(conf.sender, \
+            for admin in conf.MAIL_TO:
+                log_mail(conf.MAIL_FROM, \
                         admin, \
                         local_time+"\n"+message+"\n\nHave a nice day !\n\n" + \
-                        "\nThis mail was sent to :\n"+"\n".join(conf.admin_mail))
+                        "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))
 
 
 def log(message, display=False):
@@ -159,16 +160,15 @@ def log_mail(mfrom, mto, message):
     """
     Send the warning via mail
     """
-    email = MIMEText(message)
+    email = MIMEText(message, 'plain', 'utf-8')
     email['From'] = mfrom
     email['To'] = mto
     email['Subject'] = 'pyHIDS : Alerte'
     #email['Text'] = message
 
-    server = smtplib.SMTP('smtp.orange.fr')
-    server.sendmail(mfrom, \
-                    mto, \
-                    email.as_string())
+    server = smtplib.SMTP(conf.SMTP_SERVER)
+    server.login(conf.USERNAME, conf.PASSWORD)
+    server.send_message(email)
     server.quit()
 
 
@@ -179,11 +179,11 @@ if __name__ == "__main__":
 
 
     # Verify the integrity of the base of hashes
-    with open(conf.pub_key_location, "rb") as public_key_dump:
+    with open(conf.PUBLIC_KEY, "rb") as public_key_dump:
         public_key = pickle.load(public_key_dump)
     with open("./signature", "rb") as signature_file:
         signature = signature_file.read()
-    with open(conf.base_location, 'rb') as msgfile:
+    with open(conf.DATABASE, 'rb') as msgfile:
         try:
             rsa.verify(msgfile, signature, public_key)
         except rsa.pkcs1.VerificationError as e:
@@ -196,9 +196,10 @@ if __name__ == "__main__":
     # open the log file
     log_file = None
     try:
-        log_file = open(conf.log_location, "a")
+        log_file = open(conf.LOGS, "a")
     except Exception as e:
         print(("Something wrong happens when opening the logs :-(", e))
+        exit(0)
 
     log(time.strftime("[%d/%m/%y %H:%M:%S] HIDS starting.", \
                            time.localtime()))

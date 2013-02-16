@@ -36,32 +36,44 @@ __copyright__ = "Copyright (c) 2010-2013-2013 Cedric Bonhomme"
 __license__ = "GPL v3"
 
 import os
+import configparser
+# load the configuration
+config = configparser.SafeConfigParser()
+try:
+    config.read("./conf.cfg")
+except:
+    config.read("./conf.cfg-sample")
 
-pyhids_location = os.path.abspath(".")
+PATH = os.path.abspath(".")
+
+NB_BITS = int(config.get('globals','nb_bits'))
+
+MAIL_ENABLED = bool(int(config.get('email','enabled')))
+MAIL_FROM = config.get('email','mail_from')
+MAIL_TO = [config.get('email','mail_to')]
+SMTP_SERVER = config.get('email','smtp')
+USERNAME =  config.get('email','username')
+PASSWORD =  config.get('email','password')
 
 # address of the log file :
-log_location = os.path.join(pyhids_location, "log")
+LOGS = os.path.join(PATH, "log")
 # address of the saved base of hash values :
-base_location = os.path.join(pyhids_location, "base")
+DATABASE = os.path.join(PATH, "base")
 
 
 # address of the private key
 # (used only genBase.py by to crypt the base of hash values) :
-priv_key_location = os.path.join(pyhids_location, "cle_priv")
+PRIVATE_KEY = os.path.join(PATH, "cle_priv")
 # address of the public key (used to decrypt the base of hash values) :
-pub_key_location = os.path.join(pyhids_location, "cle_pub")
+PUBLIC_KEY = os.path.join(PATH, "cle_pub")
 
-# mail of admins
-admin_mail = ["yourmail@mail.com"]
-# mail of the sender
-sender = "sendermail@mail.com"
+
 
 
 # specific files to scan :
-specific_files_to_scan = [ \
-        os.path.join(pyhids_location, "pyHIDS.py"),
-        os.path.join(pyhids_location, "conf.py"),
-        #"/home/cedric/pyHIDS/genBase.py", (genBase.py should not stay on the computer)
+SPECIFIC_FILES_TO_SCAN = [ \
+        os.path.join(PATH, "pyHIDS.py"),
+        os.path.join(PATH, "conf.py"),
         "/etc/cron.hourly/pyHIDS", \
         "/boot/grub/menu.lst", \
         "/etc/shadow", \
@@ -69,6 +81,6 @@ specific_files_to_scan = [ \
         "/etc/networks"]
 
 # rules to scan folders :
-folder_rules = [ \
+FOLDER_RULES = [ \
     ("conf", "/etc")]
 # used by search_files() in genBase.py

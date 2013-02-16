@@ -94,16 +94,16 @@ if __name__ == '__main__':
 
     # Open the base of hash values
     try:
-        base = open(conf.base_location, "w")
+        base = open(conf.DATABASE, "w")
     except Exception as e:
         print("Error :", e)
         exit(0)
 
     # load the specific files to scan
-    list_of_files = conf.specific_files_to_scan
+    list_of_files = conf.SPECIFIC_FILES_TO_SCAN
 
     # adding the folders with rules to scan :
-    for rules in conf.folder_rules:
+    for rules in conf.FOLDER_RULES:
         list_of_files.extend(search_files(rules[0], rules[1]))
     number_of_files_to_scan = len(list_of_files)
 
@@ -119,11 +119,11 @@ if __name__ == '__main__':
     base.close()
 
     # Loads the private key
-    with open(conf.priv_key_location, "rb") as private_key_dump:
+    with open(conf.PRIVATE_KEY, "rb") as private_key_dump:
         private_key = pickle.load(private_key_dump)
 
     # Sign the base of hash
-    with open(conf.base_location, 'rb') as msgfile:
+    with open(conf.DATABASE, 'rb') as msgfile:
         signature = rsa.sign(msgfile, private_key, 'SHA-1')
 
     # Writes the signature in a file.
