@@ -11,44 +11,21 @@ Tested with Python 3.2.
 
 Configuration
 -------------
-The configuration is very easy. 
+The configuration is very easy. First copy the sample configuration file:
 
+    $ cp ./conf.cfg-sample ./conf.cfg
 
-    pyhids_location = "/home/cedric/python/pyhids/"
+And edit the file **conf.cfg**:
 
-    # address of the log file :
-    log_location = pyhids_location + "log"
-    # address of the saved base of hash values :
-    base_location = pyhids_location + "base"
-
-    # address of the private key
-    # (used only by genBase.py to crypt the base of hash values) :
-    priv_key_location = pyhids_location + "cle_priv"
-    # address of the public key (used to decrypt the base of hash values) :
-    pub_key_location = pyhids_location + "cle_pub"
-
-    # mail of admins
-    admin_mail = ["yourmail@mail.com"]
-    # mail of the sender
-    sender = "sendermail@mail.com"
-
-    # specific files to scan :
-    specific_files_to_scan = [ \
-            pyhids_location + "pyHIDS.py",
-            pyhids_location + "conf.py",
-            pyhids_location + "rsa/__init__.py",
-            #pyhids_location + "genBase.py", (genBase.py should not stay on the computer)
-            "/etc/cron.hourly/pyHIDS", \
-            "/boot/grub/menu.lst", \
-            "/etc/shadow", \
-            "/etc/crontab", \
-            "/etc/networks"]
-
-    # rules to scan folders :
-    folder_rules = [ \
-        ("conf", "/etc")]
-    # used by search_files() in genBase.py
-
+    [globals]
+    nb_bits = 752
+    [email]
+    enabled = 0
+    mail_from = pyHIDS@no-reply.com
+    mail_to = you_address
+    smtp = SMTP_server
+    username = your_username
+    password = your_password
 
 
 RSA keys and base generation
@@ -75,25 +52,25 @@ Test
 ----
 To test the program, enter the commands:
 
-    python genKeys.py
-    python genBase.py
-    python pyHIDS.py
+    $ ./genKeys.py
+    $ ./genBase.py
+    $ ./pyHIDS.py
 
 
 Example
 -------
 
-    [cedric@localhost pyhids]$ python3.1 genKeys.py
-    Generating 256 bits RSA keys ...
+    $ ./genKeys.py
+    Generating 752 bits RSA keys ...
     Dumping Keys
     Done.
 
-    [cedric@localhost pyhids]$ python3.1 genBase.py
+    $ ./genBase.py
     Loading public key
     Generating data base...
     552 files in the base
 
-    [cedric@localhost pyhids]$ python3.1 pyHIDS.py
+    $ ./pyHIDS.py
     [07/03/10 15:03:06] HIDS starting
     .
     .
@@ -115,18 +92,10 @@ Example
 
 Modify a character in the file  **/etc/httpd/conf/httpd.conf** and relaunch the program:
 
-    [cedric@localhost pyhids]$ python3.1 pyHIDS.py
+    $ ./pyHIDS.py
     [07/03/10 15:05:13] HIDS starting.
-    .
-    .
-    .
     [07/03/10 15:05:31] [warning] /etc/httpd/conf/httpd.conf hash has changed :
     573edeed49818cb20ff1efd4f8ce7d6db7e6e28fe831f8d60de40b6298b8d555!=33027d530eeebc9d5355855016b3543a8bf2000c4986bb0eb8aa8e244a827e8a
-    [07/03/10 15:05:31] [notice] /etc/gconf/gconf.xml.defaults/%gconf-tree-yo.xml ok
-    .
-    .
-    .
-    [07/03/10 15:05:35] [notice] /etc/gconf/gconf.xml.defaults/%gconf-tree-crh.xml ok
     [07/03/10 15:05:36] Error(s) : 0
     [07/03/10 15:05:36] Warning(s) : 1
     [07/03/10 15:05:36] HIDS finished.
@@ -147,8 +116,6 @@ Thank you!
 License
 -------
 [pyHIDS](https://bitbucket.org/cedricbonhomme/pyhids/) is under [GPLv3](http://www.gnu.org/licenses/gpl-3.0.txt) license.
-
-
 
 
 Contact
