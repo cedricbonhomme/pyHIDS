@@ -64,10 +64,10 @@ DATABASE = os.path.join(PATH, "base")
 
 
 # address of the private key
-# (used only genBase.py by to crypt the base of hash values) :
-PRIVATE_KEY = os.path.join(PATH, "cle_priv")
+# used only genBase.py by to sign the database of hash values :
+PRIVATE_KEY = os.path.join(PATH, "pyhids_rsa")
 # address of the public key (used to decrypt the base of hash values) :
-PUBLIC_KEY = os.path.join(PATH, "cle_pub")
+PUBLIC_KEY = os.path.join(PATH, "pyhids_rsa.pub")
 
 
 
