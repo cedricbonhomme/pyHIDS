@@ -75,7 +75,7 @@ def hash_file(target_file):
     except Exception as e:
         # The specified file does not exist,
         # remove from the list.
-        print(e)
+        print(target_file, ":", e)
         globals()['number_of_files_to_scan'] = \
             globals()['number_of_files_to_scan'] - 1
         del list_of_files[list_of_files.index(target_file)]
