@@ -186,7 +186,7 @@ if __name__ == "__main__":
         try:
             rsa.verify(msgfile, signature, public_key)
         except rsa.pkcs1.VerificationError as e:
-            print("Verification of the base of hashes failed!")
+            print("Integrity check of the base of hashes failed.")
             exit(0)
 
 
