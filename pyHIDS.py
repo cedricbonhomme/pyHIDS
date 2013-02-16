@@ -142,7 +142,6 @@ def log(message):
     """Print and save the log in the log file.
     """
     lock.acquire()
-    print(message)
     try:
         log_file.write(message+"\n")
     except Exception as e:
