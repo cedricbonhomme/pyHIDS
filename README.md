@@ -29,24 +29,16 @@ And edit the file **conf.cfg**:
 
 
 RSA keys and base generation
-----------------------------
-You can configure the number of bits of the RSA keys. By default the number is 256 for performance reasons.
-That said, a 256-bit encryption for this application is sufficient.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+You can configure the number of bits of the RSA keys. By default the number is 752 for performance reasons.
 
 
 Email alerts
-------------
-To receive email alerts, it just need to fill the list **admin_mail** in the file **conf.py**.
-This list contains people to prevent when a file has been modified. It must also configure the sender.
-If you do not want to receive email alerts, simply leave the list empty.
+~~~~~~~~~~~~
+To receive email alerts, it just need to set some variable in the **email**
+section of the file **conf.cfg**.
+If you do not want to receive email alerts, simply set **enabled** to **0**.
 
-
-General configuration
----------------------
-
-* the address of pyHIDS on your system;
-* email(s) for alerts;
-* if needed: folder_rules.
 
 Test
 ----
