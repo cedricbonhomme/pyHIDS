@@ -77,9 +77,9 @@ SPECIFIC_FILES_TO_SCAN = [ \
         os.path.join(PATH, "pyHIDS.py"),
         os.path.join(PATH, "conf.py"),
         os.path.join(PATH, "conf.cfg"),
-        "/etc/cron.hourly/pyHIDS", \
+        #"/etc/cron.hourly/pyHIDS", \
         "/etc/crontab", \
-        "/boot/grub/menu.lst", \
+        "/boot/grub/grub.cfg", \
         "/etc/shadow", \
         "/etc/networks"]
 
