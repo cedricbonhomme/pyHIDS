@@ -76,13 +76,16 @@ PUBLIC_KEY = os.path.join(PATH, "pyhids_rsa.pub")
 SPECIFIC_FILES_TO_SCAN = [ \
         os.path.join(PATH, "pyHIDS.py"),
         os.path.join(PATH, "conf.py"),
+        os.path.join(PATH, "conf.cfg"),
         "/etc/cron.hourly/pyHIDS", \
+        "/etc/crontab", \
         "/boot/grub/menu.lst", \
         "/etc/shadow", \
-        "/etc/crontab", \
         "/etc/networks"]
 
 # rules to scan folders :
 FOLDER_RULES = [ \
-    ("conf", "/etc")]
+                ("conf", "/etc"), \
+                ("list", "/etc/apt") \
+                ]
 # used by search_files() in genBase.py
