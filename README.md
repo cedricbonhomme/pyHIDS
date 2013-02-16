@@ -29,12 +29,12 @@ And edit the file **conf.cfg**:
 
 
 RSA keys and base generation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 You can configure the number of bits of the RSA keys. By default the number is 752 for performance reasons.
 
 
 Email alerts
-~~~~~~~~~~~~
+
 To receive email alerts, it just need to set some variable in the **email**
 section of the file **conf.cfg**.
 If you do not want to receive email alerts, simply set **enabled** to **0**.
