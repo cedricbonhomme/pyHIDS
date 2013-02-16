@@ -38,7 +38,6 @@ __license__ = "GPL v3"
 import hashlib
 import pickle
 import os
-import glob
 import re
 import rsa
 

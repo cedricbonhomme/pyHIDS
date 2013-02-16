@@ -41,15 +41,14 @@ __license__ = "GPL v3"
 import os
 import time
 import pickle
-import smtplib
 import hashlib
 import threading
 import rsa
 
-from email.mime.multipart import MIMEMultipart
+import smtplib
 from email.mime.text import MIMEText
 
-import conf # variables used by the program
+import conf
 
 def load_base():
     """
