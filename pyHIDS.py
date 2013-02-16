@@ -119,7 +119,7 @@ def compare_hash(target_file, expected_hash):
             globals()['warning'] = globals()['warning'] + 1
             log(local_time + " [warning] " + target_file + \
                       " hash has changed : " + \
-                      hashed_data + " != " + expected_hash)
+                      hashed_data + " != " + expected_hash, True)
 
             # reporting alert in syslog
             message = target_file + " hash has changed : " + \
@@ -135,11 +135,13 @@ def compare_hash(target_file, expected_hash):
                         "\nThis mail was sent to :\n"+"\n".join(conf.admin_mail))
 
 
-def log(message):
+def log(message, display=False):
     """
     Print and save the log in the log file.
     """
     lock.acquire()
+    if display:
+        print(message)
     try:
         log_file.write(message+"\n")
     except Exception as e:
