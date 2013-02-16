@@ -1,0 +1,9 @@
+[globals]
+nb_bits = 752
+[email]
+enabled = 0
+mail_from = pyHIDS@no-reply.com
+mail_to = you_address
+smtp = SMTP_server
+username = your_username
+password = your_password
