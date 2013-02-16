@@ -31,8 +31,10 @@ under certain conditions; type `show c' for details.
 """
 
 __author__ = "Cedric Bonhomme"
-__date__ = "$Date: 2013/02/14 $"
-__copyright__ = "Copyright (c) 2010-2013-2013 Cedric Bonhomme"
+__version__ = "$Revision: 0.1 $"
+__date__ = "$Date: 2013/02/16 $"
+__revesion__ = "$Date: 2013/02/16 $"
+__copyright__ = "Copyright (c) 2010-2013 Cedric Bonhomme"
 __license__ = "GPL v3"
 
 import os
