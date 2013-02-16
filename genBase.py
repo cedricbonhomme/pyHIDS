@@ -124,7 +124,7 @@ if __name__ == '__main__':
 
     # Sign the base of hash
     with open(conf.DATABASE, 'rb') as msgfile:
-        signature = rsa.sign(msgfile, private_key, 'SHA-1')
+        signature = rsa.sign(msgfile, private_key, 'SHA-256')
 
     # Writes the signature in a file.
     with open("./signature", "wb") as signature_file:
