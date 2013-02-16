@@ -33,6 +33,7 @@ under certain conditions; type `show c' for details.
 
 __author__ = "Cedric Bonhomme"
 __date__ = "$Date: 2010/03/06 $"
+__revesion__ = "$Date: 2013/02/16 $"
 __copyright__ = "Copyright (c) 2010-2013 Cedric Bonhomme"
 __license__ = "GPL v3"
 
@@ -49,14 +50,12 @@ from email import *
 import conf # variables used by the program
 
 def load_base():
-    """Load the base file.
+    """
+    Load the base file.
 
     Return a dictionnary wich contains filenames
     and theirs hash value.
     """
-    # load the private key (to decrypt the base)
-    
-
     # try to open the saved base of hash values
     base_file = None
     try:
@@ -69,8 +68,6 @@ def load_base():
         # dictionnary containing the files and hash values
         result = {}
         for line in base_file:
-            #clearLine = key.decrypt_text(line)
-            #(address, sha256, _) = clearLine.split(":")
             (address, sha256, _) = str(line).split(":")
             result[address] = sha256
         base_file.close()
@@ -139,7 +136,8 @@ def compare_hash(target_file, expected_hash):
 
 
 def log(message):
-    """Print and save the log in the log file.
+    """
+    Print and save the log in the log file.
     """
     lock.acquire()
     try:
@@ -149,13 +147,15 @@ def log(message):
     lock.release()
 
 def log_syslog(message):
-    """Write a message in syslog.
+    """
+    Write a message in syslog.
     """
     import syslog
     syslog.syslog(message)
 
 def log_mail(mfrom, mto, message):
-    """Send the warning via mail
+    """
+    Send the warning via mail
     """
     email = MIMEText(message)
     email['From'] = mfrom
