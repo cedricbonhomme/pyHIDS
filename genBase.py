@@ -72,10 +72,10 @@ def hash_file(target_file):
     try:
         opened_file = open(target_file, "r")
         data = opened_file.read()
-    except:
+    except Exception as e:
         # The specified file does not exist,
         # remove from the list.
-        print("File", target_file, "does not exist.")
+        print(e)
         globals()['number_of_files_to_scan'] = \
             globals()['number_of_files_to_scan'] - 1
         del list_of_files[list_of_files.index(target_file)]
