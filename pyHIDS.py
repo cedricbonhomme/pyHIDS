@@ -128,13 +128,14 @@ def compare_hash(target_file, expected_hash):
                        hashed_data + " != " + expected_hash
             log_syslog(message)
 
-            # reporting alert via mail
-            # this list contains the admins to prevent
-            for admin in conf.MAIL_TO:
-                log_mail(conf.MAIL_FROM, \
-                        admin, \
-                        local_time+"\n"+message+"\n\nHave a nice day !\n\n" + \
-                        "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))
+            if MAIL_ENABLED:
+                # reporting alert via mail
+                # this list contains the admins to prevent
+                for admin in conf.MAIL_TO:
+                    log_mail(conf.MAIL_FROM, \
+                            admin, \
+                            local_time+"\n"+message+"\n\nHave a nice day !\n\n" + \
+                            "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))
 
 def log(message, display=False):
     """
