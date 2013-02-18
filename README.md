@@ -13,8 +13,8 @@ to a list of users. You can define rules to specify files to be checked periodic
 Tested with Python 3.2.
 
 
-Requirements
-------------
+Requirement
+-----------
 
 pyHIDS only requires the [Pure-Python RSA implementation](http://pypi.python.org/pypi/rsa).
 
@@ -45,8 +45,8 @@ Set the value of "enabled" to 1 to activate email notification.
 You can configure the number of bits of the RSA keys.
 
 
-Example
--------
+Example of use
+--------------
 
     $ ./genKeys.py
     Generating 752 bits RSA keys ...
