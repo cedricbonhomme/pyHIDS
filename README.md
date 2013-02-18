@@ -13,10 +13,19 @@ to a list of users. You can define rules to specify files to be checked periodic
 Tested with Python 3.2.
 
 
+Requirements
+------------
+
+pyHIDS only requires the [Pure-Python RSA implementation](http://pypi.python.org/pypi/rsa).
+
+    $ sudo pip install rsa
+
 Configuration
 -------------
 The configuration is very easy. First copy the sample configuration file:
 
+    $ hg clone https://bitbucket.org/cedricbonhomme/pyhids
+    $ cd pyhids/
     $ cp ./conf.cfg-sample ./conf.cfg
 
 And edit the file **conf.cfg**:
