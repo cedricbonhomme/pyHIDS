@@ -22,13 +22,13 @@ pyHIDS only requires the [Pure-Python RSA implementation](http://pypi.python.org
 
 Configuration
 -------------
-The configuration is very easy. First copy the sample configuration file:
+The configuration is really easy. First get pyHIDS source code and copy the sample configuration file:
 
     $ hg clone https://bitbucket.org/cedricbonhomme/pyhids
     $ cd pyhids/
     $ cp ./conf.cfg-sample ./conf.cfg
 
-And edit the file **conf.cfg**:
+Then edit the file **conf.cfg**:
 
     [globals]
     nb_bits = 752
@@ -40,26 +40,9 @@ And edit the file **conf.cfg**:
     username = your_username
     password = your_password
 
+Set the value of "enabled" to 1 to activate email notification.
 
-RSA keys and base generation
-
-You can configure the number of bits of the RSA keys. By default the number is 752 for performance reasons.
-
-
-Email alerts
-
-To receive email alerts, it just need to set some variable in the **email**
-section of the file **conf.cfg**.
-If you do not want to receive email alerts, simply set **enabled** to **0**.
-
-
-Test
-----
-To test the program, enter the commands:
-
-    $ ./genKeys.py
-    $ ./genBase.py
-    $ ./pyHIDS.py
+You can configure the number of bits of the RSA keys.
 
 
 Example
