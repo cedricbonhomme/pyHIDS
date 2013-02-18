@@ -3,8 +3,12 @@ pyHIDS
 
 Presentation
 ------------
-pyHIDS is a little [HIDS](http://en.wikipedia.org/wiki/Host-based_intrusion_detection_system)
-(written for my personal needs) for verifying the integrity of a system.
+[pyHIDS](https://bitbucket.org/cedricbonhomme/pyhids) is a simple
+[HIDS](http://en.wikipedia.org/wiki/Host-based_intrusion_detection_system)
+(host-based intrusion detection system) for verifying the integrity of a system.
+It uses an RSA signature to check the integrity of its database.
+Alerts are written in the logs of the system and can be sent via email
+to a list of users. You can define rules to specify files to be checked periodically.
 
 Tested with Python 3.2.
 
