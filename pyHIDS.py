@@ -124,8 +124,7 @@ def compare_hash(target_file, expected_hash):
                       hashed_data + " != " + expected_hash, True)
 
             # reporting alert in syslog
-            message = target_file + " hash has changed : " + \
-                       hashed_data + " != " + expected_hash
+            message = target_file + " hash has changed."
             log_syslog(message)
 
             if conf.MAIL_ENABLED:
