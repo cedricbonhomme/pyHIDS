@@ -120,11 +120,10 @@ def compare_hash(target_file, expected_hash):
             # reporting aler in the log file
             globals()['warning'] = globals()['warning'] + 1
             log(local_time + " [warning] " + target_file + \
-                      " hash has changed : " + \
-                      hashed_data + " != " + expected_hash, True)
+                      " has changed.", True)
 
             # reporting alert in syslog
-            message = target_file + " hash has changed."
+            message = target_file + " has changed."
             log_syslog(message)
 
             if conf.MAIL_ENABLED:
