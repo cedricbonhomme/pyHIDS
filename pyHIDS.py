@@ -128,7 +128,7 @@ def compare_hash(target_file, expected_hash):
                        hashed_data + " != " + expected_hash
             log_syslog(message)
 
-            if MAIL_ENABLED:
+            if conf.MAIL_ENABLED:
                 # reporting alert via mail
                 # this list contains the admins to prevent
                 for admin in conf.MAIL_TO:
