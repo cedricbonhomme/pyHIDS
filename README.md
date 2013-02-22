@@ -94,6 +94,18 @@ The program warns that the hash has changed. When this happens, a warning is gen
 in the logs **/var/log/syslog** and a mail is sent to the administrator.
 If no change is detected only the log file is updated.
 
+Automatic execution
+-------------------
+Use the time-based job scheduler, Cron, in order to schedule system scans. In your shell enter the command:
+
+    $ crontab -e
+
+And add the following line to check the integrity of the system every fifty minutes:
+
+    */50 * * * * python /home/username/pyhids/pyHIDS.py
+
+After each system check pyHIDS sends an email to the administrators.
+In the case of an attacker who has deleted the cron line, for example.
 
 Donnation
 ---------
