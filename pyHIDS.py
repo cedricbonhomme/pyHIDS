@@ -231,3 +231,12 @@ if __name__ == "__main__":
 
     if log_file is not None:
         log_file.close()
+
+    # Send an email to all administrators to tell that a system check
+    # has terminated.
+    message = "A system check successfully terminated at " + local_time + "."
+    for admin in conf.MAIL_TO:
+        log_mail(conf.MAIL_FROM, \
+                    admin, \
+                    message+"\n\nHave a nice day !\n\n" + \
+                    "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))
