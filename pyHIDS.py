@@ -162,7 +162,7 @@ def log_mail(mfrom, mto, message):
     email = MIMEText(message, 'plain', 'utf-8')
     email['From'] = mfrom
     email['To'] = mto
-    email['Subject'] = 'pyHIDS : Alerte'
+    email['Subject'] = 'pyHIDS : Alert'
     #email['Text'] = message
 
     server = smtplib.SMTP(conf.SMTP_SERVER)
@@ -193,7 +193,7 @@ if __name__ == "__main__":
     try:
         log_file = open(conf.LOGS, "a")
     except Exception as e:
-        print(("Something wrong happens when opening the logs :-(", e))
+        print(("Something wrong happens when opening the logs.", e))
         exit(0)
 
     log(time.strftime("[%d/%m/%y %H:%M:%S] HIDS starting.", \

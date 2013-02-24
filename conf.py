@@ -84,3 +84,8 @@ FOLDER_RULES = [ \
                 ("conf", "/etc"), \
                 ("list", "/etc/apt") \
                 ]
+
+# Output of commands :
+COMMANDS_OUTPUTS = [ \
+                ("iptables", "sudo iptables -L") \
+                ]
