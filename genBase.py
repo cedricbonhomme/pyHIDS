@@ -111,14 +111,14 @@ if __name__ == '__main__':
     number_of_files_to_scan = len(list_of_files)
 
 
-    print("Generating data base...")
+    print("Generating database...")
     # Hash and write each files
     for a_file in list_of_files:
         hash_value = hash_file(a_file)
         if hash_value is not None:
             line = a_file + ":" + hash_value + ":"
             base.write(line+"\n")
-    print(number_of_files_to_scan, "files in the base.")
+    print(number_of_files_to_scan, "files in the database.")
     base.close()
 
     # Loads the private key
