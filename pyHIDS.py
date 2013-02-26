@@ -58,22 +58,15 @@ def load_base():
     and theirs hash value.
     """
     # try to open the saved base of hash values
-    base_file = None
-    try:
-        base_file = open(conf.DATABASE, "r")
-    except:
-        globals()['warning'] = globals()['warning'] + 1
-        log("Base file " + conf.DATABASE + " does no exist.")
-
-    if base_file is not None:
-        # dictionnary containing the files and hash values
-        result = {}
-        for line in base_file:
-            (address, sha256, _) = str(line).split(":")
-            result[address] = sha256
-        base_file.close()
-        return result
-    return None
+    database = None
+    with open(conf.DATABASE, "rb") as serialized_database:
+        database = pickle.load(serialized_database)
+    #try:
+        #base_file = open(conf.DATABASE, "r")
+    #except:
+        #globals()['warning'] = globals()['warning'] + 1
+        #log("Base file " + conf.DATABASE + " does no exist.")
+    return database
 
 def compare_hash(target_file, expected_hash):
     """
@@ -208,10 +201,10 @@ if __name__ == "__main__":
         exit(0)
 
     list_of_threads = []
-    for file in list(base.keys()):
+    for file in list(base["files"].keys()):
         if os.path.exists(file):
             thread = threading.Thread(None, compare_hash, \
-                                        None, (file, base[file],))
+                                        None, (file, base["files"][file],))
             thread.start()
             list_of_threads.append(thread)
         else:

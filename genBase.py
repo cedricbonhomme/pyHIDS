@@ -37,6 +37,7 @@ __license__ = "GPL v3"
 
 import hashlib
 import pickle
+import subprocess
 import os
 import re
 import rsa
@@ -94,13 +95,8 @@ def hash_file(target_file):
 
 if __name__ == '__main__':
     # Point of entry in execution mode.
-
-    # Open the base of hash values
-    try:
-        base = open(conf.DATABASE, "w")
-    except Exception as e:
-        print("Error :", e)
-        exit(0)
+    database = {}
+    database["files"] = {}
 
     # load the specific files to scan
     list_of_files = conf.SPECIFIC_FILES_TO_SCAN
@@ -117,15 +113,22 @@ if __name__ == '__main__':
         hash_value = hash_file(a_file)
         if hash_value is not None:
             line = a_file + ":" + hash_value + ":"
-            base.write(line+"\n")
+            database["files"][a_file] = hash_value
+
+    for command in conf.COMMANDS:
+        proc =  subprocess.Popen(command[1], stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+        command_output = proc.stdout.read()
+
+    serialized_database = open(conf.DATABASE, "wb")
+    pickle.dump(database, serialized_database)
+
     print(number_of_files_to_scan, "files in the database.")
-    base.close()
 
     # Loads the private key
     with open(conf.PRIVATE_KEY, "rb") as private_key_dump:
         private_key = pickle.load(private_key_dump)
 
-    # Sign the base of hash
+    # Sign the database of hash
     with open(conf.DATABASE, 'rb') as msgfile:
         signature = rsa.sign(msgfile, private_key, 'SHA-256')
 
