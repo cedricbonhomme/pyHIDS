@@ -109,13 +109,14 @@ if __name__ == '__main__':
 
 
     print("Generating database...")
-    # Hash and write each files
+    # Compute the hash values of each files
     for a_file in list_of_files:
         hash_value = hash_file(a_file)
         if hash_value is not None:
             line = a_file + ":" + hash_value + ":"
             database["files"][a_file] = hash_value
 
+    # Compute the hash values of each commands
     for command in conf.COMMANDS:
         proc =  subprocess.Popen((command), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
         command_output = proc.stdout.read()
