@@ -87,5 +87,5 @@ FOLDER_RULES = [ \
 
 # Output of commands :
 COMMANDS = [ \
-                ("iptables", ["sudo", "iptables", "-L"]) \
+                ("sudo", "iptables", "-L") \
                 ]

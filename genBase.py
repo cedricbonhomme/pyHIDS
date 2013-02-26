@@ -97,6 +97,7 @@ if __name__ == '__main__':
     # Point of entry in execution mode.
     database = {}
     database["files"] = {}
+    database["commands"] = {}
 
     # load the specific files to scan
     list_of_files = conf.SPECIFIC_FILES_TO_SCAN
@@ -116,8 +117,12 @@ if __name__ == '__main__':
             database["files"][a_file] = hash_value
 
     for command in conf.COMMANDS:
-        proc =  subprocess.Popen(command[1], stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+        proc =  subprocess.Popen(command, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
         command_output = proc.stdout.read()
+        sha256_hash = hashlib.sha256()
+        sha256_hash.update(command_output)
+        hashed_data = sha256_hash.hexdigest()
+        database["commands"][command] = hashed_data
 
     serialized_database = open(conf.DATABASE, "wb")
     pickle.dump(database, serialized_database)
