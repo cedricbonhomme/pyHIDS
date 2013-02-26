@@ -117,7 +117,8 @@ if __name__ == '__main__':
             database["files"][a_file] = hash_value
 
     for command in conf.COMMANDS:
-        proc =  subprocess.Popen(command, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+        print(command)
+        proc =  subprocess.Popen((command), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
         command_output = proc.stdout.read()
         sha256_hash = hashlib.sha256()
         sha256_hash.update(command_output)

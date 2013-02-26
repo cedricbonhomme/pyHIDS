@@ -43,6 +43,7 @@ import time
 import pickle
 import hashlib
 import threading
+import subprocess
 import rsa
 
 import smtplib
@@ -128,6 +129,41 @@ def compare_hash(target_file, expected_hash):
                             local_time+"\n"+message+"\n\nHave a nice day !\n\n" + \
                             "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))
 
+def compare_command_hash(command, expected_hash):
+    # each log's line contain the local time. it makes research easier.
+    local_time = time.strftime("[%d/%m/%y %H:%M:%S]", time.localtime())
+
+    proc =  subprocess.Popen(command, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    command_output = proc.stdout.read()
+    sha256_hash = hashlib.sha256()
+    sha256_hash.update(command_output)
+    hashed_data = sha256_hash.hexdigest()
+
+    if hashed_data == expected_hash:
+        # no changes, just write a notice in the log file
+        log(local_time + " [notice] "  + " ".join(command) + " ok")
+    else:
+        # hash has change, warning
+
+        # reporting aler in the log file
+        globals()['warning'] = globals()['warning'] + 1
+        log(local_time + " [warning] " + " ".join(command) + \
+                  " command output has changed.", True)
+
+        # reporting alert in syslog
+        message = " ".join(command) + " command output has changed."
+        log_syslog(message)
+
+        if conf.MAIL_ENABLED:
+            # reporting alert via mail
+            # this list contains the admins to prevent
+            for admin in conf.MAIL_TO:
+                log_mail(conf.MAIL_FROM, \
+                        admin, \
+                        local_time+"\n"+message+"\n\nHave a nice day !\n\n" + \
+                        "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))
+    
+
 def log(message, display=False):
     """
     Print and save the log in the log file.
@@ -200,6 +236,7 @@ if __name__ == "__main__":
         print("Base of hash values can not be loaded.")
         exit(0)
 
+    # Check the integrity of monitored files
     list_of_threads = []
     for file in list(base["files"].keys()):
         if os.path.exists(file):
@@ -211,6 +248,13 @@ if __name__ == "__main__":
             error = error + 1
             log(file + " does not exist. " + \
                   "Or not enought privilege to read it.")
+
+    # Check the integrity of commands output
+    for command in list(base["commands"].keys()):
+        thread = threading.Thread(None, compare_command_hash, \
+                                        None, (command, base["commands"][command],))
+        thread.start()
+        list_of_threads.append(thread)
 
     # blocks the calling thread until the thread
     # whose join() method is called is terminated.
