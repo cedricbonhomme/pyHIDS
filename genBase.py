@@ -127,6 +127,7 @@ if __name__ == '__main__':
 
     serialized_database = open(conf.DATABASE, "wb")
     pickle.dump(database, serialized_database)
+    serialized_database.close()
 
     print(number_of_files_to_scan, "files in the database.")
 
