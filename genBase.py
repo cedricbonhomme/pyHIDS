@@ -140,5 +140,5 @@ if __name__ == '__main__':
         signature = rsa.sign(msgfile, private_key, 'SHA-256')
 
     # Writes the signature in a file.
-    with open("./signature", "wb") as signature_file:
+    with open(conf.DATABASE_SIG, "wb") as signature_file:
         signature_file.write(signature)

@@ -59,8 +59,10 @@ PASSWORD =  config.get('email','password')
 
 # address of the log file :
 LOGS = os.path.join(PATH, "log")
-# address of the saved base of hash values :
+# address of the database of hash values :
 DATABASE = os.path.join(PATH, "base")
+# address of the signature of the database:
+DATABASE_SIG = os.path.join(PATH, "database.sig")
 
 # path of the private key (to sign the database of hash values) :
 PRIVATE_KEY = os.path.join(PATH, "pyhids_rsa")

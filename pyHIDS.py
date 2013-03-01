@@ -205,7 +205,7 @@ if __name__ == "__main__":
     # Verify the integrity of the base of hashes
     with open(conf.PUBLIC_KEY, "rb") as public_key_dump:
         public_key = pickle.load(public_key_dump)
-    with open("./signature", "rb") as signature_file:
+    with open(conf.DATABASE_SIG, "rb") as signature_file:
         signature = signature_file.read()
     with open(conf.DATABASE, 'rb') as msgfile:
         try:
