@@ -62,10 +62,9 @@ Example of use
 Modify a character in the file  **/etc/httpd/conf/httpd.conf** and relaunch the program:
 
     $ ./pyHIDS.py
-    [01/03/13 15:05:31] [warning] /etc/httpd/conf/httpd.conf hash has changed.
+    [01/03/13 15:05:31] [warning] /etc/httpd/conf/httpd.conf has changed.
 
-
-The program warns that the hash has changed. When this happens, a warning is generated
+The program warns that the file has changed. When this happens, a warning is generated
 in the logs **/var/log/syslog** and a mail is sent to the administrator.
 If no change is detected only the log file is updated.
 
