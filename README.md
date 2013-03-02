@@ -81,8 +81,8 @@ And add the following line to check the integrity of the system every fifty minu
 After each system check pyHIDS sends an email to the administrators.
 In the case of an attacker who has deleted the cron line, for example.
 
-Donnation
----------
+Donation
+--------
 If you wish and if you like pyHIDS, you can donate via bitcoin. My bitcoin address: 1GVmhR9fbBeEh7rP1qNq76jWArDdDQ3otZ
 Thank you!
 
