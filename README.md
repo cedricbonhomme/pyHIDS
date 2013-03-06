@@ -12,6 +12,12 @@ to a list of users. You can define rules to specify files to be checked periodic
 
 Tested with Python 3.2.
 
+pyHIDS features:
+* checks the integrity of system's files with a list of rules;
+* checks the output of commands (*iptables*, ...);
+* uses an RSA signature to check the integrity of its database;
+* alerts are written in the logs of the system;
+* alerts can be sent via email to a list of users.
 
 Requirement
 -----------
