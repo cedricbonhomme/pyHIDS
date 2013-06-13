@@ -7,5 +7,13 @@ mail_to = you_address
 smtp = SMTP_server
 username = your_username
 password = your_password
+[files]
+file1 = /etc/crontab
+file2 = /boot/grub/grub.cfg
+file3 = /etc/shadow
+file4 = /etc/networks
+[rules]
+rule1 = conf /etc
+rule2 = list /etc/apt
 [commands]
 iptables = /sbin/iptables -L

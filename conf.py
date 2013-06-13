@@ -74,18 +74,15 @@ PUBLIC_KEY = os.path.join(PATH, "pyhids_rsa.pub")
 SPECIFIC_FILES_TO_SCAN = [ \
         os.path.join(PATH, "pyHIDS.py"),
         os.path.join(PATH, "conf.py"),
-        os.path.join(PATH, "conf.cfg"),
-        #"/etc/cron.hourly/pyHIDS", \
-        "/etc/crontab", \
-        "/boot/grub/grub.cfg", \
-        "/etc/shadow", \
-        "/etc/networks"]
+        os.path.join(PATH, "conf.cfg")]
+for name, current_file in config.items("files"):
+    SPECIFIC_FILES_TO_SCAN.append(current_file)
 
-# rules to scan folders :
-FOLDER_RULES = [ \
-                ("conf", "/etc"), \
-                ("list", "/etc/apt") \
-                ]
+# rules to scan folders : ]
+FOLDER_RULES = []
+for name, rule in config.items("rules"):
+    pattern, folfer = rule.split(' ')
+    FOLDER_RULES.append((pattern, folfer))
 
 # Output of commands :
 COMMANDS = []
