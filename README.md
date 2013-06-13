@@ -10,7 +10,7 @@ It uses an RSA signature to check the integrity of its database.
 Alerts are written in the logs of the system and can be sent via email
 to a list of users. You can define rules to specify files to be checked periodically.
 
-Tested with Python 3.2 and Python 3.3.1.
+Tested with Python 3.3, 3.2 and 3.3.1.
 
 Features
 --------
@@ -18,7 +18,8 @@ Features
 * checks the output of commands (*iptables*, ...);
 * uses an RSA signature to check the integrity of its database;
 * alerts are written in the logs of the system;
-* alerts can be sent via email to a list of users.
+* alerts can be sent via email to a list of users;
+* alerts can be sent on IRC channels through the [irker](https://gitorious.org/irker) IRC client (which should be running as a daemon).
 
 Requirement
 -----------
@@ -39,6 +40,10 @@ Then edit the file **conf.cfg**:
 
     [globals]
     nb_bits = 752
+    [irc]
+    channel = irc://chat.freenode.net/#testpyHIDS
+    host = localhost
+    port = 6659
     [email]
     enabled = 0
     mail_from = pyHIDS@no-reply.com
@@ -83,7 +88,7 @@ Example of use
 Modify a character in the file  **/etc/httpd/conf/httpd.conf** and relaunch the program:
 
     $ ./pyHIDS.py
-    [01/03/13 15:05:31] [warning] /etc/httpd/conf/httpd.conf has changed.
+    [01/03/13 15:05:31] [warning] /etc/httpd/conf/httpd.conf changed.
 
 The program warns that the file has changed. When this happens, a warning is generated
 in the logs **/var/log/syslog** and a mail is sent to the administrator.
