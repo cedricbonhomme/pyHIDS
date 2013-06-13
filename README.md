@@ -47,7 +47,7 @@ Then edit the file **conf.cfg**:
     username = your_username
     password = your_password
     [commands]
-    iptables = iptables -L
+    iptables = /sbin/iptables -L
 
 
 Set the value of "enabled" to 1 to activate email notification.
