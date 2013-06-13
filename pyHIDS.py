@@ -137,7 +137,7 @@ def compare_command_hash(command, expected_hash):
     command_output = proc.stdout.read()
     sha256_hash = hashlib.sha256()
     sha256_hash.update(command_output)
-    hashed_data = sha256_hash.hexdiges/t()
+    hashed_data = sha256_hash.hexdigest()
 
     if hashed_data == expected_hash:
         # no changes, just write a notice in the log file
