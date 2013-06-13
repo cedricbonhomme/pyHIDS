@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#!/usr/bin/env python
 #-*- coding: utf-8 -*-
 
 """pyHIDS. Python HIDS implementation.
@@ -211,9 +211,9 @@ if __name__ == "__main__":
         try:
             rsa.verify(msgfile, signature, public_key)
         except rsa.pkcs1.VerificationError as e:
+            log_syslog("Integrity check of the base of hashes failed.")
             print("Integrity check of the base of hashes failed.")
             exit(0)
-
 
     # lock object to protect the log file during the writing
     lock = threading.Lock()
@@ -224,7 +224,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(("Something wrong happens when opening the logs.", e))
         exit(0)
-
     log(time.strftime("[%d/%m/%y %H:%M:%S] HIDS starting.", \
                            time.localtime()))
 
