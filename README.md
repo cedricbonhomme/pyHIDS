@@ -57,12 +57,13 @@ Then edit the file **conf.cfg**:
     [commands]
     iptables = /sbin/iptables -L
 
+Description of the sections:
 
-Set the value of "enabled" to 1 to activate email notification.
-
-You can configure the number of bits of the RSA keys.
-
-Put the commands to run in the section *commands*
+* *globals*: set the number of bits of the RSA keys;
+* *email*: configure the email notifications. Set the value of "enabled" to 1 to activate notifications;
+* *files*: list of files to scan;
+* *rules*: regular expression to specify files in a folder;
+* *commands*: command's output to check.
 
 
 Example of use
