@@ -124,7 +124,9 @@ def compare_hash(target_file, expected_hash):
             message = target_file + " changed."
             log_syslog(message)
 
-            log_irker(conf.IRC_CHANNEL, message)
+            if conf.IRC_CHANNEL != "":
+                # reporting alert via IRC
+                log_irker(conf.IRC_CHANNEL, message)
 
             if conf.MAIL_ENABLED:
                 # reporting alert via mail
@@ -160,7 +162,9 @@ def compare_command_hash(command, expected_hash):
         message = " ".join(command) + " command output has changed."
         log_syslog(message)
 
-        log_irker(conf.IRC_CHANNEL, message)
+        if conf.IRC_CHANNEL != "":
+            # reporting alert via IRC
+            log_irker(conf.IRC_CHANNEL, message)
 
         if conf.MAIL_ENABLED:
             # reporting alert via mail
