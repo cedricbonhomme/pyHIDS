@@ -46,6 +46,14 @@ Then edit the file **conf.cfg**:
     smtp = SMTP_server
     username = your_username
     password = your_password
+    [files]
+    file1 = /etc/crontab
+    file2 = /boot/grub/grub.cfg
+    file3 = /etc/shadow
+    file4 = /etc/networks
+    [rules]
+    rule1 = conf /etc
+    rule2 = list /etc/apt
     [commands]
     iptables = /sbin/iptables -L
 
@@ -88,7 +96,7 @@ Use the time-based job scheduler, Cron, in order to schedule system scans. In yo
 
 And add the following line to check the integrity of the system every fifty minutes:
 
-    */50 * * * * python /home/username/pyhids/pyHIDS.py
+    */50 * * * * cd $pyHIDS_path ; ./pyHIDS.py
 
 After each system check pyHIDS sends an email to the administrators.
 In the case of an attacker who has deleted the cron line, for example.
