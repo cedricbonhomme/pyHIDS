@@ -8,4 +8,4 @@ smtp = SMTP_server
 username = your_username
 password = your_password
 [commands]
-iptables = iptables -L
+iptables = /sbin/iptables -L
