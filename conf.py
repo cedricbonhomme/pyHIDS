@@ -88,6 +88,6 @@ FOLDER_RULES = [ \
                 ]
 
 # Output of commands :
-COMMANDS = [ \
-                ("sudo", "iptables", "-L") \
-                ]
+COMMANDS = []
+for name, command in config.items("commands"):
+    COMMANDS.append(tuple(command.split(' ')))
