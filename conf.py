@@ -50,6 +50,8 @@ PATH = os.path.abspath(".")
 
 NB_BITS = int(config.get('globals','nb_bits'))
 
+IRC_CHANNEL = config.get('irc','channel')
+
 MAIL_ENABLED = bool(int(config.get('email','enabled')))
 MAIL_FROM = config.get('email','mail_from')
 MAIL_TO = [config.get('email','mail_to')]

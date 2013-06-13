@@ -1,5 +1,7 @@
 [globals]
 nb_bits = 752
+[irc]
+channel = irc://chat.freenode.net/#testpyHIDS
 [email]
 enabled = 0
 mail_from = pyHIDS@no-reply.com

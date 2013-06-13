@@ -39,6 +39,8 @@ __copyright__ = "Copyright (c) 2010-2013 Cedric Bonhomme"
 __license__ = "GPL v3"
 
 import os
+import socket
+import json
 import time
 import pickle
 import hashlib
@@ -50,6 +52,8 @@ import smtplib
 from email.mime.text import MIMEText
 
 import conf
+
+irker_lock = threading.Lock()
 
 def load_base():
     """
@@ -120,6 +124,8 @@ def compare_hash(target_file, expected_hash):
             message = target_file + " changed."
             log_syslog(message)
 
+            log_irker(conf.IRC_CHANNEL, message)
+
             if conf.MAIL_ENABLED:
                 # reporting alert via mail
                 # this list contains the admins to prevent
@@ -153,6 +159,8 @@ def compare_command_hash(command, expected_hash):
         # reporting alert in syslog
         message = " ".join(command) + " command output has changed."
         log_syslog(message)
+
+        log_irker(conf.IRC_CHANNEL, message)
 
         if conf.MAIL_ENABLED:
             # reporting alert via mail
@@ -199,6 +207,16 @@ def log_mail(mfrom, mto, message):
     server.send_message(email)
     server.quit()
 
+def log_irker(target, message):
+    irker_lock.acquire()
+    data = {"to": target, "privmsg" : message}
+    try:
+        s = socket.create_connection(("localhost", 6659))
+        s.sendall(json.dumps(data).encode('utf-8'))
+    except socket.error as e:
+        sys.stderr.write("irkerd: write to server failed: %r\n" % e)
+    finally:
+        irker_lock.release()
 
 if __name__ == "__main__":
     # Point of entry in execution mode
