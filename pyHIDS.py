@@ -109,15 +109,15 @@ def compare_hash(target_file, expected_hash):
             # no changes, just write a notice in the log file
             log(local_time + " [notice] "  + target_file + " ok")
         else:
-            # hash has change, warning
+            # hash has changed, warning
 
             # reporting aler in the log file
             globals()['warning'] = globals()['warning'] + 1
             log(local_time + " [warning] " + target_file + \
-                      " has changed.", True)
+                      " changed.", True)
 
             # reporting alert in syslog
-            message = target_file + " has changed."
+            message = target_file + " changed."
             log_syslog(message)
 
             if conf.MAIL_ENABLED:
@@ -137,13 +137,13 @@ def compare_command_hash(command, expected_hash):
     command_output = proc.stdout.read()
     sha256_hash = hashlib.sha256()
     sha256_hash.update(command_output)
-    hashed_data = sha256_hash.hexdigest()
+    hashed_data = sha256_hash.hexdiges/t()
 
     if hashed_data == expected_hash:
         # no changes, just write a notice in the log file
         log(local_time + " [notice] "  + " ".join(command) + " ok")
     else:
-        # hash has change, warning
+        # hash has changed, warning
 
         # reporting aler in the log file
         globals()['warning'] = globals()['warning'] + 1
