@@ -51,6 +51,8 @@ PATH = os.path.abspath(".")
 NB_BITS = int(config.get('globals','nb_bits'))
 
 IRC_CHANNEL = config.get('irc','channel')
+IRKER_HOST = config.get('irc','host')
+IRKER_PORT = int(config.get('irc','port'))
 
 MAIL_ENABLED = bool(int(config.get('email','enabled')))
 MAIL_FROM = config.get('email','mail_from')

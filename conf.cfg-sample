@@ -2,6 +2,8 @@
 nb_bits = 752
 [irc]
 channel = irc://chat.freenode.net/#testpyHIDS
+host = localhost
+port = 6659
 [email]
 enabled = 0
 mail_from = pyHIDS@no-reply.com

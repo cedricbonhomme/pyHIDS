@@ -215,7 +215,7 @@ def log_irker(target, message):
     irker_lock.acquire()
     data = {"to": target, "privmsg" : message}
     try:
-        s = socket.create_connection(("localhost", 6659))
+        s = socket.create_connection((conf.IRKER_HOST, conf.IRKER_PORT))
         s.sendall(json.dumps(data).encode('utf-8'))
     except socket.error as e:
         sys.stderr.write("irkerd: write to server failed: %r\n" % e)
