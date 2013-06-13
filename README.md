@@ -46,10 +46,15 @@ Then edit the file **conf.cfg**:
     smtp = SMTP_server
     username = your_username
     password = your_password
+    [commands]
+    iptables = iptables -L
+
 
 Set the value of "enabled" to 1 to activate email notification.
 
 You can configure the number of bits of the RSA keys.
+
+Put the commands to run in the section *commands*
 
 
 Example of use
