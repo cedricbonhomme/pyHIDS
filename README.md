@@ -3,7 +3,7 @@ pyHIDS
 
 Presentation
 ------------
-[pyHIDS](https://bitbucket.org/cedricbonhomme/pyhids) is a simple
+[pyHIDS](https://bitbucket.org/cedricbonhomme/pyhids) is a
 [HIDS](http://en.wikipedia.org/wiki/Host-based_intrusion_detection_system)
 (host-based intrusion detection system) for verifying the integrity of a system.
 It uses an RSA signature to check the integrity of its database.
