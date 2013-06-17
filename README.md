@@ -10,7 +10,7 @@ It uses an RSA signature to check the integrity of its database.
 Alerts are written in the logs of the system and can be sent via email
 to a list of users. You can define rules to specify files to be checked periodically.
 
-Tested with Python 3.3, 3.2 and 3.3.1.
+It is recommended to use Python 3.3.
 
 Features
 --------
