@@ -44,7 +44,7 @@ import json
 import time
 import pickle
 import hashlib
-import threading
+import threading, queue
 import subprocess
 import rsa
 
@@ -73,7 +73,7 @@ def load_base():
         #log("Base file " + conf.DATABASE + " does no exist.")
     return database
 
-def compare_hash(target_file, expected_hash):
+def compare_hash(target_file, expected_hash, q1):
     """
     Compare 2 hash values.
 
@@ -117,11 +117,12 @@ def compare_hash(target_file, expected_hash):
 
             # reporting aler in the log file
             globals()['warning'] = globals()['warning'] + 1
-            log(local_time + " [warning] " + target_file + \
-                      " changed.", True)
+            message = local_time + " [warning] " + target_file + " changed."
+
+            # pyHIDS log
+            log(message, True)
 
             # reporting alert in syslog
-            message = target_file + " changed."
             log_syslog(message)
 
             if conf.IRC_CHANNEL != "":
@@ -129,15 +130,9 @@ def compare_hash(target_file, expected_hash):
                 log_irker(conf.IRC_CHANNEL, message)
 
             if conf.MAIL_ENABLED:
-                # reporting alert via mail
-                # this list contains the admins to prevent
-                for admin in conf.MAIL_TO:
-                    log_mail(conf.MAIL_FROM, \
-                            admin, \
-                            local_time+"\n"+message+"\n\nHave a nice day !\n\n" + \
-                            "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))
+                q1.put(message + "\n")
 
-def compare_command_hash(command, expected_hash):
+def compare_command_hash(command, expected_hash, q2):
     # each log's line contain the local time. it makes research easier.
     local_time = time.strftime("[%d/%m/%y %H:%M:%S]", time.localtime())
 
@@ -155,11 +150,12 @@ def compare_command_hash(command, expected_hash):
 
         # reporting aler in the log file
         globals()['warning'] = globals()['warning'] + 1
-        log(local_time + " [warning] " + " ".join(command) + \
-                  " command output has changed.", True)
+        message = local_time + " [warning] " + " ".join(command) + " command output has changed."
 
-        # reporting alert in syslog
-        message = " ".join(command) + " command output has changed."
+        # pyHIDS log
+        log(message, True)
+
+        # reporting alert in syslog        
         log_syslog(message)
 
         if conf.IRC_CHANNEL != "":
@@ -167,13 +163,7 @@ def compare_command_hash(command, expected_hash):
             log_irker(conf.IRC_CHANNEL, message)
 
         if conf.MAIL_ENABLED:
-            # reporting alert via mail
-            # this list contains the admins to prevent
-            for admin in conf.MAIL_TO:
-                log_mail(conf.MAIL_FROM, \
-                        admin, \
-                        local_time+"\n"+message+"\n\nHave a nice day !\n\n" + \
-                        "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))
+            q2.put(message + "\n")
     
 
 def log(message, display=False):
@@ -186,7 +176,8 @@ def log(message, display=False):
     try:
         log_file.write(message+"\n")
     except Exception as e:
-        log_syslog(e)
+        print(e)
+        #log_syslog(e)
     lock.release()
 
 def log_syslog(message):
@@ -221,7 +212,7 @@ def log_irker(target, message):
         sys.stderr.write("irkerd: write to server failed: %r\n" % e)
     finally:
         irker_lock.release()
-
+        
 if __name__ == "__main__":
     # Point of entry in execution mode
     # Verify the integrity of the base of hashes
@@ -257,12 +248,15 @@ if __name__ == "__main__":
         print("Base of hash values can not be loaded.")
         exit(0)
 
+    email_report = ""
+    q1 = queue.Queue()
+        
     # Check the integrity of monitored files
     list_of_threads = []
     for file in list(base["files"].keys()):
         if os.path.exists(file):
             thread = threading.Thread(None, compare_hash, \
-                                        None, (file, base["files"][file],))
+                                        None, (file, base["files"][file], q1))
             thread.start()
             list_of_threads.append(thread)
         else:
@@ -270,10 +264,11 @@ if __name__ == "__main__":
             log(file + " does not exist. " + \
                   "Or not enought privilege to read it.")
 
+    q2 = queue.Queue()
     # Check the integrity of commands output
     for command in list(base["commands"].keys()):
         thread = threading.Thread(None, compare_command_hash, \
-                                        None, (command, base["commands"][command],))
+                                        None, (command, base["commands"][command], q1))
         thread.start()
         list_of_threads.append(thread)
 
@@ -281,7 +276,8 @@ if __name__ == "__main__":
     # whose join() method is called is terminated.
     for th in list_of_threads:
         th.join()
-
+    email_report += q1.get()
+    #email_report += q2.get()
     local_time = time.strftime("[%d/%m/%y %H:%M:%S]", time.localtime())
     log(local_time + " Error(s) : " + str(error))
     log(local_time + " Warning(s) : " + str(warning))
@@ -290,12 +286,22 @@ if __name__ == "__main__":
     if log_file is not None:
         log_file.close()
 
-    # Send an email to all administrators to tell that a system check
-    # has terminated.
+
+
     if conf.MAIL_ENABLED:
+        if email_report != "":
+            # reporting alert via mail
+            # this list contains the admins to prevent
+            for admin in conf.MAIL_TO:
+                print(email_report)
+                print('')
+                """log_mail(conf.MAIL_FROM, \
+                        admin, \
+                        email_report+"\n\nHave a nice day !\n\n" + \
+                        "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))"""
         message = "A system check successfully terminated at " + local_time + "."
-        for admin in conf.MAIL_TO:
+        """for admin in conf.MAIL_TO:
             log_mail(conf.MAIL_FROM, \
                         admin, \
                         message+"\n\nHave a nice day !\n\n" + \
-                        "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))
+                        "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))"""
