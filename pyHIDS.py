@@ -268,16 +268,24 @@ if __name__ == "__main__":
     # Check the integrity of commands output
     for command in list(base["commands"].keys()):
         thread = threading.Thread(None, compare_command_hash, \
-                                        None, (command, base["commands"][command], q1))
+                                        None, (command, base["commands"][command], q2))
         thread.start()
         list_of_threads.append(thread)
 
     # blocks the calling thread until the thread
     # whose join() method is called is terminated.
+    try:
+        email_report += q1.get(True, 0.05)
+    except queue.Empty:
+        pass
+    try:
+        email_report += q2.get(True, 0.05)
+    except queue.Empty:
+        pass
+
     for th in list_of_threads:
         th.join()
-    email_report += q1.get()
-    #email_report += q2.get()
+
     local_time = time.strftime("[%d/%m/%y %H:%M:%S]", time.localtime())
     log(local_time + " Error(s) : " + str(error))
     log(local_time + " Warning(s) : " + str(warning))
