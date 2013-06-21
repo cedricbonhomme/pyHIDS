@@ -280,10 +280,7 @@ if __name__ == "__main__":
         th.join()
 
     while not Q.empty():
-        try:
-            email_report += Q.get(True, 0.5)
-        except queue.Empty:
-            pass
+        email_report += Q.get(True, 0.5)
 
     local_time = time.strftime("[%d/%m/%y %H:%M:%S]", time.localtime())
     log(local_time + " Error(s) : " + str(error))
