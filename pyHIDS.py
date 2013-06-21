@@ -39,6 +39,7 @@ __copyright__ = "Copyright (c) 2010-2013 Cedric Bonhomme"
 __license__ = "GPL v3"
 
 import os
+import sys
 import socket
 import json
 import time
@@ -303,13 +304,13 @@ if __name__ == "__main__":
             for admin in conf.MAIL_TO:
                 print(email_report)
                 print('')
-                """log_mail(conf.MAIL_FROM, \
+                log_mail(conf.MAIL_FROM, \
                         admin, \
                         email_report+"\n\nHave a nice day !\n\n" + \
-                        "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))"""
+                        "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))
         message = "A system check successfully terminated at " + local_time + "."
-        """for admin in conf.MAIL_TO:
+        for admin in conf.MAIL_TO:
             log_mail(conf.MAIL_FROM, \
                         admin, \
                         message+"\n\nHave a nice day !\n\n" + \
-                        "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))"""
+                        "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))
