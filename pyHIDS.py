@@ -34,7 +34,7 @@ under certain conditions; type `show c' for details.
 __author__ = "Cedric Bonhomme"
 __version__ = "$Revision: 0.3 $"
 __date__ = "$Date: 2010/03/06 $"
-__revesion__ = "$Date: 2013/06/17 $"
+__revesion__ = "$Date: 2013/06/21 $"
 __copyright__ = "Copyright (c) 2010-2013 Cedric Bonhomme"
 __license__ = "GPL v3"
 
@@ -56,6 +56,8 @@ import conf
 
 irker_lock = threading.Lock()
 
+Q = queue.Queue()
+
 def load_base():
     """
     Load the base file.
@@ -74,7 +76,7 @@ def load_base():
         #log("Base file " + conf.DATABASE + " does no exist.")
     return database
 
-def compare_hash(target_file, expected_hash, q1):
+def compare_hash(target_file, expected_hash):
     """
     Compare 2 hash values.
 
@@ -131,9 +133,9 @@ def compare_hash(target_file, expected_hash, q1):
                 log_irker(conf.IRC_CHANNEL, message)
 
             if conf.MAIL_ENABLED:
-                q1.put(message + "\n")
+                Q.put(message + "\n")
 
-def compare_command_hash(command, expected_hash, q2):
+def compare_command_hash(command, expected_hash):
     # each log's line contain the local time. it makes research easier.
     local_time = time.strftime("[%d/%m/%y %H:%M:%S]", time.localtime())
 
@@ -164,7 +166,7 @@ def compare_command_hash(command, expected_hash, q2):
             log_irker(conf.IRC_CHANNEL, message)
 
         if conf.MAIL_ENABLED:
-            q2.put(message + "\n")
+            Q.put(message + "\n")
     
 
 def log(message, display=False):
@@ -250,42 +252,38 @@ if __name__ == "__main__":
         exit(0)
 
     email_report = ""
-    q1 = queue.Queue()
-        
+
     # Check the integrity of monitored files
     list_of_threads = []
     for file in list(base["files"].keys()):
         if os.path.exists(file):
             thread = threading.Thread(None, compare_hash, \
-                                        None, (file, base["files"][file], q1))
+                                        None, (file, base["files"][file],))
             thread.start()
             list_of_threads.append(thread)
+
         else:
             error = error + 1
             log(file + " does not exist. " + \
                   "Or not enought privilege to read it.")
 
-    q2 = queue.Queue()
     # Check the integrity of commands output
     for command in list(base["commands"].keys()):
         thread = threading.Thread(None, compare_command_hash, \
-                                        None, (command, base["commands"][command], q2))
+                                        None, (command, base["commands"][command],))
         thread.start()
         list_of_threads.append(thread)
 
     # blocks the calling thread until the thread
     # whose join() method is called is terminated.
-    try:
-        email_report += q1.get(True, 0.05)
-    except queue.Empty:
-        pass
-    try:
-        email_report += q2.get(True, 0.05)
-    except queue.Empty:
-        pass
-
     for th in list_of_threads:
         th.join()
+
+    while not Q.empty():
+        try:
+            email_report += Q.get(True, 0.5)
+        except queue.Empty:
+            pass
 
     local_time = time.strftime("[%d/%m/%y %H:%M:%S]", time.localtime())
     log(local_time + " Error(s) : " + str(error))
@@ -302,8 +300,6 @@ if __name__ == "__main__":
             # reporting alert via mail
             # this list contains the admins to prevent
             for admin in conf.MAIL_TO:
-                print(email_report)
-                print('')
                 log_mail(conf.MAIL_FROM, \
                         admin, \
                         email_report+"\n\nHave a nice day !\n\n" + \
