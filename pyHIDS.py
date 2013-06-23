@@ -48,6 +48,7 @@ import hashlib
 import threading, queue
 import subprocess
 import rsa
+from contextlib import contextmanager
 
 import smtplib
 from email.mime.text import MIMEText
@@ -167,7 +168,18 @@ def compare_command_hash(command, expected_hash):
 
         if conf.MAIL_ENABLED:
             Q.put(message + "\n")
-    
+
+@contextmanager
+def opened_w_error(filename, mode="r"):
+    try:
+        f = open(filename, mode)
+    except IOError as err:
+        yield None, err
+    else:
+        try:
+            yield f, None
+        finally:
+            f.close()
 
 def log(message, display=False):
     """
@@ -215,21 +227,32 @@ def log_irker(target, message):
         sys.stderr.write("irkerd: write to server failed: %r\n" % e)
     finally:
         irker_lock.release()
-        
+
 if __name__ == "__main__":
     # Point of entry in execution mode
     # Verify the integrity of the base of hashes
-    with open(conf.PUBLIC_KEY, "rb") as public_key_dump:
-        public_key = pickle.load(public_key_dump)
-    with open(conf.DATABASE_SIG, "rb") as signature_file:
-        signature = signature_file.read()
-    with open(conf.DATABASE, 'rb') as msgfile:
-        try:
-            rsa.verify(msgfile, signature, public_key)
-        except rsa.pkcs1.VerificationError as e:
-            log_syslog("Integrity check of the base of hashes failed.")
-            print("Integrity check of the base of hashes failed.")
-            exit(0)
+    with opened_w_error(conf.PUBLIC_KEY, "rb") as (public_key_dump, err):
+        if err:
+            print(str(err))
+        else:
+            public_key = pickle.load(public_key_dump)
+
+    with opened_w_error(conf.DATABASE_SIG, "rb") as (signature_file, err):
+        if err:
+            print(str(err))
+        else:
+            signature = signature_file.read()
+
+    with opened_w_error(conf.DATABASE, 'rb') as (msgfile, err):
+        if err:
+            print(str(err))
+        else:
+            try:
+                rsa.verify(msgfile, signature, public_key)
+            except rsa.pkcs1.VerificationError as e:
+                log_syslog("Integrity check of the base of hashes failed.")
+                print("Integrity check of the base of hashes failed.")
+                exit(0)
 
     # lock object to protect the log file during the writing
     lock = threading.Lock()
@@ -290,8 +313,6 @@ if __name__ == "__main__":
 
     if log_file is not None:
         log_file.close()
-
-
 
     if conf.MAIL_ENABLED:
         if email_report != "":
