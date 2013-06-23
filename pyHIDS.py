@@ -234,18 +234,21 @@ if __name__ == "__main__":
     with opened_w_error(conf.PUBLIC_KEY, "rb") as (public_key_dump, err):
         if err:
             print(str(err))
+            exit(0)
         else:
             public_key = pickle.load(public_key_dump)
 
     with opened_w_error(conf.DATABASE_SIG, "rb") as (signature_file, err):
         if err:
             print(str(err))
+            exit(0)
         else:
             signature = signature_file.read()
 
     with opened_w_error(conf.DATABASE, 'rb') as (msgfile, err):
         if err:
             print(str(err))
+            exit(0)
         else:
             try:
                 rsa.verify(msgfile, signature, public_key)
