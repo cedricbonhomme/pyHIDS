@@ -34,7 +34,7 @@ under certain conditions; type `show c' for details.
 __author__ = "Cedric Bonhomme"
 __version__ = "$Revision: 0.3 $"
 __date__ = "$Date: 2010/03/06 $"
-__revesion__ = "$Date: 2013/06/21 $"
+__revesion__ = "$Date: 2013/06/23 $"
 __copyright__ = "Copyright (c) 2010-2013 Cedric Bonhomme"
 __license__ = "GPL v3"
 
@@ -55,6 +55,9 @@ from email.mime.text import MIMEText
 
 import conf
 
+# lock object to protect the log file during the writing
+lock = threading.Lock()
+# lock object used when sending alerts via irc
 irker_lock = threading.Lock()
 
 Q = queue.Queue()
@@ -257,8 +260,6 @@ if __name__ == "__main__":
                 print("Integrity check of the base of hashes failed.")
                 exit(0)
 
-    # lock object to protect the log file during the writing
-    lock = threading.Lock()
     # open the log file
     log_file = None
     try:
