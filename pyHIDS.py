@@ -188,7 +188,7 @@ def log_syslog(message):
     Write a message in syslog.
     """
     import syslog
-    syslog.syslog(message)
+    syslog.syslog("pyHIDS - " + message)
 
 def log_mail(mfrom, mto, message):
     """
@@ -238,7 +238,8 @@ if __name__ == "__main__":
     try:
         log_file = open(conf.LOGS, "a")
     except Exception as e:
-        print(("Something wrong happens when opening the logs.", e))
+        log_syslog("Something wrong happens when opening the logs: " + str(e))
+        print("Something wrong happens when opening the logs: " + str(e))
         exit(0)
     log(time.strftime("[%d/%m/%y %H:%M:%S] HIDS starting.", \
                            time.localtime()))
