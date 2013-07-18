@@ -72,7 +72,7 @@ def hash_file(target_file):
 
     # Handle the errors that may happen
     try:
-        opened_file = open(target_file, "r")
+        opened_file = open(target_file, "rb")
         data = opened_file.read()
     except Exception as e:
         # The specified file does not exist,
@@ -86,7 +86,7 @@ def hash_file(target_file):
             opened_file.close()
 
     if data is not None:
-        sha256_hash.update(data.encode('utf-8'))
+        sha256_hash.update(data)
         hashed_data = sha256_hash.hexdigest()
 
     return hashed_data
