@@ -100,7 +100,7 @@ def compare_hash(target_file, expected_hash):
 
     # opening the file to test
     try:
-        opened_file = open(target_file, "b")
+        opened_file = open(target_file, "rb")
         data = opened_file.read()
     except:
         globals()['error'] = globals()['error'] + 1
