@@ -113,7 +113,7 @@ def compare_hash(target_file, expected_hash):
 
     # now we're ready to compare the hash values
     if opened_file is not None:
-        sha256_hash.update(data.encode())
+        sha256_hash.update(data)
         hashed_data = sha256_hash.hexdigest()
 
         if hashed_data == expected_hash:
