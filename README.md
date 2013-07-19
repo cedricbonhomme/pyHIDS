@@ -57,8 +57,9 @@ Then edit the file **conf.cfg**:
     file3 = /etc/shadow
     file4 = /etc/networks
     [rules]
-    rule1 = conf /etc
+    rule1 = conf$ /etc
     rule2 = list /etc/apt
+    rule3 = .* /bin
     [commands]
     iptables = /sbin/iptables -L
 
