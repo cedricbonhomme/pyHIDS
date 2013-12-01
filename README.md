@@ -110,7 +110,8 @@ In the case of an attacker who has deleted the cron line, for example.
 
 Donation
 --------
-If you wish and if you like pyHIDS, you can donate via bitcoin. My bitcoin address: 1GVmhR9fbBeEh7rP1qNq76jWArDdDQ3otZ
+If you wish and if you like pyHIDS, you can donate via bitcoin
+[1GVmhR9fbBeEh7rP1qNq76jWArDdDQ3otZ](https://blockexplorer.com/address/1GVmhR9fbBeEh7rP1qNq76jWArDdDQ3otZ).
 Thank you!
 
 
