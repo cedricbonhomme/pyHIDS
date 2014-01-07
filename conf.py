@@ -61,6 +61,14 @@ SMTP_SERVER = config.get('email','smtp')
 USERNAME =  config.get('email','username')
 PASSWORD =  config.get('email','password')
 
+BITMESSAGE_ENABLED = bool(int(config.get('bitmessage','enabled')))
+BITMESSAGE_FROM = config.get('bitmessage','from')
+BITMESSAGE_TO = config.get('bitmessage','to')
+API_PORT = int(config.get('bitmessage','apiport'))
+API_INTERFACE = config.get('bitmessage','apiinterface')
+BITMESSAGE_USERNAME =  config.get('bitmessage','apiusername')
+BITMESSAGE_PASSWORD =  config.get('bitmessage','apipassword')
+
 # address of the log file :
 LOGS = os.path.join(PATH, "log")
 # address of the database of hash values :

@@ -34,8 +34,8 @@ under certain conditions; type `show c' for details.
 __author__ = "Cedric Bonhomme"
 __version__ = "$Revision: 0.4 $"
 __date__ = "$Date: 2010/03/06 $"
-__revesion__ = "$Date: 2013/07/23 $"
-__copyright__ = "Copyright (c) 2010-2013 Cedric Bonhomme"
+__revision__ = "$Date: 2014/01/07 $"
+__copyright__ = "Copyright (c) 2010-2014 Cedric Bonhomme"
 __license__ = "GPL v3"
 
 import os
@@ -54,6 +54,11 @@ import smtplib
 from email.mime.text import MIMEText
 
 import conf
+
+if conf.BITMESSAGE_ENABLED:
+    import xmlrpclib
+    BITMESSAGE_API = xmlrpclib.ServerProxy("http://" + conf.BITMESSAGE_USERNAME + ":" + \
+                        conf.BITMESSAGE_PASSWORD + "@" + conf.API_INTERFACE + ":" + conf.API_PORT)
 
 # lock object to protect the log file during the writing
 lock = threading.Lock()
@@ -169,7 +174,7 @@ def compare_command_hash(command, expected_hash):
             # reporting alert via IRC
             log_irker(conf.IRC_CHANNEL, message)
 
-        if conf.MAIL_ENABLED:
+        if conf.MAIL_ENABLED or conf.BITMESSAGE_ENABLED:
             Q.put(message + "\n")
 
 @contextmanager
@@ -279,7 +284,7 @@ if __name__ == "__main__":
         print("Base of hash values can not be loaded.")
         exit(0)
 
-    email_report = ""
+    report = ""
 
     # Check the integrity of monitored files
     list_of_threads = []
@@ -308,7 +313,7 @@ if __name__ == "__main__":
         th.join()
 
     while not Q.empty():
-        email_report += Q.get(True, 0.5)
+        report += Q.get(True, 0.5)
 
     local_time = time.strftime("[%d/%m/%y %H:%M:%S]", time.localtime())
     log(local_time + " Error(s) : " + str(error))
@@ -319,13 +324,13 @@ if __name__ == "__main__":
         log_file.close()
 
     if conf.MAIL_ENABLED:
-        if email_report != "":
+        if report != "":
             # reporting alert via mail
             # this list contains the admins to prevent
             for admin in conf.MAIL_TO:
                 log_mail(conf.MAIL_FROM, \
                         admin, \
-                        email_report+"\n\nHave a nice day !\n\n" + \
+                        report+"\n\nHave a nice day !\n\n" + \
                         "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))
         message = "A system check successfully terminated at " + local_time + "."
         for admin in conf.MAIL_TO:
@@ -333,3 +338,10 @@ if __name__ == "__main__":
                         admin, \
                         message+"\n\nHave a nice day !\n\n" + \
                         "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))
+    if conf.BITMESSAGE_ENABLED:
+        if report != "":
+            # reporting alert via Bitessage
+            BITMESSAGE_API.sendMessage(conf.BITMESSAGE_TO, conf.BITMESSAGE_FROM, \
+                                'pyHIDS : Alert', \
+                                report+"\n\nHave a nice day !\n\n" + \
+                                "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))
