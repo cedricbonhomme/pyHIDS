@@ -19,7 +19,9 @@ Features
 * uses an RSA signature to check the integrity of its database;
 * alerts are written in the logs of the system;
 * alerts can be sent via email to a list of users;
-* alerts can be sent on IRC channels through the [irker](https://gitorious.org/irker) IRC client (which should be running as a daemon).
+* alerts can be sent on IRC channels through the [irker](https://gitorious.org/irker) IRC client (which should be running as a daemon);
+* alerts can be sent to a [Bitmessage](https://bitmessage.org) address.
+
 
 Requirement
 -----------
@@ -51,6 +53,14 @@ Then edit the file **conf.cfg**:
     smtp = SMTP_server
     username = your_username
     password = your_password
+    [bitmessage]
+    from = BM-2DCutnUZG16WiW3mdAm66jJUSCUv88xLgS
+    to = BM-Gtsm7PUabZecs3qTeXbNPmqx3xtHCSXF
+    enabled = 0
+    apiport = 8442
+    apiinterface = 127.0.0.1
+    apiusername = chelsea
+    apipassword = YourSuperPassw6rd-ChangeThIs-022w3eksssoQAWfasddswwWIU
     [files]
     file1 = /etc/crontab
     file2 = /boot/grub/grub.cfg
@@ -63,10 +73,13 @@ Then edit the file **conf.cfg**:
     [commands]
     iptables = /sbin/iptables -L
 
+
 Description of the sections:
 
 * *globals*: set the number of bits of the RSA keys;
+* *irc*: configure notifications sent via IRC;
 * *email*: configure the email notifications. Set the value of "enabled" to 1 to activate notifications;
+* *bitmessage*: configure notifications sent via Bitmessage ([more information](https://bitmessage.org/wiki/API_Reference));
 * *files*: list of files to scan;
 * *rules*: regular expression to specify files in a folder;
 * *commands*: command's output to check.
