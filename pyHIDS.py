@@ -56,9 +56,9 @@ from email.mime.text import MIMEText
 import conf
 
 if conf.BITMESSAGE_ENABLED:
-    import xmlrpclib
-    BITMESSAGE_API = xmlrpclib.ServerProxy("http://" + conf.BITMESSAGE_USERNAME + ":" + \
-                        conf.BITMESSAGE_PASSWORD + "@" + conf.API_INTERFACE + ":" + conf.API_PORT)
+    import xmlrpc.client
+    BITMESSAGE_API = xmlrpc.client.ServerProxy("http://" + conf.BITMESSAGE_USERNAME + ":" + \
+                        conf.BITMESSAGE_PASSWORD + "@" + conf.API_INTERFACE + ":" + str(conf.API_PORT))
 
 # lock object to protect the log file during the writing
 lock = threading.Lock()
