@@ -127,9 +127,9 @@ In your shell enter the command:
 And add the following line to check the integrity of the system every fifty
 minutes:
 
-    \*/50 * * * * cd $pyHIDS_path ; ./pyHIDS.py
+    */50 * * * * cd $pyHIDS_path ; ./pyHIDS.py
 
-After each system check pyHIDS sends an email to the administrators.
+After each system check, pyHIDS sends a report to the administrators.
 In the case of an attacker who has deleted the cron line, for example.
 
 Donation
