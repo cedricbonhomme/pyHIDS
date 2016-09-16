@@ -132,12 +132,6 @@ minutes:
 After each system check, pyHIDS sends a report to the administrators.
 In the case of an attacker who has deleted the cron line, for example.
 
-Donation
---------
-If you wish and if you like pyHIDS, you can donate via bitcoin
-[1GVmhR9fbBeEh7rP1qNq76jWArDdDQ3otZ](https://blockexplorer.com/address/1GVmhR9fbBeEh7rP1qNq76jWArDdDQ3otZ).
-Thank you!
-
 
 License
 -------
@@ -147,4 +141,4 @@ License
 
 Contact
 -------
-[My home page](http://cedricbonhomme.org/).
+[Cédric Bonhomme](https://www.cedricbonhomme.org)
