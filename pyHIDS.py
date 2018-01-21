@@ -10,7 +10,7 @@ pyHIDS can prevent the admin by mail, log file and syslog.
 """
 pyHIDS. Python HIDS. Security software.
 pyHIDS verify the integrity of your system.
-Copyright (C) 2010-2013 Cedric Bonhomme
+Copyright (C) 2010-2018 Cedric Bonhomme
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-pyHIDS Copyright (C) 2010-2013 Cedric Bonhomme
+pyHIDS Copyright (C) 2010-2018 Cedric Bonhomme
 This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
 This is free software, and you are welcome to redistribute it
 under certain conditions; type `show c' for details.
@@ -35,7 +35,7 @@ __author__ = "Cedric Bonhomme"
 __version__ = "$Revision: 0.4 $"
 __date__ = "$Date: 2010/03/06 $"
 __revision__ = "$Date: 2014/01/07 $"
-__copyright__ = "Copyright (c) 2010-2014 Cedric Bonhomme"
+__copyright__ = "Copyright (c) 2010-2018 Cedric Bonhomme"
 __license__ = "GPL v3"
 
 import os
