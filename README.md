@@ -3,7 +3,7 @@ pyHIDS
 
 Presentation
 ------------
-[pyHIDS](https://github.com/cedricbonhomme/pyHIDS) is a
+[pyHIDS](https://gitlab.com/cedric/pyHIDS) is a
 [HIDS](http://en.wikipedia.org/wiki/Host-based_intrusion_detection_system)
 (host-based intrusion detection system) for verifying the integrity of a system.
 It uses an RSA signature to check the integrity of its database.
@@ -135,7 +135,7 @@ In the case of an attacker who has deleted the cron line, for example.
 
 License
 -------
-[pyHIDS](https://github.com/cedricbonhomme/pyHIDS) is under
+[pyHIDS](https://gitlab.com/cedric/pyHIDS) is under
 [GPLv3](http://www.gnu.org/licenses/gpl-3.0.txt) license.
 
 Copyright (C) 2010-2018 [Cédric Bonhomme](https://www.cedricbonhomme.org>)
