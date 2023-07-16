@@ -31,7 +31,7 @@ Requirement
 pyHIDS only requires the
 [Pure-Python RSA implementation](http://pypi.python.org/pypi/rsa).
 
-    $ sudo pip install rsa
+    $ poetry install
 
 Configuration
 -------------

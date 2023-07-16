@@ -117,9 +117,12 @@ if __name__ == "__main__":
 
     # Compute the hash values of each commands
     for command in conf.COMMANDS:
-        proc = subprocess.Popen(
-            (command), stderr=subprocess.STDOUT, stdout=subprocess.PIPE
-        )
+        try:
+            proc = subprocess.Popen(
+                (command), stderr=subprocess.STDOUT, stdout=subprocess.PIPE
+            )
+        except FileNotFoundError:
+            continue
         command_output = proc.stdout.read()
         sha256_hash = hashlib.sha256()
         sha256_hash.update(command_output)
