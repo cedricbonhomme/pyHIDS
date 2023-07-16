@@ -11,7 +11,7 @@ Alerts are written in the logs of the system and can be sent via email
 to a list of users. You can define rules to specify files to be checked
 periodically.
 
-It is recommended to use Python >= 3.3.
+It is recommended to use Python >= 3.11.
 
 Features
 --------
@@ -45,7 +45,7 @@ sample configuration file:
 Then edit the file **conf.cfg**:
 
     [globals]
-    nb_bits = 752
+    nb_bits = 2048
     [irc]
     channel = irc://chat.freenode.net/#testpyHIDS
     host = localhost

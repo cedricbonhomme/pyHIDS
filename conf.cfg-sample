@@ -1,5 +1,5 @@
 [globals]
-nb_bits = 752
+nb_bits = 2048
 [irc]
 channel = irc://chat.freenode.net/#testpyHIDS
 host = localhost
