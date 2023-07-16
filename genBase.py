@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 """This script generates the base of hash values.
 """
@@ -44,6 +44,7 @@ import rsa
 
 import conf
 
+
 def search_files(motif, root_path):
     """
     Return a list of files.
@@ -53,13 +54,14 @@ def search_files(motif, root_path):
     """
     result = []
     w = os.walk(root_path)
-    for (path, dirs, files) in w:
+    for path, dirs, files in w:
         for f in files:
             if re.compile(motif).search(f):
                 # if not a symbolic link
                 if not os.path.islink(os.path.join(path, f)):
                     result.append(os.path.join(path, f))
     return result
+
 
 def hash_file(target_file):
     """
@@ -78,8 +80,7 @@ def hash_file(target_file):
         # The specified file does not exist,
         # remove from the list.
         print(target_file, ":", e)
-        globals()['number_of_files_to_scan'] = \
-            globals()['number_of_files_to_scan'] - 1
+        globals()["number_of_files_to_scan"] = globals()["number_of_files_to_scan"] - 1
         del list_of_files[list_of_files.index(target_file)]
     finally:
         if data is not None:
@@ -92,8 +93,7 @@ def hash_file(target_file):
     return hashed_data
 
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Point of entry in execution mode.
     database = {}
     database["files"] = {}
@@ -107,7 +107,6 @@ if __name__ == '__main__':
         list_of_files.extend(search_files(rules[0], rules[1]))
     number_of_files_to_scan = len(list_of_files)
 
-
     print("Generating database...")
     # Compute the hash values of each files
     for a_file in list_of_files:
@@ -118,7 +117,9 @@ if __name__ == '__main__':
 
     # Compute the hash values of each commands
     for command in conf.COMMANDS:
-        proc =  subprocess.Popen((command), stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+        proc = subprocess.Popen(
+            (command), stderr=subprocess.STDOUT, stdout=subprocess.PIPE
+        )
         command_output = proc.stdout.read()
         sha256_hash = hashlib.sha256()
         sha256_hash.update(command_output)
@@ -136,8 +137,8 @@ if __name__ == '__main__':
         private_key = pickle.load(private_key_dump)
 
     # Sign the database of hash
-    with open(conf.DATABASE, 'rb') as msgfile:
-        signature = rsa.sign(msgfile, private_key, 'SHA-256')
+    with open(conf.DATABASE, "rb") as msgfile:
+        signature = rsa.sign(msgfile, private_key, "SHA-256")
 
     # Writes the signature in a file.
     with open(conf.DATABASE_SIG, "wb") as signature_file:

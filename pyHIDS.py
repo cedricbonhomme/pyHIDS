@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 """pyHIDS. Python HIDS implementation.
 
@@ -62,6 +62,7 @@ irker_lock = threading.Lock()
 
 Q = queue.Queue()
 
+
 def load_base():
     """
     Load the base file.
@@ -73,12 +74,13 @@ def load_base():
     database = None
     with open(conf.DATABASE, "rb") as serialized_database:
         database = pickle.load(serialized_database)
-    #try:
-        #base_file = open(conf.DATABASE, "r")
-    #except:
-        #globals()['warning'] = globals()['warning'] + 1
-        #log("Base file " + conf.DATABASE + " does no exist.")
+    # try:
+    # base_file = open(conf.DATABASE, "r")
+    # except:
+    # globals()['warning'] = globals()['warning'] + 1
+    # log("Base file " + conf.DATABASE + " does no exist.")
     return database
+
 
 def compare_hash(target_file, expected_hash):
     """
@@ -95,7 +97,7 @@ def compare_hash(target_file, expected_hash):
 
     # test for safety. Normally expected_hash != "" thanks to genBase.py
     if expected_hash == "":
-        globals()['warning'] = globals()['warning'] + 1
+        globals()["warning"] = globals()["warning"] + 1
         log(local_time + " No hash value for " + target_file)
 
     # opening the file to test
@@ -103,10 +105,14 @@ def compare_hash(target_file, expected_hash):
         opened_file = open(target_file, "rb")
         data = opened_file.read()
     except:
-        globals()['error'] = globals()['error'] + 1
-        log(local_time + " [error] " + \
-                   target_file + " does not exist. " + \
-                  "Or not enough privilege to read it.")
+        globals()["error"] = globals()["error"] + 1
+        log(
+            local_time
+            + " [error] "
+            + target_file
+            + " does not exist. "
+            + "Or not enough privilege to read it."
+        )
     finally:
         if opened_file is not None:
             opened_file.close()
@@ -118,12 +124,12 @@ def compare_hash(target_file, expected_hash):
 
         if hashed_data == expected_hash:
             # no changes, just write a notice in the log file
-            log(local_time + " [notice] "  + target_file + " ok")
+            log(local_time + " [notice] " + target_file + " ok")
         else:
             # hash has changed, warning
 
             # reporting aler in the log file
-            globals()['warning'] = globals()['warning'] + 1
+            globals()["warning"] = globals()["warning"] + 1
             message = local_time + " [warning] " + target_file + " changed."
 
             # pyHIDS log
@@ -139,11 +145,12 @@ def compare_hash(target_file, expected_hash):
             if conf.MAIL_ENABLED:
                 Q.put(message + "\n")
 
+
 def compare_command_hash(command, expected_hash):
     # each log's line contain the local time. it makes research easier.
     local_time = time.strftime("[%d/%m/%y %H:%M:%S]", time.localtime())
 
-    proc =  subprocess.Popen(command, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
+    proc = subprocess.Popen(command, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
     command_output = proc.stdout.read()
     sha256_hash = hashlib.sha256()
     sha256_hash.update(command_output)
@@ -151,18 +158,23 @@ def compare_command_hash(command, expected_hash):
 
     if hashed_data == expected_hash:
         # no changes, just write a notice in the log file
-        log(local_time + " [notice] "  + " ".join(command) + " ok")
+        log(local_time + " [notice] " + " ".join(command) + " ok")
     else:
         # hash has changed, warning
 
         # reporting aler in the log file
-        globals()['warning'] = globals()['warning'] + 1
-        message = local_time + " [warning] " + " ".join(command) + " command output has changed."
+        globals()["warning"] = globals()["warning"] + 1
+        message = (
+            local_time
+            + " [warning] "
+            + " ".join(command)
+            + " command output has changed."
+        )
 
         # pyHIDS log
         log(message, True)
 
-        # reporting alert in syslog        
+        # reporting alert in syslog
         log_syslog(message)
 
         if conf.IRC_CHANNEL != "":
@@ -171,6 +183,7 @@ def compare_command_hash(command, expected_hash):
 
         if conf.MAIL_ENABLED:
             Q.put(message + "\n")
+
 
 @contextmanager
 def opened_w_error(filename, mode="r"):
@@ -184,6 +197,7 @@ def opened_w_error(filename, mode="r"):
         finally:
             f.close()
 
+
 def log(message, display=False):
     """
     Print and save the log in the log file.
@@ -192,44 +206,49 @@ def log(message, display=False):
     if display:
         print(message)
     try:
-        log_file.write(message+"\n")
+        log_file.write(message + "\n")
     except Exception as e:
         print(e)
-        #log_syslog(e)
+        # log_syslog(e)
     lock.release()
+
 
 def log_syslog(message):
     """
     Write a message in syslog.
     """
     import syslog
+
     syslog.syslog("pyHIDS - " + message)
+
 
 def log_mail(mfrom, mto, message):
     """
     Send the warning via mail
     """
-    email = MIMEText(message, 'plain', 'utf-8')
-    email['From'] = mfrom
-    email['To'] = mto
-    email['Subject'] = 'pyHIDS : Alert'
-    #email['Text'] = message
+    email = MIMEText(message, "plain", "utf-8")
+    email["From"] = mfrom
+    email["To"] = mto
+    email["Subject"] = "pyHIDS : Alert"
+    # email['Text'] = message
 
     server = smtplib.SMTP(conf.SMTP_SERVER)
     server.login(conf.USERNAME, conf.PASSWORD)
     server.send_message(email)
     server.quit()
 
+
 def log_irker(target, message):
     irker_lock.acquire()
-    data = {"to": target, "privmsg" : message}
+    data = {"to": target, "privmsg": message}
     try:
         s = socket.create_connection((conf.IRKER_HOST, conf.IRKER_PORT))
-        s.sendall(json.dumps(data).encode('utf-8'))
+        s.sendall(json.dumps(data).encode("utf-8"))
     except socket.error as e:
         sys.stderr.write("irkerd: write to server failed: %r\n" % e)
     finally:
         irker_lock.release()
+
 
 if __name__ == "__main__":
     # Point of entry in execution mode
@@ -248,7 +267,7 @@ if __name__ == "__main__":
         else:
             signature = signature_file.read()
 
-    with opened_w_error(conf.DATABASE, 'rb') as (msgfile, err):
+    with opened_w_error(conf.DATABASE, "rb") as (msgfile, err):
         if err:
             print(str(err))
             exit(0)
@@ -268,8 +287,7 @@ if __name__ == "__main__":
         log_syslog("Something wrong happens when opening the logs: " + str(e))
         print("Something wrong happens when opening the logs: " + str(e))
         exit(0)
-    log(time.strftime("[%d/%m/%y %H:%M:%S] HIDS starting.", \
-                           time.localtime()))
+    log(time.strftime("[%d/%m/%y %H:%M:%S] HIDS starting.", time.localtime()))
 
     warning, error = 0, 0
 
@@ -285,20 +303,33 @@ if __name__ == "__main__":
     list_of_threads = []
     for file in list(base["files"].keys()):
         if os.path.exists(file):
-            thread = threading.Thread(None, compare_hash, \
-                                        None, (file, base["files"][file],))
+            thread = threading.Thread(
+                None,
+                compare_hash,
+                None,
+                (
+                    file,
+                    base["files"][file],
+                ),
+            )
             thread.start()
             list_of_threads.append(thread)
 
         else:
             error = error + 1
-            log(file + " does not exist. " + \
-                  "Or not enought privilege to read it.")
+            log(file + " does not exist. " + "Or not enought privilege to read it.")
 
     # Check the integrity of commands output
     for command in list(base["commands"].keys()):
-        thread = threading.Thread(None, compare_command_hash, \
-                                        None, (command, base["commands"][command],))
+        thread = threading.Thread(
+            None,
+            compare_command_hash,
+            None,
+            (
+                command,
+                base["commands"][command],
+            ),
+        )
         thread.start()
         list_of_threads.append(thread)
 
@@ -323,13 +354,21 @@ if __name__ == "__main__":
             # reporting alert via mail
             # this list contains the admins to prevent
             for admin in conf.MAIL_TO:
-                log_mail(conf.MAIL_FROM, \
-                        admin, \
-                        report+"\n\nHave a nice day !\n\n" + \
-                        "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))
+                log_mail(
+                    conf.MAIL_FROM,
+                    admin,
+                    report
+                    + "\n\nHave a nice day !\n\n"
+                    + "\nThis mail was sent to :\n"
+                    + "\n".join(conf.MAIL_TO),
+                )
         message = "A system check successfully terminated at " + local_time + "."
         for admin in conf.MAIL_TO:
-            log_mail(conf.MAIL_FROM, \
-                        admin, \
-                        message+"\n\nHave a nice day !\n\n" + \
-                        "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))
+            log_mail(
+                conf.MAIL_FROM,
+                admin,
+                message
+                + "\n\nHave a nice day !\n\n"
+                + "\nThis mail was sent to :\n"
+                + "\n".join(conf.MAIL_TO),
+            )
