@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "pyhids"
+version = "0.1.0"
+description = "A host-based intrusion detection system."
+authors = ["Cédric Bonhomme <cedric@cedricbonhomme.org>"]
+license = "GPL-3.0-or-later"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+rsa = "^4.9"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
