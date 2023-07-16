@@ -3,7 +3,7 @@ pyHIDS
 
 Presentation
 ------------
-[pyHIDS](https://gitlab.com/cedric/pyHIDS) is a
+[pyHIDS](https://github.com/cedricbonhomme/pyHIDS) is a
 [HIDS](http://en.wikipedia.org/wiki/Host-based_intrusion_detection_system)
 (host-based intrusion detection system) for verifying the integrity of a system.
 It uses an RSA signature to check the integrity of its database.
@@ -21,9 +21,8 @@ Features
 * alerts are written in the logs of the system;
 * alerts can be sent via email to a list of users;
 * alerts can be sent on IRC channels through the
-  [irker](https://gitorious.org/irker) IRC client (which should be running as a
-  daemon);
-* alerts can be sent to a [Bitmessage](https://bitmessage.org) address.
+  [irker](https://gitlab.com/esr/irker) IRC client (which should be running as a
+  daemon).
 
 
 Requirement
@@ -58,14 +57,6 @@ Then edit the file **conf.cfg**:
     smtp = SMTP_server
     username = your_username
     password = your_password
-    [bitmessage]
-    from = BM-2DCutnUZG16WiW3mdAm66jJUSCUv88xLgS
-    to = BM-Gtsm7PUabZecs3qTeXbNPmqx3xtHCSXF
-    enabled = 0
-    apiport = 8442
-    apiinterface = 127.0.0.1
-    apiusername = chelsea
-    apipassword = YourSuperPassw6rd-ChangeThIs-022w3eksssoQAWfasddswwWIU
     [files]
     file1 = /etc/crontab
     file2 = /boot/grub/grub.cfg
@@ -85,8 +76,6 @@ Description of the sections:
 * *irc*: configure notifications sent via IRC;
 * *email*: configure the email notifications. Set the value of "enabled" to 1
   to activate notifications;
-* *bitmessage*: configure notifications sent via Bitmessage
-  ([more information](https://bitmessage.org/wiki/API_Reference));
 * *files*: list of files to scan;
 * *rules*: regular expression to specify files in a folder;
 * *commands*: command's output to check.
@@ -135,8 +124,8 @@ In the case of an attacker who has deleted the cron line, for example.
 
 License
 -------
-[pyHIDS](https://gitlab.com/cedric/pyHIDS) is under
+[pyHIDS](https://github.com/cedricbonhomme/pyHIDS) is under
 [GPLv3](http://www.gnu.org/licenses/gpl-3.0.txt) license.
 
-Copyright (C) 2010-2018 [Cédric Bonhomme](https://www.cedricbonhomme.org>)
+Copyright (C) 2010-2023 [Cédric Bonhomme](https://www.cedricbonhomme.org>)
 

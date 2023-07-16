@@ -11,14 +11,6 @@ mail_to = you_address
 smtp = SMTP_server
 username = your_username
 password = your_password
-[bitmessage]
-from = BM-2DCutnUZG16WiW3mdAm66jJUSCUv88xLgS
-to = BM-Gtsm7PUabZecs3qTeXbNPmqx3xtHCSXF
-enabled = 0
-apiport = 8442
-apiinterface = 127.0.0.1
-apiusername = chelsea 
-apipassword = YourSuperPassw6rd-ChangeThIs-022w3eksssoQAWfasddswwWIU
 [files]
 file1 = /etc/crontab
 file2 = /boot/grub/grub.cfg

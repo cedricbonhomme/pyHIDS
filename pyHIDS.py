@@ -10,7 +10,7 @@ pyHIDS can prevent the admin by mail, log file and syslog.
 """
 pyHIDS. Python HIDS. Security software.
 pyHIDS verify the integrity of your system.
-Copyright (C) 2010-2018 Cedric Bonhomme
+Copyright (C) 2010-2023 Cedric Bonhomme
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -35,7 +35,7 @@ __author__ = "Cedric Bonhomme"
 __version__ = "$Revision: 0.4 $"
 __date__ = "$Date: 2010/03/06 $"
 __revision__ = "$Date: 2014/01/07 $"
-__copyright__ = "Copyright (c) 2010-2018 Cedric Bonhomme"
+__copyright__ = "Copyright (c) 2010-2023 Cedric Bonhomme"
 __license__ = "GPL v3"
 
 import os
@@ -54,11 +54,6 @@ import smtplib
 from email.mime.text import MIMEText
 
 import conf
-
-if conf.BITMESSAGE_ENABLED:
-    import xmlrpc.client
-    BITMESSAGE_API = xmlrpc.client.ServerProxy("http://" + conf.BITMESSAGE_USERNAME + ":" + \
-                        conf.BITMESSAGE_PASSWORD + "@" + conf.API_INTERFACE + ":" + str(conf.API_PORT))
 
 # lock object to protect the log file during the writing
 lock = threading.Lock()
@@ -174,7 +169,7 @@ def compare_command_hash(command, expected_hash):
             # reporting alert via IRC
             log_irker(conf.IRC_CHANNEL, message)
 
-        if conf.MAIL_ENABLED or conf.BITMESSAGE_ENABLED:
+        if conf.MAIL_ENABLED:
             Q.put(message + "\n")
 
 @contextmanager
@@ -338,10 +333,3 @@ if __name__ == "__main__":
                         admin, \
                         message+"\n\nHave a nice day !\n\n" + \
                         "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))
-    if conf.BITMESSAGE_ENABLED:
-        if report != "":
-            # reporting alert via Bitessage
-            BITMESSAGE_API.sendMessage(conf.BITMESSAGE_TO, conf.BITMESSAGE_FROM, \
-                                'pyHIDS : Alert', \
-                                report+"\n\nHave a nice day !\n\n" + \
-                                "\nThis mail was sent to :\n"+"\n".join(conf.MAIL_TO))
