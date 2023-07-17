@@ -32,7 +32,7 @@ under certain conditions; type `show c' for details.
 """
 
 __author__ = "Cedric Bonhomme"
-__version__ = "$Revision: 0.4 $"
+__version__ = "$Revision: 0.5 $"
 __date__ = "$Date: 2010/03/06 $"
 __revision__ = "$Date: 2014/01/07 $"
 __copyright__ = "Copyright (c) 2010-2023 Cedric Bonhomme"
