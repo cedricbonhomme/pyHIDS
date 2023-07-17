@@ -6,6 +6,9 @@ authors = ["Cédric Bonhomme <cedric@cedricbonhomme.org>"]
 license = "GPL-3.0-or-later"
 readme = "README.md"
 
+homepage = "https://github.com/cedricbonhomme/pyHIDS"
+repository = "https://github.com/cedricbonhomme/pyHIDS"
+
 keywords = ["hids", "security"]
 
 classifiers = [
@@ -20,6 +23,12 @@ classifiers = [
     "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)"
 ]
 
+include = [
+    "README.md",
+    "COPYING",
+    "conf.py",
+]
+
 [tool.poetry.scripts]
 pyhids-genKeys = "pyhids.genKeys:main"
 pyhids-genBase = "pyhids.genBase:main"
@@ -29,7 +38,9 @@ pyhids-run = "pyhids.pyHIDS:main"
 python = "^3.11"
 rsa = "^4.9"
 
-
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
