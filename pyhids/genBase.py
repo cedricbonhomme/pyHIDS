@@ -93,8 +93,7 @@ def hash_file(target_file):
     return hashed_data
 
 
-if __name__ == "__main__":
-    # Point of entry in execution mode.
+def main():
     database = {}
     database["files"] = {}
     database["commands"] = {}
@@ -146,3 +145,7 @@ if __name__ == "__main__":
     # Writes the signature in a file.
     with open(conf.DATABASE_SIG, "wb") as signature_file:
         signature_file.write(signature)
+
+
+if __name__ == "__main__":
+    main()

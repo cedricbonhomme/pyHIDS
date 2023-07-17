@@ -42,17 +42,23 @@ import rsa
 
 import conf
 
-print("Generating", conf.NB_BITS, "bits RSA keys ...")
-pub, priv = rsa.newkeys(conf.NB_BITS)
 
-public_key = open(conf.PUBLIC_KEY, "wb")
-private_key = open(conf.PRIVATE_KEY, "wb")
+def main():
+    print("Generating", conf.NB_BITS, "bits RSA keys ...")
+    pub, priv = rsa.newkeys(conf.NB_BITS)
 
-print("Dumping Keys")
-pickle.dump(pub, public_key)
-pickle.dump(priv, private_key)
+    public_key = open(conf.PUBLIC_KEY, "wb")
+    private_key = open(conf.PRIVATE_KEY, "wb")
 
-public_key.close()
-public_key.close()
+    print("Dumping Keys")
+    pickle.dump(pub, public_key)
+    pickle.dump(priv, private_key)
 
-print("Done.")
+    public_key.close()
+    public_key.close()
+
+    print("Done.")
+
+
+if __name__ == "__main__":
+    main()    

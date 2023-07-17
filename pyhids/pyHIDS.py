@@ -129,7 +129,7 @@ def compare_hash(target_file, expected_hash):
             # hash has changed, warning
 
             # reporting aler in the log file
-            globals()["warning"] = globals()["warning"] + 1
+            globals()["warning"] = globals().get("warning", 0) + 1
             message = local_time + " [warning] " + target_file + " changed."
 
             # pyHIDS log
@@ -206,6 +206,12 @@ def log(message, display=False):
     if display:
         print(message)
     try:
+        log_file = open(conf.LOGS, "a")
+    except Exception as e:
+        log_syslog("Something wrong happens when opening the logs: " + str(e))
+        print("Something wrong happens when opening the logs: " + str(e))
+        exit(0)
+    try:
         log_file.write(message + "\n")
     except Exception as e:
         print(e)
@@ -250,8 +256,7 @@ def log_irker(target, message):
         irker_lock.release()
 
 
-if __name__ == "__main__":
-    # Point of entry in execution mode
+def main():
     # Verify the integrity of the base of hashes
     with opened_w_error(conf.PUBLIC_KEY, "rb") as (public_key_dump, err):
         if err:
@@ -372,3 +377,8 @@ if __name__ == "__main__":
                 + "\nThis mail was sent to :\n"
                 + "\n".join(conf.MAIL_TO),
             )
+
+
+if __name__ == "__main__":
+    # Point of entry in execution mode
+    main()

@@ -65,7 +65,7 @@ PASSWORD = config.get("email", "password")
 # address of the log file :
 LOGS = os.path.join(PATH, "log")
 # address of the database of hash values :
-DATABASE = os.path.join(PATH, "base")
+DATABASE = os.path.join(PATH, "database")
 # address of the signature of the database:
 DATABASE_SIG = os.path.join(PATH, "database.sig")
 
@@ -77,7 +77,7 @@ PUBLIC_KEY = os.path.join(PATH, "pyhids_rsa.pub")
 
 # specific files to scan :
 SPECIFIC_FILES_TO_SCAN = [
-    os.path.join(PATH, "pyHIDS.py"),
+    os.path.join(PATH, "pyhids/pyHIDS.py"),
     os.path.join(PATH, "conf.py"),
     os.path.join(PATH, "conf.cfg"),
 ]

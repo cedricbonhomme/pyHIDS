@@ -21,9 +21,9 @@ classifiers = [
 ]
 
 [tool.poetry.scripts]
-pyhids-genKeys = "./genKeys.py"
-pyhids-genBase = "./genBase.py"
-pyhids-run = "./pyHIDS.py"
+pyhids-genKeys = "pyhids.genKeys:main"
+pyhids-genBase = "pyhids.genBase:main"
+pyhids-run = "pyhids.pyHIDS:main"
 
 [tool.poetry.dependencies]
 python = "^3.11"
