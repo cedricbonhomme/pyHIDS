@@ -43,9 +43,9 @@ import configparser
 # load the configuration
 config = configparser.SafeConfigParser()
 try:
-    config.read("./conf.cfg")
-except:
-    config.read("./conf.cfg-sample")
+    config.read(os.environ.get("PYHIDS_CONFIG", "./conf.cfg"))
+except Exception:
+    raise Exception("No configuration file provided.")
 
 PATH = os.path.abspath(".")
 
@@ -79,7 +79,7 @@ PUBLIC_KEY = os.path.join(PATH, "pyhids_rsa.pub")
 SPECIFIC_FILES_TO_SCAN = [
     os.path.join(PATH, "pyhids/pyHIDS.py"),
     os.path.join(PATH, "conf.py"),
-    os.path.join(PATH, "conf.cfg"),
+    # os.path.join(PATH, "conf.cfg"),
 ]
 for name, current_file in config.items("files"):
     SPECIFIC_FILES_TO_SCAN.append(current_file)
