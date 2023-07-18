@@ -166,5 +166,5 @@ In the case of an attacker who has deleted the cron line, for example.
 [pyHIDS](https://github.com/cedricbonhomme/pyHIDS) is under
 [GPLv3](http://www.gnu.org/licenses/gpl-3.0.txt) license.
 
-Copyright (C) 2010-2023 [Cédric Bonhomme](https://www.cedricbonhomme.org>)
+Copyright (C) 2010-2023 [Cédric Bonhomme](https://www.cedricbonhomme.org)
 
