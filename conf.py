@@ -76,15 +76,16 @@ PUBLIC_KEY = os.path.join(PATH, "pyhids_rsa.pub")
 
 
 # specific files to scan :
-SPECIFIC_FILES_TO_SCAN = [
-    os.path.join(PATH, "pyhids/pyHIDS.py"),
-    os.path.join(PATH, "conf.py"),
-    # os.path.join(PATH, "conf.cfg"),
-]
+# SPECIFIC_FILES_TO_SCAN = [
+#     os.path.join(PATH, "pyhids/pyHIDS.py"),
+#     os.path.join(PATH, "conf.py"),
+#     os.path.join(PATH, "conf.cfg"),
+# ]
+SPECIFIC_FILES_TO_SCAN = []
 for name, current_file in config.items("files"):
     SPECIFIC_FILES_TO_SCAN.append(current_file)
 
-# rules to scan folders : ]
+# rules to scan folders :
 FOLDER_RULES = []
 for name, rule in config.items("rules"):
     pattern, folfer = rule.split(" ")
