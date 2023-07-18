@@ -25,9 +25,41 @@ It is recommended to use Python >= 3.11.
   daemon).
 
 
-### Configuration
+### Installation
 
-The configuration is really easy. First get pyHIDS source code and copy the
+#### Installation as a command line tool
+
+You can simply use [pipx](https://pypa.github.io/pipx/).
+
+```bash
+$ pipx install pyHIDS
+$ export PYHIDS_CONFIG=~/.pyHIDS/conf.cfg
+$ pyhids-genKeys 
+Generating 2048 bits RSA keys ...
+Dumping Keys
+Done.
+$ pyhids-genBase
+Generating database...
+2427 files in the database.
+$ pyhids-run
+
+$ tail log 
+[18/07/23 22:34:25] [notice] /bin/tload ok
+[18/07/23 22:34:25] [notice] /bin/mbim-network ok
+[18/07/23 22:34:25] [notice] /bin/preparetips5 ok
+[18/07/23 22:34:25] [notice] /bin/grub-file ok
+[18/07/23 22:34:25] [notice] /bin/xclip ok
+[18/07/23 22:34:25] [notice] /bin/pamperspective ok
+[18/07/23 22:34:25] [notice] /bin/pod2usage ok
+[18/07/23 22:34:25] Error(s) : 0
+[18/07/23 22:34:25] Warning(s) : 0
+[18/07/23 22:34:25] HIDS finished.
+```
+
+
+#### From the repository
+
+Get pyHIDS source code and copy the
 sample configuration file:
 
 ```bash
