@@ -30,9 +30,7 @@ include = [
 ]
 
 [tool.poetry.scripts]
-pyhids-genKeys = "pyhids.genKeys:main"
-pyhids-genBase = "pyhids.genBase:main"
-pyhids-run = "pyhids.pyHIDS:main"
+pyhids = "bin.main:main"
 
 [tool.poetry.dependencies]
 python = "^3.11"
