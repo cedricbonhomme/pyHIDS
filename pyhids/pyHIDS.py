@@ -256,34 +256,37 @@ def log_irker(target, message):
         irker_lock.release()
 
 
-def main():
-    # Verify the integrity of the base of hashes
-    with opened_w_error(conf.PUBLIC_KEY, "rb") as (public_key_dump, err):
-        if err:
-            print(str(err))
-            exit(0)
-        else:
-            public_key = pickle.load(public_key_dump)
-
-    with opened_w_error(conf.DATABASE_SIG, "rb") as (signature_file, err):
-        if err:
-            print(str(err))
-            exit(0)
-        else:
-            signature = signature_file.read()
-
-    with opened_w_error(conf.DATABASE, "rb") as (msgfile, err):
-        if err:
-            print(str(err))
-            exit(0)
-        else:
-            try:
-                rsa.verify(msgfile, signature, public_key)
-            except rsa.pkcs1.VerificationError as e:
-                log_syslog("Integrity check of the base of hashes failed.")
-                print("Integrity check of the base of hashes failed.")
+def main(check_signature=False):
+    if check_signature:
+        print("Verifying the integrity of the base of hashes...")
+        with opened_w_error(conf.PUBLIC_KEY, "rb") as (public_key_dump, err):
+            if err:
+                print(str(err))
                 exit(0)
+            else:
+                public_key = pickle.load(public_key_dump)
 
+        with opened_w_error(conf.DATABASE_SIG, "rb") as (signature_file, err):
+            if err:
+                print(str(err))
+                exit(0)
+            else:
+                signature = signature_file.read()
+
+        with opened_w_error(conf.DATABASE, "rb") as (msgfile, err):
+            if err:
+                print(str(err))
+                exit(0)
+            else:
+                try:
+                    rsa.verify(msgfile, signature, public_key)
+                    print("Database integrity verified.")
+                except rsa.pkcs1.VerificationError as e:
+                    log_syslog("Integrity check of the base of hashes failed.")
+                    print("Integrity check of the base of hashes failed.")
+                    exit(0)
+
+    print("Verifying the integrity of the files...")
     # open the log file
     log_file = None
     try:

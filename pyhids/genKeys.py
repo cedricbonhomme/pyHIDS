@@ -43,9 +43,9 @@ import rsa
 import conf
 
 
-def main():
-    print("Generating", conf.NB_BITS, "bits RSA keys ...")
-    pub, priv = rsa.newkeys(conf.NB_BITS)
+def main(nb_bits=1024):
+    print("Generating", nb_bits, "bits RSA keys ...")
+    pub, priv = rsa.newkeys(nb_bits)
 
     public_key = open(conf.PUBLIC_KEY, "wb")
     private_key = open(conf.PRIVATE_KEY, "wb")

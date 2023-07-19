@@ -34,15 +34,31 @@ You can simply use [pipx](https://pypa.github.io/pipx/).
 ```bash
 $ pipx install pyHIDS
 $ export PYHIDS_CONFIG=~/.pyHIDS/conf.cfg
-$ pyhids-genKeys 
+
+$ pyhids gen-keys --size 2048
 Generating 2048 bits RSA keys ...
 Dumping Keys
 Done.
-$ pyhids-genBase
+
+$ pyhids gen-base --sign
 Generating database...
 2427 files in the database.
-$ pyhids-run
 
+$ pyhids run --check-signature
+Verifying the integrity of the base of hashes...
+Database integrity verified.
+Verifying the integrity of the files...
+```
+
+As you can see you can skip the first step (generation of the keys)
+if you do not want to sign the database with the solution provided
+with pyHIDS (RSA) or if you simply do not want to sign the database.
+
+
+
+Log file generated:
+
+```bash
 $ tail log 
 [18/07/23 22:34:25] [notice] /bin/tload ok
 [18/07/23 22:34:25] [notice] /bin/mbim-network ok

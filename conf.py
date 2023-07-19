@@ -34,7 +34,7 @@ __author__ = "Cedric Bonhomme"
 __version__ = "$Revision: 0.2 $"
 __date__ = "$Date: 2013/02/16 $"
 __revision__ = "$Date: 2014/01/07 $"
-__copyright__ = "Copyright (c) 2010-2014 Cedric Bonhomme"
+__copyright__ = "Copyright (c) 2010-2023 Cedric Bonhomme"
 __license__ = "GPL v3"
 
 import os
@@ -48,8 +48,6 @@ except Exception:
     raise Exception("No configuration file provided.")
 
 PATH = os.path.abspath(".")
-
-NB_BITS = int(config.get("globals", "nb_bits"))
 
 IRC_CHANNEL = config.get("irc", "channel")
 IRKER_HOST = config.get("irc", "host")

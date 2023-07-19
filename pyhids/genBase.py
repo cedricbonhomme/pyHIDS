@@ -93,7 +93,7 @@ def hash_file(target_file):
     return hashed_data
 
 
-def main():
+def main(sign_database=False):
     database = {}
     database["files"] = {}
     database["commands"] = {}
@@ -134,17 +134,19 @@ def main():
 
     print(number_of_files_to_scan, "files in the database.")
 
-    # Loads the private key
-    with open(conf.PRIVATE_KEY, "rb") as private_key_dump:
-        private_key = pickle.load(private_key_dump)
+    if sign_database:
+        print("Signing the database in {}".format(conf.DATABASE_SIG))
+        # Loads the private key
+        with open(conf.PRIVATE_KEY, "rb") as private_key_dump:
+            private_key = pickle.load(private_key_dump)
 
-    # Sign the database of hash
-    with open(conf.DATABASE, "rb") as msgfile:
-        signature = rsa.sign(msgfile, private_key, "SHA-256")
+        # Sign the database of hash
+        with open(conf.DATABASE, "rb") as msgfile:
+            signature = rsa.sign(msgfile, private_key, "SHA-256")
 
-    # Writes the signature in a file.
-    with open(conf.DATABASE_SIG, "wb") as signature_file:
-        signature_file.write(signature)
+        # Writes the signature in a file.
+        with open(conf.DATABASE_SIG, "wb") as signature_file:
+            signature_file.write(signature)
 
 
 if __name__ == "__main__":
