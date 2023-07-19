@@ -1,7 +1,7 @@
 [irc]
-channel = irc://chat.freenode.net/#testpyHIDS
+channel = irc://irc.libera.chat/#testpyHIDS
 host = localhost
-port = 6659
+port = 6697
 [email]
 enabled = 0
 mail_from = pyHIDS@no-reply.com

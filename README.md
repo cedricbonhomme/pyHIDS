@@ -1,15 +1,15 @@
 ## pyHIDS
 
-
 ### Presentation
 
 [pyHIDS](https://github.com/cedricbonhomme/pyHIDS) is a
 [HIDS](http://en.wikipedia.org/wiki/Host-based_intrusion_detection_system)
 (host-based intrusion detection system) for verifying the integrity of a system.
-It uses an RSA signature to check the integrity of its database.
+
+It is possible to use an RSA signature to check the integrity of its database.
+
 Alerts are written in the logs of the system and can be sent via email
-to a list of users. You can define rules to specify files to be checked
-periodically.
+to a list of users. You can define rules to specify files to be checked.
 
 It is recommended to use Python >= 3.11.
 
@@ -21,8 +21,8 @@ It is recommended to use Python >= 3.11.
 * alerts are written in the logs of the system;
 * alerts can be sent via email to a list of users;
 * alerts can be sent on IRC channels through the
-  [irker](https://gitlab.com/esr/irker) IRC client (which should be running as a
-  daemon).
+  [irker](https://gitlab.com/esr/irker) IRC client (which should be running as
+  a daemon).
 
 
 ### Installation
@@ -54,6 +54,19 @@ As you can see you can skip the first step (generation of the keys)
 if you do not want to sign the database with the solution provided
 with pyHIDS (RSA) or if you simply do not want to sign the database.
 
+As an example you can modify a character in a monitored file and
+relaunch the program:
+
+```bash
+$ pyhids run
+Verifying the integrity of the files...
+[07/19/23 15:05:31] [warning] /etc/httpd/conf/httpd.conf changed.
+```
+
+The program warns that the file has changed. When this happens, a warning is
+generated in the logs **/var/log/syslog** and a mail is sent to the
+administrator.
+If no change is detected only the log file is updated.
 
 
 Log file generated:
@@ -85,13 +98,18 @@ $ cp ./conf.cfg-sample ./conf.cfg
 $ poetry install
 ```
 
-Then edit the file **conf.cfg**:
+The same as explained above applies.
+
+
+### Configuration
+
+The configuration file of pyHIDS looks like the following:
 
 ```ini
 [irc]
-channel = irc://chat.freenode.net/#testpyHIDS
+channel = irc://irc.libera.chat/#testpyHIDS
 host = localhost
-port = 6659
+port = 6697
 [email]
 enabled = 0
 mail_from = pyHIDS@no-reply.com
@@ -112,10 +130,8 @@ rule3 = .* /bin
 iptables = /sbin/iptables -L
 ```
 
-
 Description of the sections:
 
-* *globals*: set the number of bits of the RSA keys;
 * *irc*: configure notifications sent via IRC;
 * *email*: configure the email notifications. Set the value of "enabled" to 1
   to activate notifications;
@@ -123,35 +139,6 @@ Description of the sections:
 * *rules*: regular expression to specify files in a folder;
 * *commands*: command's output to check.
 
-
-### Example of use
-
-
-```bash
-$ pyhids-genKeys
-Generating 2048 bits RSA keys ...
-Dumping Keys
-Done.
-
-$ pyhids-genBase
-Generating database...
-543 files in the database.
-
-$ pyhids-run
-```
-
-Modify a character in the file  **/etc/httpd/conf/httpd.conf** and relaunch the
-program:
-
-```bash
-$ pyhids-run
-[01/03/13 15:05:31] [warning] /etc/httpd/conf/httpd.conf changed.
-```
-
-The program warns that the file has changed. When this happens, a warning is
-generated in the logs **/var/log/syslog** and a mail is sent to the
-administrator.
-If no change is detected only the log file is updated.
 
 
 ### Automatic execution
@@ -167,7 +154,7 @@ And add the following line to check the integrity of the system every fifty
 minutes:
 
 ```bash
-*/50 * * * * pyhids-run
+*/50 * * * * pyhids run
 ```
 
 After each system check, pyHIDS sends a report to the administrators.
@@ -175,7 +162,6 @@ In the case of an attacker who has deleted the cron line, for example.
 
 
 ### License
-
 
 [pyHIDS](https://github.com/cedricbonhomme/pyHIDS) is under
 [GPLv3](http://www.gnu.org/licenses/gpl-3.0.txt) license.
