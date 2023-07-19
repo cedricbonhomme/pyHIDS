@@ -61,4 +61,4 @@ def main(nb_bits=1024):
 
 
 if __name__ == "__main__":
-    main()    
+    main()

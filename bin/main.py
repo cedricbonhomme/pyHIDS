@@ -2,9 +2,9 @@
 
 import argparse
 
-from pyhids.genKeys import main as genKeys 
-from pyhids.genBase import main as genBase 
-from pyhids.pyHIDS import main as run 
+from pyhids.genKeys import main as genKeys
+from pyhids.genBase import main as genBase
+from pyhids.pyHIDS import main as run
 
 
 def main():
@@ -24,7 +24,7 @@ def main():
         type=int,
         help="The number of bits for the RSA keys.",
     )
-    
+
     # Subparser: gen-base
     parser_gen_base = subparsers.add_parser("gen-base", help="gen-base help")
     parser_gen_base.add_argument(

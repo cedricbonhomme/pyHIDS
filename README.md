@@ -88,8 +88,6 @@ $ poetry install
 Then edit the file **conf.cfg**:
 
 ```ini
-[globals]
-nb_bits = 2048
 [irc]
 channel = irc://chat.freenode.net/#testpyHIDS
 host = localhost
