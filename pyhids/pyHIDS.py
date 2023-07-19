@@ -4,7 +4,7 @@
 """pyHIDS. Python HIDS implementation.
 
 pyHIDS verify the integrity of your system.
-pyHIDS can prevent the admin by mail, log file and syslog.
+pyHIDS can send alerts by email, log file and syslog.
 """
 
 """
