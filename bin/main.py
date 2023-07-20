@@ -14,7 +14,9 @@ def main():
     )
 
     # Subparser: gen-keys
-    parser_gen_keys = subparsers.add_parser("gen-keys", help="gen-keys help")
+    parser_gen_keys = subparsers.add_parser(
+        "gen-keys", help="Generates RSA keys in order to verify the database of hashes."
+    )
     parser_gen_keys.add_argument(
         "-s",
         "--size",
@@ -26,7 +28,9 @@ def main():
     )
 
     # Subparser: gen-base
-    parser_gen_base = subparsers.add_parser("gen-base", help="gen-base help")
+    parser_gen_base = subparsers.add_parser(
+        "gen-base", help="Generates the database of files to monitor."
+    )
     parser_gen_base.add_argument(
         "--sign",
         dest="sign_database",
@@ -36,7 +40,9 @@ def main():
     )
 
     # Subparser: run
-    parser_run = subparsers.add_parser("run", help="run help")
+    parser_run = subparsers.add_parser(
+        "run", help="Executes pyHIDS in order to verify the integrity of the files."
+    )
     parser_run.add_argument(
         "--check-signature",
         dest="check_signature",
