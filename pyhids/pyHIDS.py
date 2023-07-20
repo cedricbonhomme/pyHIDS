@@ -47,6 +47,7 @@ import pickle
 import hashlib
 import threading, queue
 import subprocess
+import syslog
 import rsa
 from contextlib import contextmanager
 
@@ -138,7 +139,7 @@ def compare_hash(target_file, expected_hash):
             # reporting alert in syslog
             log_syslog(message)
 
-            if conf.IRC_CHANNEL != "":
+            if conf.IRC_ENABLED:
                 # reporting alert via IRC
                 log_irker(conf.IRC_CHANNEL, message)
 
@@ -177,7 +178,7 @@ def compare_command_hash(command, expected_hash):
         # reporting alert in syslog
         log_syslog(message)
 
-        if conf.IRC_CHANNEL != "":
+        if conf.IRC_ENABLED:
             # reporting alert via IRC
             log_irker(conf.IRC_CHANNEL, message)
 
@@ -223,8 +224,6 @@ def log_syslog(message):
     """
     Write a message in syslog.
     """
-    import syslog
-
     syslog.syslog("pyHIDS - " + message)
 
 

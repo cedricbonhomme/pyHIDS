@@ -49,11 +49,12 @@ except Exception:
 
 PATH = os.path.abspath(".")
 
+IRC_ENABLED = bool(config.getint("irc", "enabled"))
 IRC_CHANNEL = config.get("irc", "channel")
 IRKER_HOST = config.get("irc", "host")
 IRKER_PORT = int(config.get("irc", "port"))
 
-MAIL_ENABLED = bool(int(config.get("email", "enabled")))
+MAIL_ENABLED = bool(config.getint("email", "enabled"))
 MAIL_FROM = config.get("email", "mail_from")
 MAIL_TO = [config.get("email", "mail_to")]
 SMTP_SERVER = config.get("email", "smtp")
@@ -74,11 +75,6 @@ PUBLIC_KEY = os.path.join(PATH, "pyhids_rsa.pub")
 
 
 # specific files to scan :
-# SPECIFIC_FILES_TO_SCAN = [
-#     os.path.join(PATH, "pyhids/pyHIDS.py"),
-#     os.path.join(PATH, "conf.py"),
-#     os.path.join(PATH, "conf.cfg"),
-# ]
 SPECIFIC_FILES_TO_SCAN = []
 for name, current_file in config.items("files"):
     SPECIFIC_FILES_TO_SCAN.append(current_file)

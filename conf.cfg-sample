@@ -1,4 +1,5 @@
 [irc]
+enabled = 0
 channel = irc://irc.libera.chat/#testpyHIDS
 host = localhost
 port = 6697
