@@ -1,10 +1,4 @@
 #! /usr/bin/env python
-# -*- coding: utf-8 -*-
-
-""" Program variables.
-
-This file contain the variables used by pyHIDS.
-"""
 
 """
 pyHIDS. Python HIDS. Security software.
@@ -30,15 +24,8 @@ This is free software, and you are welcome to redistribute it
 under certain conditions; type `show c' for details.
 """
 
-__author__ = "Cedric Bonhomme"
-__version__ = "$Revision: 0.2 $"
-__date__ = "$Date: 2013/02/16 $"
-__revision__ = "$Date: 2014/01/07 $"
-__copyright__ = "Copyright (c) 2010-2023 Cedric Bonhomme"
-__license__ = "GPL v3"
-
-import os
 import configparser
+import os
 
 # load the configuration
 config = configparser.SafeConfigParser()
@@ -76,16 +63,16 @@ PUBLIC_KEY = os.path.join(PATH, "pyhids_rsa.pub")
 
 # specific files to scan :
 SPECIFIC_FILES_TO_SCAN = []
-for name, current_file in config.items("files"):
+for _, current_file in config.items("files"):
     SPECIFIC_FILES_TO_SCAN.append(current_file)
 
 # rules to scan folders :
 FOLDER_RULES = []
-for name, rule in config.items("rules"):
+for _, rule in config.items("rules"):
     pattern, folfer = rule.split(" ")
     FOLDER_RULES.append((pattern, folfer))
 
 # Output of commands :
 COMMANDS = []
-for name, command in config.items("commands"):
+for _, command in config.items("commands"):
     COMMANDS.append(tuple(command.split(" ")))

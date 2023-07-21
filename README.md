@@ -72,7 +72,7 @@ If no change is detected only the log file is updated.
 Log file generated:
 
 ```bash
-$ tail log 
+$ tail log
 [18/07/23 22:34:25] [notice] /bin/tload ok
 [18/07/23 22:34:25] [notice] /bin/mbim-network ok
 [18/07/23 22:34:25] [notice] /bin/preparetips5 ok
@@ -167,4 +167,3 @@ In the case of an attacker who has deleted the cron line, for example.
 [GPLv3](http://www.gnu.org/licenses/gpl-3.0.txt) license.
 
 Copyright (C) 2010-2023 [Cédric Bonhomme](https://www.cedricbonhomme.org)
-

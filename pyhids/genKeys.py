@@ -1,5 +1,4 @@
 #! /usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """Generates RSA public/private keys
 
@@ -38,6 +37,7 @@ __copyright__ = "Copyright (c) 2010-2023 Cedric Bonhomme"
 __license__ = "GPL v3"
 
 import pickle
+
 import rsa
 
 import conf

@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """pyHIDS. Python HIDS implementation.
 
@@ -31,28 +30,22 @@ This is free software, and you are welcome to redistribute it
 under certain conditions; type `show c' for details.
 """
 
-__author__ = "Cedric Bonhomme"
-__version__ = "$Revision: 0.6 $"
-__date__ = "$Date: 2010/03/06 $"
-__revision__ = "$Date: 2023/07/19 $"
-__copyright__ = "Copyright (c) 2010-2023 Cedric Bonhomme"
-__license__ = "GPL v3"
-
-import os
-import sys
-import socket
-import json
-import time
-import pickle
 import hashlib
-import threading, queue
-import subprocess
-import syslog
-import rsa
-from contextlib import contextmanager
-
+import json
+import os
+import pickle
+import queue
 import smtplib
+import socket
+import subprocess
+import sys
+import syslog
+import threading
+import time
+from contextlib import contextmanager
 from email.mime.text import MIMEText
+
+import rsa
 
 import conf
 
@@ -105,7 +98,7 @@ def compare_hash(target_file, expected_hash):
     try:
         opened_file = open(target_file, "rb")
         data = opened_file.read()
-    except:
+    except Exception:
         globals()["error"] = globals()["error"] + 1
         log(
             local_time
@@ -190,7 +183,7 @@ def compare_command_hash(command, expected_hash):
 def opened_w_error(filename, mode="r"):
     try:
         f = open(filename, mode)
-    except IOError as err:
+    except OSError as err:
         yield None, err
     else:
         try:
@@ -249,7 +242,7 @@ def log_irker(target, message):
     try:
         s = socket.create_connection((conf.IRKER_HOST, conf.IRKER_PORT))
         s.sendall(json.dumps(data).encode("utf-8"))
-    except socket.error as e:
+    except OSError as e:
         sys.stderr.write("irkerd: write to server failed: %r\n" % e)
     finally:
         irker_lock.release()
@@ -280,7 +273,7 @@ def main(check_signature=False):
                 try:
                     rsa.verify(msgfile, signature, public_key)
                     print("Database integrity verified.")
-                except rsa.pkcs1.VerificationError as e:
+                except rsa.pkcs1.VerificationError:
                     log_syslog("Integrity check of the base of hashes failed.")
                     print("Integrity check of the base of hashes failed.")
                     exit(0)

@@ -2,8 +2,8 @@
 
 import argparse
 
-from pyhids.genKeys import main as genKeys
 from pyhids.genBase import main as genBase
+from pyhids.genKeys import main as genKeys
 from pyhids.pyHIDS import main as run
 
 
@@ -48,7 +48,7 @@ def main():
         dest="check_signature",
         default=False,
         action=argparse.BooleanOptionalAction,
-        help="Specify if the signature of the database must be checked. ",
+        help="Specify if the signature of the database must be checked.",
     )
 
     arguments = parser.parse_args()

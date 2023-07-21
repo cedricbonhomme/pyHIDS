@@ -1,8 +1,4 @@
 #! /usr/bin/env python
-# -*- coding: utf-8 -*-
-
-"""This script generates the base of hash values.
-"""
 
 """
 pyHIDS. Python HIDS. Security software.
@@ -28,18 +24,12 @@ This is free software, and you are welcome to redistribute it
 under certain conditions; type `show c' for details.
 """
 
-__author__ = "Cedric Bonhomme"
-__version__ = "$Revision: 0.2 $"
-__date__ = "$Date: 2010/03/06 $"
-__revision__ = "$Date: 2013/02/26 $"
-__copyright__ = "Copyright (c) 2010-2023 Cedric Bonhomme"
-__license__ = "GPL v3"
-
 import hashlib
-import pickle
-import subprocess
 import os
+import pickle
 import re
+import subprocess
+
 import rsa
 
 import conf
@@ -54,7 +44,7 @@ def search_files(motif, root_path):
     """
     result = []
     w = os.walk(root_path)
-    for path, dirs, files in w:
+    for path, _dirs, files in w:
         for f in files:
             if re.compile(motif).search(f):
                 # if not a symbolic link
@@ -135,7 +125,7 @@ def main(sign_database=False):
     print(number_of_files_to_scan, "files in the database.")
 
     if sign_database:
-        print("Signing the database in {}".format(conf.DATABASE_SIG))
+        print(f"Signing the database in {conf.DATABASE_SIG}")
         # Loads the private key
         with open(conf.PRIVATE_KEY, "rb") as private_key_dump:
             private_key = pickle.load(private_key_dump)
