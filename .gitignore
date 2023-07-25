@@ -13,7 +13,7 @@ build
 
 # setuptools
 build/*
-stegano.egg-info/
+pyhids.egg-info/
 dist/*
 
 # tests
