@@ -48,6 +48,8 @@ SMTP_SERVER = config.get("email", "smtp")
 USERNAME = config.get("email", "username")
 PASSWORD = config.get("email", "password")
 
+HASHLOOKUP_URL = config.get("hashlookup", "root_url")
+
 # address of the log file :
 LOGS = os.path.join(PATH, "log")
 # address of the database of hash values :

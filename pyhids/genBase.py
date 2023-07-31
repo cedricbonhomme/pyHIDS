@@ -57,7 +57,7 @@ def hash_file(target_file):
     """
     Hash the file given in parameter.
     """
-    sha256_hash = hashlib.sha256()
+    sha1_hash = hashlib.sha1()
     opened_file = None
     hashed_data = None
     data = None
@@ -77,8 +77,8 @@ def hash_file(target_file):
             opened_file.close()
 
     if data is not None:
-        sha256_hash.update(data)
-        hashed_data = sha256_hash.hexdigest()
+        sha1_hash.update(data)
+        hashed_data = sha1_hash.hexdigest()
 
     return hashed_data
 
@@ -113,9 +113,9 @@ def main(sign_database=False):
         except FileNotFoundError:
             continue
         command_output = proc.stdout.read()
-        sha256_hash = hashlib.sha256()
-        sha256_hash.update(command_output)
-        hashed_data = sha256_hash.hexdigest()
+        sha1_hash = hashlib.sha1()
+        sha1_hash.update(command_output)
+        hashed_data = sha1_hash.hexdigest()
         database["commands"][command] = hashed_data
 
     serialized_database = open(conf.DATABASE, "wb")

@@ -21,3 +21,5 @@ rule2 = list /etc/apt
 rule3 = .* /bin
 [commands]
 iptables = /sbin/iptables -L
+[hashlookup]
+root_url = https://hashlookup.circl.lu/

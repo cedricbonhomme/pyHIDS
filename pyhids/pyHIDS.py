@@ -1,11 +1,5 @@
 #!/usr/bin/env python
 
-"""pyHIDS. Python HIDS implementation.
-
-pyHIDS verify the integrity of your system.
-pyHIDS can send alerts by email, log file and syslog.
-"""
-
 """
 pyHIDS. Python HIDS. Security software.
 pyHIDS verify the integrity of your system.
@@ -48,6 +42,7 @@ from email.mime.text import MIMEText
 import rsa
 
 import conf
+from pyhids import utils
 
 # lock object to protect the log file during the writing
 lock = threading.Lock()
@@ -57,25 +52,6 @@ irker_lock = threading.Lock()
 Q = queue.Queue()
 
 
-def load_base():
-    """
-    Load the base file.
-
-    Return a dictionnary wich contains filenames
-    and theirs hash value.
-    """
-    # try to open the saved base of hash values
-    database = None
-    with open(conf.DATABASE, "rb") as serialized_database:
-        database = pickle.load(serialized_database)
-    # try:
-    # base_file = open(conf.DATABASE, "r")
-    # except:
-    # globals()['warning'] = globals()['warning'] + 1
-    # log("Base file " + conf.DATABASE + " does no exist.")
-    return database
-
-
 def compare_hash(target_file, expected_hash):
     """
     Compare 2 hash values.
@@ -83,7 +59,7 @@ def compare_hash(target_file, expected_hash):
     Compare the hash value of the target file
     with the expected hash value.
     """
-    sha256_hash = hashlib.sha256()
+    sha1_hash = hashlib.sha1()
     opened_file = None
 
     # each log's line contain the local time. it makes research easier.
@@ -113,8 +89,8 @@ def compare_hash(target_file, expected_hash):
 
     # now we're ready to compare the hash values
     if opened_file is not None:
-        sha256_hash.update(data)
-        hashed_data = sha256_hash.hexdigest()
+        sha1_hash.update(data)
+        hashed_data = sha1_hash.hexdigest()
 
         if hashed_data == expected_hash:
             # no changes, just write a notice in the log file
@@ -146,9 +122,9 @@ def compare_command_hash(command, expected_hash):
 
     proc = subprocess.Popen(command, stderr=subprocess.STDOUT, stdout=subprocess.PIPE)
     command_output = proc.stdout.read()
-    sha256_hash = hashlib.sha256()
-    sha256_hash.update(command_output)
-    hashed_data = sha256_hash.hexdigest()
+    sha1_hash = hashlib.sha1()
+    sha1_hash.update(command_output)
+    hashed_data = sha1_hash.hexdigest()
 
     if hashed_data == expected_hash:
         # no changes, just write a notice in the log file
@@ -292,7 +268,7 @@ def main(check_signature=False):
     warning, error = 0, 0
 
     # dictionnary containing filenames and their hash value.
-    base = load_base()
+    base = utils.load_base()
     if base is None:
         print("Base of hash values can not be loaded.")
         exit(0)
