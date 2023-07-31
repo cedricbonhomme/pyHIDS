@@ -17,7 +17,8 @@ It is recommended to use Python >= 3.11.
 
 * checks the integrity of system's files with a list of rules;
 * checks the output of commands (*iptables*, ...);
-* uses an RSA signature to check the integrity of its database;
+* possibity to use RSA to sign to check the integrity of its database;
+* verify files with [Hashlookup](https://github.com/hashlookup);
 * alerts are written in the logs of the system;
 * alerts can be sent via email to a list of users;
 * alerts can be sent on IRC channels through the
