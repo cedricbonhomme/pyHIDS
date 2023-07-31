@@ -5,11 +5,14 @@ import pyhashlookup
 import conf
 from pyhids import utils
 
-base = utils.load_base()
+
+def main():
+    base = utils.load_base()
+    pylookup = pyhashlookup.Hashlookup(root_url=conf.HASHLOOKUP_URL)
+    result = pylookup.lookup(list(base["files"].values()))
+    for elem in result:
+        print(elem)
 
 
-pylookup = pyhashlookup.Hashlookup(root_url=conf.HASHLOOKUP_URL)
-
-result = pylookup.lookup(list(base["files"].values()))
-
-print(result)
+if __name__ == "__main__":
+    main()

@@ -4,6 +4,7 @@ import argparse
 
 from pyhids.genBase import main as genBase
 from pyhids.genKeys import main as genKeys
+from pyhids.hashlookup import main as hashlookup
 from pyhids.pyHIDS import main as run
 
 
@@ -51,6 +52,11 @@ def main():
         help="Specify if the signature of the database must be checked.",
     )
 
+    # Subparser: hashlookup
+    subparsers.add_parser(
+        "hashlookup", help="Uses Hashlookup in order to verify the hashes of the files."
+    )
+
     arguments = parser.parse_args()
 
     if arguments.command == "gen-keys":
@@ -59,6 +65,8 @@ def main():
         genBase(arguments.sign_database)
     elif arguments.command == "run":
         run(arguments.check_signature)
+    elif arguments.command == "hashlookup":
+        hashlookup()
     else:
         return "Unknown sub-command."
 
