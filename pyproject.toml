@@ -35,6 +35,7 @@ pyhids = "bin.main:main"
 [tool.poetry.dependencies]
 python = "^3.11"
 rsa = "^4.9"
+pyhashlookup = "^1.2.1"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.0.0"
