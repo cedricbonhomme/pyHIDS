@@ -35,14 +35,14 @@ def main():
     base = utils.load_base()
     pylookup = pyhashlookup.Hashlookup(root_url=conf.HASHLOOKUP_URL)
     hashes = list(base["files"].values())
-    # hashes.append("C18E2AACF02FACBCAD29D20593E823A1C7A088E98AB3A06E48E46821B63A1BF5")
     result = pylookup.lookup(hashes)
     malicious_files = {}
     for elem in result:
         sha1_legit, sha1_details = check_result(elem)
         if None is not sha1_legit:
-            malicious_files[sha1_legit] = sha1_details
-    print(malicious_files)
+            malicious_files[elem["SHA-1"]] = sha1_details
+    for sha, details in malicious_files.items():
+        print("{} {}".format(sha, " ".join([f"{k}:{v}" for k, v in details.items()])))
 
 
 if __name__ == "__main__":
