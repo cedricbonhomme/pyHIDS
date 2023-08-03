@@ -50,6 +50,10 @@ PASSWORD = config.get("email", "password")
 
 HASHLOOKUP_URL = config.get("hashlookup", "root_url")
 
+PANDORA_URL = config.get("pandora", "root_url")
+PANDORA_USERNAME = config.get("pandora", "username")
+PANDORA_PASSWORD = config.get("pandora", "password")
+
 # address of the log file :
 LOGS = os.path.join(PATH, "log")
 # address of the database of hash values :

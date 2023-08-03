@@ -1,3 +1,9 @@
+[hashlookup]
+root_url = https://hashlookup.circl.lu/
+[pandora]
+root_url = https://pandora.circl.lu/
+username = <username>
+password = <password>
 [irc]
 enabled = 0
 channel = irc://irc.libera.chat/#testpyHIDS
@@ -21,5 +27,3 @@ rule2 = list /etc/apt
 rule3 = .* /bin
 [commands]
 iptables = /sbin/iptables -L
-[hashlookup]
-root_url = https://hashlookup.circl.lu/
