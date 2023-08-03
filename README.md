@@ -19,6 +19,7 @@ It is recommended to use Python >= 3.11.
 * checks the output of commands (*iptables*, ...);
 * possibity to use RSA to sign to check the integrity of its database;
 * verify files with [Hashlookup](https://github.com/hashlookup);
+* verify files with [Pandora](https://github.com/pandora-analysis);
 * alerts are written in the logs of the system;
 * alerts can be sent via email to a list of users;
 * alerts can be sent on IRC channels through the
@@ -86,6 +87,12 @@ $ tail log
 [18/07/23 22:34:25] HIDS finished.
 ```
 
+Check for known malicious files with
+[Hashlookup](https://github.com/hashlookup):
+
+```bash
+$ pyhids hashlookup
+```
 
 #### From the repository
 
