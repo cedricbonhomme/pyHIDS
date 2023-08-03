@@ -114,7 +114,14 @@ The same as explained above applies.
 The configuration file of pyHIDS looks like the following:
 
 ```ini
+[hashlookup]
+root_url = https://hashlookup.circl.lu/
+[pandora]
+root_url = https://pandora.circl.lu/
+username = <username>
+password = <password>
 [irc]
+enabled = 0
 channel = irc://irc.libera.chat/#testpyHIDS
 host = localhost
 port = 6697
