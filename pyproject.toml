@@ -9,7 +9,7 @@ readme = "README.md"
 homepage = "https://github.com/cedricbonhomme/pyHIDS"
 repository = "https://github.com/cedricbonhomme/pyHIDS"
 
-keywords = ["hids", "security"]
+keywords = ["hids", "security", "hashlookup", "integrity"]
 
 classifiers = [
     "Development Status :: 5 - Production/Stable",
