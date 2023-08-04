@@ -29,14 +29,29 @@ It is recommended to use Python >= 3.11.
 
 ### Installation
 
-#### Installation as a command line tool
-
-You can simply use [pipx](https://pypa.github.io/pipx/).
+You can simply use [pipx](https://pypa.github.io/pipx/)
+or [poetry](https://python-poetry.org/).
 
 ```bash
 $ pipx install pyHIDS
 $ export PYHIDS_CONFIG=~/.pyHIDS/conf.cfg
+```
 
+[An example](./conf.cfg-sample) of configuration file is available.
+With this file you can configure:
+
+- the connection to Hashlookup;
+- the connection to Pandora;
+- the connection IRC for the notifications;
+- the SMTP connection for the email notifications;
+- the ist of files to scan;
+- the regular expressions to specify files to scan in a folder;
+- the command's output to check.
+
+
+### Usage
+
+```bash
 $ pyhids gen-keys --size 2048
 Generating 2048 bits RSA keys ...
 Dumping Keys
@@ -87,6 +102,9 @@ $ tail log
 [18/07/23 22:34:25] HIDS finished.
 ```
 
+
+### Other features
+
 Check for known malicious files with
 [Hashlookup](https://github.com/hashlookup):
 
@@ -94,66 +112,12 @@ Check for known malicious files with
 $ pyhids hashlookup
 ```
 
-#### From the repository
-
-Get pyHIDS source code and copy the
-sample configuration file:
+Check for known malicious files with
+[Pandora](https://github.com/pandora-analysis):
 
 ```bash
-$ git clone https://github.com/cedricbonhomme/pyHIDS.git
-$ cd pyHIDS/
-$ cp ./conf.cfg-sample ./conf.cfg
-$ poetry install
+$ pyhids pandora
 ```
-
-The same as explained above applies.
-
-
-### Configuration
-
-The configuration file of pyHIDS looks like the following:
-
-```ini
-[hashlookup]
-root_url = https://hashlookup.circl.lu/
-[pandora]
-root_url = https://pandora.circl.lu/
-username = <username>
-password = <password>
-[irc]
-enabled = 0
-channel = irc://irc.libera.chat/#testpyHIDS
-host = localhost
-port = 6697
-[email]
-enabled = 0
-mail_from = pyHIDS@no-reply.com
-mail_to = you_address
-smtp = SMTP_server
-username = your_username
-password = your_password
-[files]
-file1 = /etc/crontab
-file2 = /boot/grub/grub.cfg
-file3 = /etc/shadow
-file4 = /etc/networks
-[rules]
-rule1 = conf$ /etc
-rule2 = list /etc/apt
-rule3 = .* /bin
-[commands]
-iptables = /sbin/iptables -L
-```
-
-Description of the sections:
-
-* *irc*: configure notifications sent via IRC;
-* *email*: configure the email notifications. Set the value of "enabled" to 1
-  to activate notifications;
-* *files*: list of files to scan;
-* *rules*: regular expression to specify files in a folder;
-* *commands*: command's output to check.
-
 
 
 ### Automatic execution
