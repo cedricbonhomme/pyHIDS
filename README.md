@@ -42,9 +42,9 @@ With this file you can configure:
 
 - the connection to Hashlookup;
 - the connection to Pandora;
-- the connection IRC for the notifications;
+- the IRC connection for the notifications;
 - the SMTP connection for the email notifications;
-- the ist of files to scan;
+- the list of files to scan;
 - the regular expressions to specify files to scan in a folder;
 - the command's output to check.
 
