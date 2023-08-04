@@ -67,12 +67,11 @@ Database integrity verified.
 Verifying the integrity of the files...
 ```
 
-As you can see you can skip the first step (generation of the keys)
-if you do not want to sign the database with the solution provided
-with pyHIDS (RSA) or if you simply do not want to sign the database.
+You can skip the first step (generation of the keys) if you do not want to
+sign the database with the solution provided with pyHIDS (RSA) or if you
+do not want to sign the database.
 
-As an example you can modify a character in a monitored file and
-relaunch the program:
+Change a monitored file and relaunch the program:
 
 ```bash
 $ pyhids run
