@@ -28,11 +28,14 @@ import configparser
 import os
 
 # load the configuration
-config = configparser.SafeConfigParser()
+config = configparser.ConfigParser()
 try:
-    config.read(os.environ.get("PYHIDS_CONFIG", "./conf.cfg"))
+    configs = config.read(os.environ.get("PYHIDS_CONFIG", "./conf.cfg"))
 except Exception:
     raise Exception("No configuration file provided.")
+finally:
+    if not configs:
+        raise Exception("No configuration file provided.")
 
 PATH = os.path.abspath(".")
 
