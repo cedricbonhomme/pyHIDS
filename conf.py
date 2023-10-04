@@ -18,7 +18,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-pyHIDS Copyright (C) 2010-2013 Cedric Bonhomme
+pyHIDS Copyright (C) 2010-2023 Cedric Bonhomme
 This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
 This is free software, and you are welcome to redistribute it
 under certain conditions; type `show c' for details.
@@ -56,6 +56,9 @@ HASHLOOKUP_URL = config.get("hashlookup", "root_url")
 PANDORA_URL = config.get("pandora", "root_url")
 PANDORA_USERNAME = config.get("pandora", "username")
 PANDORA_PASSWORD = config.get("pandora", "password")
+
+MISP_URL = config.get("misp", "root_url")
+MISP_KEY = config.get("misp", "key")
 
 # address of the log file :
 LOGS = os.path.join(PATH, "log")

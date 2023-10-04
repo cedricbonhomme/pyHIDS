@@ -20,6 +20,7 @@ It is recommended to use Python >= 3.11.
 * possibity to use RSA to sign to check the integrity of its database;
 * verify files with [Hashlookup](https://github.com/hashlookup);
 * verify files with [Pandora](https://github.com/pandora-analysis);
+* verify files with [MISP](https://github.com/MISP);
 * alerts are written in the logs of the system;
 * alerts can be sent via email to a list of users;
 * alerts can be sent on IRC channels through the
@@ -116,6 +117,13 @@ Check for known malicious files with
 
 ```bash
 $ pyhids pandora
+```
+
+Check for known malicious files with
+[MISP](https://github.com/MISP):
+
+```bash
+$ pyhids misp
 ```
 
 

@@ -5,6 +5,7 @@ import argparse
 from pyhids.genBase import main as genBase
 from pyhids.genKeys import main as genKeys
 from pyhids.hashlookup import main as hashlookup
+from pyhids.misp import main as misp
 from pyhids.pandora import main as pandora
 from pyhids.pyHIDS import main as run
 
@@ -63,6 +64,11 @@ def main():
         "pandora", help="Uses Pandora in order to verify the hashes of the files."
     )
 
+    # Subparser: MISP
+    subparsers.add_parser(
+        "misp", help="Uses MISP in order to verify the hashes of the files."
+    )
+
     arguments = parser.parse_args()
 
     if arguments.command == "gen-keys":
@@ -75,6 +81,8 @@ def main():
         hashlookup()
     elif arguments.command == "pandora":
         pandora()
+    elif arguments.command == "misp":
+        misp()
     else:
         return "Unknown sub-command."
 

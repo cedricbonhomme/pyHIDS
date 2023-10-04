@@ -14,7 +14,7 @@ def main():
     pandora.init_apikey(
         conf.PANDORA_USERNAME, conf.PANDORA_PASSWORD, api_key["authkey"]
     )
-    hashes = list(base["files"].values())[:5]
+    hashes = list(base["files"].values())
     for hash_value in hashes:
         result = pandora.search(hash_value)
         if "matching_tasks" in result and result["matching_tasks"]:

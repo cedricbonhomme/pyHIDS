@@ -4,6 +4,9 @@ root_url = https://hashlookup.circl.lu/
 root_url = https://pandora.circl.lu/
 username = <username>
 password = <password>
+[misp]
+root_url = https://misppriv.circl.lu/
+key = <key>
 [irc]
 enabled = 0
 channel = irc://irc.libera.chat/#testpyHIDS
