@@ -18,14 +18,14 @@ It is recommended to use Python >= 3.11.
 * checks the integrity of system's files with a list of rules;
 * checks the output of commands (*iptables*, ...);
 * possibity to use RSA to sign to check the integrity of its database;
-* verify files with [Hashlookup](https://github.com/hashlookup);
-* verify files with [Pandora](https://github.com/pandora-analysis);
-* verify files with [MISP](https://github.com/MISP);
 * alerts are written in the logs of the system;
 * alerts can be sent via email to a list of users;
 * alerts can be sent on IRC channels through the
   [irker](https://gitlab.com/esr/irker) IRC client (which should be running as
-  a daemon).
+  a daemon);
+* verify files with [Hashlookup](https://github.com/hashlookup),
+  [Pandora](https://github.com/pandora-analysis),
+  and [MISP](https://github.com/MISP).
 
 
 ### Installation
