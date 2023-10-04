@@ -70,8 +70,6 @@ def hash_file(target_file):
         # The specified file does not exist,
         # remove from the list.
         print(target_file, ":", e)
-        globals()["number_of_files_to_scan"] = globals()["number_of_files_to_scan"] - 1
-        del list_of_files[list_of_files.index(target_file)]
     finally:
         if data is not None:
             opened_file.close()
@@ -101,7 +99,6 @@ def main(sign_database=False):
     for a_file in list_of_files:
         hash_value = hash_file(a_file)
         if hash_value is not None:
-            line = a_file + ":" + hash_value + ":"
             database["files"][a_file] = hash_value
 
     # Compute the hash values of each commands

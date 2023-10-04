@@ -1,10 +1,5 @@
 #! /usr/bin/env python
 
-"""Generates RSA public/private keys
-
-Used for the encryption/decrytion of the base file.
-"""
-
 """
 pyHIDS. Python HIDS. Security software.
 pyHIDS verify the integrity of your system.
@@ -28,13 +23,6 @@ This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
 This is free software, and you are welcome to redistribute it
 under certain conditions; type `show c' for details.
 """
-
-__author__ = "Cedric Bonhomme"
-__version__ = "$Revision: 0.2 $"
-__date__ = "$Date: 2010/03/06 $"
-__revision__ = "$Date: 2013/02/16 $"
-__copyright__ = "Copyright (c) 2010-2023 Cedric Bonhomme"
-__license__ = "GPL v3"
 
 import pickle
 
