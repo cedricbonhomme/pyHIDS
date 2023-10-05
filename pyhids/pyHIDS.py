@@ -75,7 +75,7 @@ def compare_hash(target_file, expected_hash):
         opened_file = open(target_file, "rb")
         data = opened_file.read()
     except Exception:
-        globals()["error"] = globals()["error"] + 1
+        globals()["error"] = globals().get("error", 0) + 1
         log(
             local_time
             + " [error] "
@@ -98,7 +98,7 @@ def compare_hash(target_file, expected_hash):
         else:
             # hash has changed, warning
 
-            # reporting aler in the log file
+            # reporting alert in the log file
             globals()["warning"] = globals().get("warning", 0) + 1
             message = local_time + " [warning] " + target_file + " changed."
 
@@ -184,8 +184,7 @@ def log(message, display=False):
     try:
         log_file.write(message + "\n")
     except Exception as e:
-        print(e)
-        # log_syslog(e)
+        log_syslog(e)
     lock.release()
 
 

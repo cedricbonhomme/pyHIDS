@@ -106,23 +106,13 @@ $ tail log
 ### Other features
 
 Check for known malicious files with
-[Hashlookup](https://github.com/hashlookup):
+[Hashlookup](https://github.com/hashlookup),
+[Pandora](https://github.com/pandora-analysis) or
+[MISP](https://github.com/MISP).
 
 ```bash
 $ pyhids hashlookup
-```
-
-Check for known malicious files with
-[Pandora](https://github.com/pandora-analysis):
-
-```bash
 $ pyhids pandora
-```
-
-Check for known malicious files with
-[MISP](https://github.com/MISP):
-
-```bash
 $ pyhids misp
 ```
 
