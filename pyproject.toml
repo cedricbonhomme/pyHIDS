@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyHIDS"
-version = "0.7.0"
+version = "0.7.1"
 description = "A host-based intrusion detection system."
 authors = ["Cédric Bonhomme <cedric@cedricbonhomme.org>"]
 license = "GPL-3.0-or-later"
