@@ -52,7 +52,7 @@ irker_lock = threading.Lock()
 Q = queue.Queue()
 
 
-def compare_hash(target_file, expected_hash):
+def compare_file_hash(target_file, expected_hash):
     """
     Compare 2 hash values.
 
@@ -178,8 +178,8 @@ def log(message, display=False):
     try:
         log_file = open(conf.LOGS, "a")
     except Exception as e:
-        log_syslog("Something wrong happens when opening the logs: " + str(e))
-        print("Something wrong happens when opening the logs: " + str(e))
+        log_syslog("There was a problem opening the logs: " + str(e))
+        print("There was a problem opening the logs: " + str(e))
         exit(0)
     try:
         log_file.write(message + "\n")
@@ -259,8 +259,8 @@ def main(check_signature=False):
     try:
         log_file = open(conf.LOGS, "a")
     except Exception as e:
-        log_syslog("Something wrong happens when opening the logs: " + str(e))
-        print("Something wrong happens when opening the logs: " + str(e))
+        log_syslog("There was a problem opening the logs: " + str(e))
+        print("There was a problem opening the logs: " + str(e))
         exit(0)
     log(time.strftime("[%d/%m/%y %H:%M:%S] HIDS starting.", time.localtime()))
 
@@ -280,7 +280,7 @@ def main(check_signature=False):
         if os.path.exists(file):
             thread = threading.Thread(
                 None,
-                compare_hash,
+                compare_file_hash,
                 None,
                 (
                     file,
