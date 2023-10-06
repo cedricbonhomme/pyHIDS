@@ -25,7 +25,8 @@ It is recommended to use Python >= 3.11.
   a daemon);
 * verify files with [Hashlookup](https://github.com/hashlookup),
   [Pandora](https://github.com/pandora-analysis),
-  and [MISP](https://github.com/MISP).
+  [MISP](https://github.com/MISP) and
+  [YARA](https://github.com/virustotal/yara).
 
 
 ### Installation
@@ -105,15 +106,13 @@ $ tail log
 
 ### Other features
 
-Check for known malicious files with
-[Hashlookup](https://github.com/hashlookup),
-[Pandora](https://github.com/pandora-analysis) or
-[MISP](https://github.com/MISP).
+Check for known malicious files with Hashlookup, Pandora, MISP or YARA.
 
 ```bash
 $ pyhids hashlookup
 $ pyhids pandora
 $ pyhids misp
+$ pyhids yara
 ```
 
 

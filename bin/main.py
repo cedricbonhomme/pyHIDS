@@ -8,6 +8,7 @@ from pyhids.hashlookup import main as hashlookup
 from pyhids.misp import main as misp
 from pyhids.pandora import main as pandora
 from pyhids.pyHIDS import main as run
+from pyhids.yara_ext import main as yara
 
 
 def main():
@@ -69,6 +70,9 @@ def main():
         "misp", help="Uses MISP in order to verify the hashes of the files."
     )
 
+    # Subparser: Yara
+    subparsers.add_parser("yara", help="Uses Yara in order to verify the files.")
+
     arguments = parser.parse_args()
 
     if arguments.command == "gen-keys":
@@ -83,6 +87,8 @@ def main():
         pandora()
     elif arguments.command == "misp":
         misp()
+    elif arguments.command == "yara":
+        yara()
     else:
         return "Unknown sub-command."
 

@@ -60,6 +60,8 @@ PANDORA_PASSWORD = config.get("pandora", "password")
 MISP_URL = config.get("misp", "root_url")
 MISP_KEY = config.get("misp", "key")
 
+YARA_RULES = config.get("yara", "rules")
+
 # address of the log file :
 LOGS = os.path.join(PATH, "log")
 # address of the database of hash values :

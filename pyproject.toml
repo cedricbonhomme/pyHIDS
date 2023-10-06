@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyHIDS"
-version = "0.7.1"
+version = "0.8.0"
 description = "A host-based intrusion detection system."
 authors = ["Cédric Bonhomme <cedric@cedricbonhomme.org>"]
 license = "GPL-3.0-or-later"
@@ -39,6 +39,7 @@ rsa = "^4.9"
 pyhashlookup = "^1.2.1"
 pypandora = "^1.5.0"
 pymisp = "^2.4.176"
+yara-python = "^4.3.1"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.0.0"
