@@ -13,6 +13,7 @@ to a list of users. You can define rules to specify files to be checked.
 
 It is recommended to use Python >= 3.11.
 
+
 ### Features
 
 * checks the integrity of system's files with a list of rules;
@@ -42,8 +43,7 @@ $ export PYHIDS_CONFIG=~/.pyHIDS/conf.cfg
 [An example](./conf.cfg-sample) of configuration file is available.
 With this file you can configure:
 
-- the connection to Hashlookup;
-- the connection to Pandora;
+- the integration with Hashlookup, Pandora, MISP and YARA;
 - the IRC connection for the notifications;
 - the SMTP connection for the email notifications;
 - the list of files to scan;
@@ -82,10 +82,8 @@ Verifying the integrity of the files...
 ```
 
 The program warns that the file has changed. When this happens, a warning is
-generated in the logs **/var/log/syslog** and a mail is sent to the
-administrator.
-If no change is detected only the log file is updated.
-
+generated in the logs of the system and an email is sent to the
+administrator. If no change is detected, only the log file is updated.
 
 Log file generated:
 
