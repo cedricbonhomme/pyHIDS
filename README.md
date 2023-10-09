@@ -27,7 +27,8 @@ It is recommended to use Python >= 3.11.
 * verify files with [Hashlookup](https://github.com/hashlookup),
   [Pandora](https://github.com/pandora-analysis),
   [MISP](https://github.com/MISP) and
-  [YARA](https://github.com/virustotal/yara).
+  [YARA](https://github.com/virustotal/yara);
+* possibility to export the database in a Bloom or a Cuckoo filter.
 
 
 ### Installation
