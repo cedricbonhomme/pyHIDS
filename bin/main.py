@@ -2,6 +2,7 @@
 
 import argparse
 
+from pyhids import utils
 from pyhids.genBase import main as genBase
 from pyhids.genKeys import main as genKeys
 from pyhids.hashlookup import main as hashlookup
@@ -40,7 +41,7 @@ def main():
         dest="sign_database",
         default=False,
         action=argparse.BooleanOptionalAction,
-        help="Specify if the database must be signed. ",
+        help="Specify if the database must be signed.",
     )
 
     # Subparser: run
@@ -73,6 +74,23 @@ def main():
     # Subparser: Yara
     subparsers.add_parser("yara", help="Uses Yara in order to verify the files.")
 
+    # Subparser: Export
+    parser_export = subparsers.add_parser("export", help="Provide export functions.")
+    parser_export.add_argument(
+        "--bloom-filter",
+        dest="bloom_filter",
+        default=False,
+        action=argparse.BooleanOptionalAction,
+        help="Export the database in a Bloom filter.",
+    )
+    parser_export.add_argument(
+        "--cuckoo-filter",
+        dest="cuckoo_filter",
+        default=False,
+        action=argparse.BooleanOptionalAction,
+        help="Export the database in a Cuckoo filter.",
+    )
+
     arguments = parser.parse_args()
 
     if arguments.command == "gen-keys":
@@ -89,6 +107,13 @@ def main():
         misp()
     elif arguments.command == "yara":
         yara()
+    elif arguments.command == "export":
+        if arguments.bloom_filter:
+            utils.bloom_export()
+        elif arguments.cuckoo_filter:
+            utils.cuckoo_export()
+        else:
+            return "Unknown export format."
     else:
         return "Unknown sub-command."
 

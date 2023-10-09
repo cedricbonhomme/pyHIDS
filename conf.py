@@ -63,8 +63,15 @@ MISP_KEY = config.get("misp", "key")
 YARA_RULES = config.get("yara", "rules")
 
 BLOOM_LOCATION = config.get("bloom", "location")
-CAPACITY = config.get("bloom", "capacity")
-FALSE_POSITIVE_PROBABILITY = config.get("bloom", "false_positive_probability")
+BLOOM_CAPACITY = config.getint("bloom", "capacity")
+BLOOM_FALSE_POSITIVE_PROBABILITY = config.getfloat(
+    "bloom", "false_positive_probability"
+)
+
+CUCKOO_LOCATION = config.get("cuckoo", "location")
+CUCKOO_CAPACITY = config.getint("cuckoo", "capacity")
+CUCKOO_ERROR_RATE = config.getfloat("cuckoo", "error_rate")
+
 
 # address of the log file :
 LOGS = os.path.join(PATH, "log")
@@ -72,7 +79,6 @@ LOGS = os.path.join(PATH, "log")
 DATABASE = os.path.join(PATH, "database")
 # address of the signature of the database:
 DATABASE_SIG = os.path.join(PATH, "database.sig")
-
 # path of the private key (to sign the database of hash values) :
 PRIVATE_KEY = os.path.join(PATH, "pyhids_rsa")
 # path of the public key (to check the integrity of the database) :

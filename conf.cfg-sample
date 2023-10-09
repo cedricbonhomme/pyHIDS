@@ -8,11 +8,15 @@ password = <password>
 root_url = https://misppriv.circl.lu/
 key = <key>
 [yara]
-rules = var/yara_rules/rules.yara
+rules = var/yara/rules.yara
 [bloom]
-location = var/bloom/bloomfilter
+location = var/bloom/bloomfilter.bf
 capacity = 100000
 false_positive_probability = 0.001
+[cuckoo]
+location = var/cuckoo/cuckoofilter.cf
+capacity = 1000000
+error_rate = 0.000001
 [irc]
 enabled = 0
 channel = irc://irc.libera.chat/#testpyHIDS
