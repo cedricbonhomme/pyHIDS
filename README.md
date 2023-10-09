@@ -105,6 +105,8 @@ $ tail log
 
 ### Other features
 
+#### Checks with external tools
+
 Check for known malicious files with Hashlookup, Pandora, MISP or YARA.
 
 ```bash
@@ -112,6 +114,18 @@ $ pyhids hashlookup
 $ pyhids pandora
 $ pyhids misp
 $ pyhids yara
+```
+
+#### Export functions
+
+```bash
+$ pyhids export --bloom-filter
+Bloom filter generated and stored: var/bloom/bloomfilter.bf
+```
+
+```bash
+$ pyhids export --cuckoo-filter
+Cuckoo filter generated and stored: var/cuckoo/cuckoofilter.cf
 ```
 
 
