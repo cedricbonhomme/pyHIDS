@@ -1,3 +1,5 @@
+[main]
+path = var/
 [hashlookup]
 root_url = https://hashlookup.circl.lu/
 [pandora]

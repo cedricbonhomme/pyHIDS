@@ -89,17 +89,17 @@ administrator. If no change is detected, only the log file is updated.
 Log file generated:
 
 ```bash
-$ tail log
-[18/07/23 22:34:25] [notice] /bin/tload ok
-[18/07/23 22:34:25] [notice] /bin/mbim-network ok
-[18/07/23 22:34:25] [notice] /bin/preparetips5 ok
-[18/07/23 22:34:25] [notice] /bin/grub-file ok
-[18/07/23 22:34:25] [notice] /bin/xclip ok
-[18/07/23 22:34:25] [notice] /bin/pamperspective ok
-[18/07/23 22:34:25] [notice] /bin/pod2usage ok
-[18/07/23 22:34:25] Error(s) : 0
-[18/07/23 22:34:25] Warning(s) : 0
-[18/07/23 22:34:25] HIDS finished.
+$ tail var/log
+[09/10/23 14:41:51] [notice] /bin/cifscreds ok
+[09/10/23 14:41:51] [notice] /bin/mbim-network ok
+[09/10/23 14:41:51] [notice] /bin/xclip ok
+[09/10/23 14:41:51] [notice] /bin/preparetips5 ok
+[09/10/23 14:41:51] [notice] /bin/pamperspective ok
+[09/10/23 14:41:51] [notice] /bin/pod2usage ok
+[09/10/23 14:41:51] [notice] /bin/mkzftree ok
+[09/10/23 14:41:51] Error(s) : 0
+[09/10/23 14:41:51] Warning(s) : 0
+[09/10/23 14:41:51] HIDS finished.
 ```
 
 

@@ -37,7 +37,10 @@ finally:
     if not configs:
         raise Exception("No configuration file provided.")
 
-PATH = os.path.abspath(".")
+BASE_PATH = os.path.abspath(".")
+PATH = config.get("main", "path")
+if not PATH:
+    PATH = os.path.join(BASE_PATH, "var")
 
 IRC_ENABLED = bool(config.getint("irc", "enabled"))
 IRC_CHANNEL = config.get("irc", "channel")
