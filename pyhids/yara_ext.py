@@ -18,7 +18,7 @@ def main():
         exit(1)
     result = {}
     base = utils.load_base()
-    for (path, _sha1) in list(base["files"].items()):
+    for path, _sha1 in list(base["files"].items()):
         try:
             matches = rules.match(path, timeout=60)
         except Exception:

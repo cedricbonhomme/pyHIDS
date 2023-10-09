@@ -20,7 +20,7 @@ def main():
     misp = PyMISP(misp_url, misp_key, misp_verifycert)
     alerts = []
     base = utils.load_base()
-    for (_path, sha1) in list(base["files"].items()):
+    for _path, sha1 in list(base["files"].items()):
         # filename = os.path.basename(_path)
         body["value"] = sha1
         result = misp.direct_call(relative_path, body)

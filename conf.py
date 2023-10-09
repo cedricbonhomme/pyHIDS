@@ -62,6 +62,10 @@ MISP_KEY = config.get("misp", "key")
 
 YARA_RULES = config.get("yara", "rules")
 
+BLOOM_LOCATION = config.get("bloom", "location")
+CAPACITY = config.get("bloom", "capacity")
+FALSE_POSITIVE_PROBABILITY = config.get("bloom", "false_positive_probability")
+
 # address of the log file :
 LOGS = os.path.join(PATH, "log")
 # address of the database of hash values :
