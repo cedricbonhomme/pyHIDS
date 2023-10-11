@@ -31,11 +31,8 @@ import os
 config = configparser.ConfigParser()
 try:
     configs = config.read(os.environ.get("PYHIDS_CONFIG", "./conf.cfg"))
-except Exception:
-    raise Exception("No configuration file provided.")
-finally:
-    if not configs:
-        raise Exception("No configuration file provided.")
+except Exception as exc:
+    raise Exception("No configuration file provided.") from exc
 
 BASE_PATH = os.path.abspath(".")
 PATH = config.get("main", "path")
