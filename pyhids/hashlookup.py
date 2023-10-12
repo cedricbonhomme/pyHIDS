@@ -1,5 +1,8 @@
 #! /usr/bin/env python
 
+"""Query a Hashlookup server in order to verify the hashes of the files.
+"""
+
 from typing import Any, Dict, Optional, Tuple
 
 import pyhashlookup
@@ -9,6 +12,7 @@ from pyhids import utils
 
 
 def check_result(result: Dict[str, Any]) -> Tuple[Optional[bool], Dict]:
+    """Checks the result returned from a Hashlookup server."""
     if "message" in result:
         # Unknown in db
         return None, {}

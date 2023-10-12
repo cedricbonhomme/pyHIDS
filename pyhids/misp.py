@@ -1,5 +1,8 @@
 #! /usr/bin/env python
 
+"""Query a MISP server in order to verify the hashes of the files.
+"""
+
 from pymisp import PyMISP
 
 import conf

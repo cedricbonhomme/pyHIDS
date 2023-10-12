@@ -1,5 +1,8 @@
 #! /usr/bin/env python
 
+"""Uses Yara in order to verify the files.
+"""
+
 import pprint
 
 import yara
