@@ -42,12 +42,16 @@ MISP_URL = config.get("misp", "root_url")
 MISP_KEY = config.get("misp", "key")
 
 YARA_RULES = config.get("yara", "rules")
+if not os.path.exists(YARA_RULES):
+    os.makedirs(YARA_RULES)
 
 BLOOM_LOCATION = config.get("bloom", "location")
 BLOOM_CAPACITY = config.getint("bloom", "capacity")
 BLOOM_FALSE_POSITIVE_PROBABILITY = config.getfloat(
     "bloom", "false_positive_probability"
 )
+if not os.path.exists(BLOOM_LOCATION):
+    os.makedirs(BLOOM_LOCATION)
 
 CUCKOO_LOCATION = config.get("cuckoo", "location")
 CUCKOO_CAPACITY = config.getint("cuckoo", "capacity")
