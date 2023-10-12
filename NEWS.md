@@ -1,0 +1,47 @@
+# pyHIDS project news
+
+
+### 0.9.0 (2023-10-10)
+
+#### New
+
+It is now possible to export the database of pyHIDS in a Bloom or a
+Cuckoo filter.
+
+#### Changes
+
+Various improvements and minor fixes.
+
+
+### 0.8.0 (2023-10-06)
+
+#### New
+
+YARA can now be used in order to look for malicious files in the database
+of pyHIDS.
+
+
+### 0.7.1 (2023-10-05)
+
+Small fixes and improvements.
+
+
+### 0.7.0 (2023-10-04)
+
+#### New
+
+A MISP server can be queried in order to find potentially malicious files
+from the checksums in the database of pyHIDS.
+
+
+
+### 0.5.3 (2023-07-19)
+
+### New
+
+Generating a RSA signature and verifying the integrity of the database
+is now optional: you can use an other tool.
+
+#### Changes
+
+Major improvements to the arguments parser.
