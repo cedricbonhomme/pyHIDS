@@ -10,13 +10,13 @@ password = <password>
 root_url = https://misppriv.circl.lu/
 key = <key>
 [yara]
-rules = var/yara/rules.yara
+rules = var/yara/
 [bloom]
-location = var/bloom/bloomfilter.bf
+location = var/bloom/
 capacity = 100000
 false_positive_probability = 0.001
 [cuckoo]
-location = var/cuckoo/cuckoofilter.cf
+location = var/cuckoo/
 capacity = 1000000
 error_rate = 0.000001
 [irc]

@@ -3,6 +3,7 @@
 """Uses Yara in order to verify the files.
 """
 
+import glob
 import pprint
 
 import yara  # type: ignore
@@ -14,11 +15,10 @@ from pyhids import utils
 def main():
     pp = pprint.PrettyPrinter(indent=4)
     try:
-        rules = yara.compile(conf.YARA_RULES)
+        yara_file = glob.glob(conf.YARA_RULES + "*.yara")[0]
+        rules = yara.compile(yara_file)
     except Exception as e:
-        print("Problem when compiling the YARA rules.")
-        print(e)
-        exit(1)
+        raise Exception("Problem when compiling the YARA rules.") from e
     result = {}
     base = utils.load_base()
     for path, _sha1 in list(base["files"].items()):

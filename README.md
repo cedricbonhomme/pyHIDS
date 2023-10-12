@@ -82,7 +82,7 @@ Change a monitored file and relaunch the program:
 ```bash
 $ pyhids run
 Verifying the integrity of the files...
-[07/19/23 15:05:31] [warning] /etc/httpd/conf/httpd.conf changed.
+[12/10/23 14:41:51] [warning] /bin/cifsdd changed.
 ```
 
 The program warns that the file has changed. When this happens, a warning is
