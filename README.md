@@ -68,6 +68,9 @@ $ pyhids run --check-signature
 Verifying the integrity of the base of hashes...
 Database integrity verified.
 Verifying the integrity of the files...
+[12/10/23 21:35:26] Error(s) : 0
+[12/10/23 21:35:26] Warning(s) : 0
+[12/10/23 21:35:26] HIDS finished.
 ```
 
 You can skip the first step (generation of the keys) if you do not want to
@@ -95,10 +98,11 @@ $ tail var/log
 [09/10/23 14:41:51] [notice] /bin/xclip ok
 [09/10/23 14:41:51] [notice] /bin/preparetips5 ok
 [09/10/23 14:41:51] [notice] /bin/pamperspective ok
+[12/10/23 14:41:51] [warning] /bin/cifsdd changed.
 [09/10/23 14:41:51] [notice] /bin/pod2usage ok
 [09/10/23 14:41:51] [notice] /bin/mkzftree ok
 [09/10/23 14:41:51] Error(s) : 0
-[09/10/23 14:41:51] Warning(s) : 0
+[09/10/23 14:41:51] Warning(s) : 1
 [09/10/23 14:41:51] HIDS finished.
 ```
 
