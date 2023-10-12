@@ -5,7 +5,7 @@
 
 import pprint
 
-import yara
+import yara  # type: ignore
 
 import conf
 from pyhids import utils

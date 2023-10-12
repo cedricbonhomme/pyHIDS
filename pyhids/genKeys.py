@@ -7,7 +7,7 @@ import rsa
 import conf
 
 
-def main(nb_bits=1024):
+def main(nb_bits: int = 1024):
     print("Generating", nb_bits, "bits RSA keys ...")
     pub, priv = rsa.newkeys(nb_bits)
 

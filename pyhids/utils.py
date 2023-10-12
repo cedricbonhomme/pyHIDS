@@ -1,7 +1,7 @@
 import pickle
 
-from cuckoo.filter import CuckooFilter
-from flor import BloomFilter
+from cuckoo.filter import CuckooFilter  # type: ignore
+from flor import BloomFilter  # type: ignore
 
 import conf
 

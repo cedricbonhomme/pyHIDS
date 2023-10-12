@@ -28,7 +28,7 @@ irker_lock = threading.Lock()
 Q = queue.Queue()
 
 
-def compare_file_hash(target_file, expected_hash):
+def compare_file_hash(target_file: str, expected_hash: str):
     """
     Compare 2 hash values.
 
@@ -92,7 +92,7 @@ def compare_file_hash(target_file, expected_hash):
                 Q.put(message + "\n")
 
 
-def compare_command_hash(command, expected_hash):
+def compare_command_hash(command: str, expected_hash: str):
     # each log's line contain the local time. it makes research easier.
     local_time = time.strftime("[%d/%m/%y %H:%M:%S]", time.localtime())
 
@@ -132,7 +132,7 @@ def compare_command_hash(command, expected_hash):
 
 
 @contextmanager
-def opened_w_error(filename, mode="r"):
+def opened_w_error(filename: str, mode: str = "r"):
     try:
         f = open(filename, mode)
     except OSError as err:
