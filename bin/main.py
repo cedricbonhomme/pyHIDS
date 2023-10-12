@@ -2,7 +2,7 @@
 
 import argparse
 
-from pyhids import utils
+from pyhids import __version__, utils
 from pyhids.genBase import main as genBase
 from pyhids.genKeys import main as genKeys
 from pyhids.hashlookup import main as hashlookup
@@ -15,7 +15,15 @@ from pyhids.yara_ext import main as yara
 def main():
     parser = argparse.ArgumentParser(prog="pyhids")
     subparsers = parser.add_subparsers(
-        help="sub-command help", dest="command", required=True
+        help="sub-command help", dest="command", required=False
+    )
+
+    parser.add_argument(
+        "--version",
+        dest="display_version",
+        default=False,
+        action=argparse.BooleanOptionalAction,
+        help="Display the version of pyHIDS.",
     )
 
     # Subparser: gen-keys
@@ -99,6 +107,9 @@ def main():
     )
 
     arguments = parser.parse_args()
+
+    if arguments.display_version:
+        return __version__
 
     if arguments.command == "gen-keys":
         genKeys(arguments.nb_bits)
