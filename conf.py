@@ -56,7 +56,8 @@ if not os.path.exists(BLOOM_LOCATION):
 CUCKOO_LOCATION = config.get("cuckoo", "location")
 CUCKOO_CAPACITY = config.getint("cuckoo", "capacity")
 CUCKOO_ERROR_RATE = config.getfloat("cuckoo", "error_rate")
-
+if not os.path.exists(CUCKOO_LOCATION):
+    os.makedirs(CUCKOO_LOCATION)
 
 # address of the log file :
 LOGS = os.path.join(PATH, "log")
