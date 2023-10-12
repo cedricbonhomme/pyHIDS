@@ -106,6 +106,38 @@ $ tail var/log
 [09/10/23 14:41:51] HIDS finished.
 ```
 
+If you want to see the logs in ``syslog`` you have different options
+depending on your system:
+
+```bash
+$ journalctl --follow
+Oct 12 22:58:47 debian pyhids[98135]: pyHIDS - [12/10/23 22:58:47] [warning] /etc/resolv.conf changed.
+Oct 12 22:58:47 debian pyhids[98135]: pyHIDS - [12/10/23 22:58:47] [warning] /bin/mdsearch changed.
+Oct 12 22:58:47 debian pyhids[98135]: pyHIDS - [12/10/23 22:58:47] [warning] /bin/smbcacls changed.
+Oct 12 22:58:47 debian pyhids[98135]: pyHIDS - [12/10/23 22:58:47] [warning] /bin/smbspool changed.
+Oct 12 22:58:47 debian pyhids[98135]: pyHIDS - [12/10/23 22:58:47] [warning] /bin/smbclient changed.
+Oct 12 22:58:47 debian pyhids[98135]: pyHIDS - [12/10/23 22:58:47] [warning] /bin/smbcquotas changed.
+Oct 12 22:58:47 debian pyhids[98135]: pyHIDS - [12/10/23 22:58:47] [warning] /bin/smbget changed.
+Oct 12 22:58:47 debian pyhids[98135]: pyHIDS - [12/10/23 22:58:47] [warning] /bin/nmblookup changed.
+Oct 12 22:58:48 debian pyhids[98135]: pyHIDS - [12/10/23 22:58:47] [warning] /bin/rpcclient changed.
+Oct 12 22:58:48 debian pyhids[98135]: pyHIDS - [12/10/23 22:58:48] [warning] /bin/smbpasswd changed.
+Oct 12 22:58:48 debian pyhids[98135]: pyHIDS - [12/10/23 22:58:48] [warning] /bin/dbwrap_tool changed.
+Oct 12 22:58:48 debian pyhids[98135]: pyHIDS - [12/10/23 22:58:48] [warning] /bin/cifsdd changed.
+Oct 12 22:58:48 debian pyhids[98135]: pyHIDS - [12/10/23 22:58:48] [warning] /bin/net changed.
+Oct 12 22:58:48 debian pyhids[98135]: pyHIDS - [12/10/23 22:58:48] [warning] /bin/samba-regedit changed.
+Oct 12 22:58:48 debian pyhids[98135]: pyHIDS - [12/10/23 22:58:48] [warning] /bin/testparm changed.
+Oct 12 22:58:48 debian pyhids[98135]: pyHIDS - [12/10/23 22:58:48] [warning] /bin/smbtree changed.
+```
+
+```bash
+$ journalctl --since="1 minute ago"
+```
+
+```bash
+$ tail -f /var/log/syslog
+```
+
+
 
 ### Other features
 
