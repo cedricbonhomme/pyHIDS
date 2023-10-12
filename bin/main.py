@@ -55,6 +55,13 @@ def main():
         action=argparse.BooleanOptionalAction,
         help="Specify if the signature of the database must be checked.",
     )
+    parser_run.add_argument(
+        "--verbose",
+        dest="verbose",
+        default=False,
+        action=argparse.BooleanOptionalAction,
+        help="Specify if the output must be verbose.",
+    )
 
     # Subparser: hashlookup
     subparsers.add_parser(
@@ -98,7 +105,7 @@ def main():
     elif arguments.command == "gen-base":
         genBase(arguments.sign_database)
     elif arguments.command == "run":
-        run(arguments.check_signature)
+        run(arguments.check_signature, arguments.verbose)
     elif arguments.command == "hashlookup":
         hashlookup()
     elif arguments.command == "pandora":

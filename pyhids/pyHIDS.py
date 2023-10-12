@@ -4,7 +4,6 @@ import hashlib
 import json
 import os
 import pickle
-import queue
 import smtplib
 import socket
 import subprocess
@@ -14,6 +13,7 @@ import threading
 import time
 from contextlib import contextmanager
 from email.mime.text import MIMEText
+from queue import Queue
 
 import rsa
 
@@ -25,10 +25,10 @@ lock = threading.Lock()
 # lock object used when sending alerts via irc
 irker_lock = threading.Lock()
 
-Q = queue.Queue()
+Q: Queue[str] = Queue()
 
 
-def compare_file_hash(target_file: str, expected_hash: str):
+def compare_file_hash(target_file: str, expected_hash: str, verbose: bool = False):
     """
     Compare 2 hash values.
 
@@ -57,7 +57,8 @@ def compare_file_hash(target_file: str, expected_hash: str):
             + " [error] "
             + target_file
             + " does not exist. "
-            + "Or not enough privilege to read it."
+            + "Or not enough privilege to read it.",
+            verbose,
         )
     finally:
         if opened_file is not None:
@@ -70,7 +71,7 @@ def compare_file_hash(target_file: str, expected_hash: str):
 
         if hashed_data == expected_hash:
             # no changes, just write a notice in the log file
-            log(local_time + " [notice] " + target_file + " ok")
+            log(local_time + " [notice] " + target_file + " ok", verbose)
         else:
             # hash has changed, warning
 
@@ -92,7 +93,7 @@ def compare_file_hash(target_file: str, expected_hash: str):
                 Q.put(message + "\n")
 
 
-def compare_command_hash(command: str, expected_hash: str):
+def compare_command_hash(command: str, expected_hash: str, verbose: bool = True):
     # each log's line contain the local time. it makes research easier.
     local_time = time.strftime("[%d/%m/%y %H:%M:%S]", time.localtime())
 
@@ -104,7 +105,7 @@ def compare_command_hash(command: str, expected_hash: str):
 
     if hashed_data == expected_hash:
         # no changes, just write a notice in the log file
-        log(local_time + " [notice] " + " ".join(command) + " ok")
+        log(local_time + " [notice] " + " ".join(command) + " ok", verbose)
     else:
         # hash has changed, warning
 
@@ -199,7 +200,7 @@ def log_irker(target, message):
         irker_lock.release()
 
 
-def main(check_signature=False):
+def main(check_signature: bool = False, verbose: bool = False):
     if check_signature:
         print("Verifying the integrity of the base of hashes...")
         with opened_w_error(conf.PUBLIC_KEY, "rb") as (public_key_dump, err):
@@ -224,7 +225,7 @@ def main(check_signature=False):
                 try:
                     rsa.verify(msgfile, signature, public_key)
                     print("Database integrity verified.")
-                except rsa.pkcs1.VerificationError:
+                except rsa.pkcs1.VerificationError:  # type: ignore
                     log_syslog("Integrity check of the base of hashes failed.")
                     print("Integrity check of the base of hashes failed.")
                     exit(0)
@@ -239,8 +240,6 @@ def main(check_signature=False):
         print("There was a problem opening the logs: " + str(e))
         exit(0)
     log(time.strftime("[%d/%m/%y %H:%M:%S] HIDS starting.", time.localtime()))
-
-    warning, error = 0, 0
 
     # dictionnary containing filenames and their hash value.
     base = utils.load_base()
@@ -261,13 +260,14 @@ def main(check_signature=False):
                 (
                     file,
                     base["files"][file],
+                    verbose,
                 ),
             )
             thread.start()
             list_of_threads.append(thread)
 
         else:
-            error = error + 1
+            globals()["error"] = globals().get("error", 0) + 1
             log(file + " does not exist. " + "Or not enought privilege to read it.")
 
     # Check the integrity of commands output
@@ -279,6 +279,7 @@ def main(check_signature=False):
             (
                 command,
                 base["commands"][command],
+                verbose,
             ),
         )
         thread.start()
@@ -293,9 +294,9 @@ def main(check_signature=False):
         report += Q.get(True, 0.5)
 
     local_time = time.strftime("[%d/%m/%y %H:%M:%S]", time.localtime())
-    log(local_time + " Error(s) : " + str(error))
-    log(local_time + " Warning(s) : " + str(warning))
-    log(local_time + " HIDS finished.")
+    log(local_time + " Error(s) : " + str(globals()["error"]), True)
+    log(local_time + " Warning(s) : " + str(globals()["warning"]), True)
+    log(local_time + " HIDS finished.", True)
 
     if log_file is not None:
         log_file.close()

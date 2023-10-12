@@ -5,6 +5,7 @@ import os
 import pickle
 import re
 import subprocess
+from typing import BinaryIO, Dict
 
 import rsa
 
@@ -34,21 +35,18 @@ def hash_file(target_file):
     Hash the file given in parameter.
     """
     sha1_hash = hashlib.sha1()
-    opened_file = None
     hashed_data = None
     data = None
 
     # Handle the errors that may happen
     try:
-        opened_file = open(target_file, "rb")
+        opened_file: BinaryIO = open(target_file, "rb")
         data = opened_file.read()
+        opened_file.close()
     except Exception as e:
         # The specified file does not exist,
         # remove from the list.
         print(target_file, ":", e)
-    finally:
-        if data is not None:
-            opened_file.close()
 
     if data is not None:
         sha1_hash.update(data)
@@ -58,7 +56,7 @@ def hash_file(target_file):
 
 
 def main(sign_database=False):
-    database = {}
+    database: Dict[str, Dict[str, str]] = {}
     database["files"] = {}
     database["commands"] = {}
 
