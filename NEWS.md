@@ -1,6 +1,17 @@
 # pyHIDS project news
 
 
+### 0.9.1 (2023-13-10)
+
+#### Changes
+
+- various improvements to the command line;
+- new argument in order to specify if the output must be more verbose;
+- new argument in order to display the version of the software;
+- improved the creation of the default folders (for the YARA rules, Bloom
+  filter and Cuckoo filter).
+
+
 ### 0.9.0 (2023-10-10)
 
 #### New
