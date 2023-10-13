@@ -1,7 +1,7 @@
 # pyHIDS project news
 
 
-### 0.9.2 (2023-13-10)
+### 0.9.2 (2023-10-13)
 
 #### Fix
 
@@ -9,7 +9,7 @@ Fixed an issue related to the function responsible of returning the version of
 the software.
 
 
-### 0.9.1 (2023-13-10)
+### 0.9.1 (2023-10-13)
 
 #### Changes
 
