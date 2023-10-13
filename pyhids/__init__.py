@@ -37,7 +37,9 @@ def get_version():
         version = (
             os.environ.get("PKGVER")
             or subprocess.run(
-                ["git", "-C", BASE_DIR, "describe", "--tags"], stdout=subprocess.PIPE
+                ["git", "-C", BASE_DIR, "describe", "--tags"],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.DEVNULL,
             )
             .stdout.decode()
             .strip()
