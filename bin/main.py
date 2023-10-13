@@ -2,7 +2,7 @@
 
 import argparse
 
-from pyhids import __version__, utils
+from pyhids import get_version, utils
 from pyhids.genBase import main as genBase
 from pyhids.genKeys import main as genKeys
 from pyhids.hashlookup import main as hashlookup
@@ -97,7 +97,7 @@ def main():
     arguments = parser.parse_args()
 
     if arguments.version:
-        return __version__
+        return get_version()
 
     if arguments.command == "gen-keys":
         genKeys(arguments.nb_bits)
