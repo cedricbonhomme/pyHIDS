@@ -36,8 +36,11 @@ def check_result(result: Dict[str, Any]) -> Tuple[Optional[bool], Dict]:
 
 
 def main():
-    base = utils.load_base()
     pylookup = pyhashlookup.Hashlookup(root_url=conf.HASHLOOKUP_URL)
+    base = utils.load_base()
+    if base is None:
+        print("Base of hash values can not be loaded.")
+        exit(1)
     hashes = list(base["files"].values())
     result = pylookup.lookup(hashes)
     malicious_files = {}

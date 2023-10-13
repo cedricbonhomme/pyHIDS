@@ -1,4 +1,5 @@
 import pickle
+from typing import Dict, Union
 
 from cuckoo.filter import CuckooFilter  # type: ignore
 from flor import BloomFilter  # type: ignore
@@ -6,7 +7,7 @@ from flor import BloomFilter  # type: ignore
 import conf
 
 
-def load_base():
+def load_base() -> Union[None, Dict[str, Dict[str, str]]]:
     """Load the database.
 
     Return a dictionnary wich contains filenames and theirs hash value.

@@ -245,7 +245,7 @@ def main(check_signature: bool = False, verbose: bool = False):
     base = utils.load_base()
     if base is None:
         print("Base of hash values can not be loaded.")
-        exit(0)
+        exit(1)
 
     report = ""
 

@@ -10,14 +10,16 @@ from pyhids import utils
 
 
 def main():
-    alerts = []
     base = utils.load_base()
+    if base is None:
+        print("Base of hash values can not be loaded.")
+        exit(1)
     pandora = pypandora.PyPandora(root_url=conf.PANDORA_URL)
     api_key = pandora.get_apikey(conf.PANDORA_USERNAME, conf.PANDORA_PASSWORD)
     pandora.init_apikey(
         conf.PANDORA_USERNAME, conf.PANDORA_PASSWORD, api_key["authkey"]
     )
-    hashes = list(base["files"].values())
+    alerts, hashes = [], list(base["files"].values())
     for hash_value in hashes:
         result = pandora.search(hash_value)
         if "matching_tasks" in result and result["matching_tasks"]:

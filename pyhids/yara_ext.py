@@ -21,6 +21,9 @@ def main():
         raise Exception("Problem when compiling the YARA rules.") from e
     result = {}
     base = utils.load_base()
+    if base is None:
+        print("Base of hash values can not be loaded.")
+        exit(1)
     for path, _sha1 in list(base["files"].items()):
         try:
             matches = rules.match(path, timeout=60)
