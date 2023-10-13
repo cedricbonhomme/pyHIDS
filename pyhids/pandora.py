@@ -11,9 +11,6 @@ from pyhids import utils
 
 def main():
     base = utils.load_base()
-    if base is None:
-        print("Base of hash values can not be loaded.")
-        exit(1)
     pandora = pypandora.PyPandora(root_url=conf.PANDORA_URL)
     api_key = pandora.get_apikey(conf.PANDORA_USERNAME, conf.PANDORA_PASSWORD)
     pandora.init_apikey(

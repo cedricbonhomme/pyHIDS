@@ -1,5 +1,6 @@
 import pickle
-from typing import Dict, Union
+from contextlib import contextmanager
+from typing import Dict
 
 from cuckoo.filter import CuckooFilter  # type: ignore
 from flor import BloomFilter  # type: ignore
@@ -7,14 +8,31 @@ from flor import BloomFilter  # type: ignore
 import conf
 
 
-def load_base() -> Union[None, Dict[str, Dict[str, str]]]:
+@contextmanager
+def opened_w_error(filename: str, mode: str = "r"):
+    try:
+        f = open(filename, mode)
+    except OSError as err:
+        yield None, err
+    else:
+        try:
+            yield f, None
+        finally:
+            f.close()
+
+
+def load_base() -> Dict[str, Dict[str, str]]:
     """Load the database.
 
     Return a dictionnary wich contains filenames and theirs hash value.
     """
     database = None
-    with open(conf.DATABASE, "rb") as serialized_database:
-        database = pickle.load(serialized_database)
+    with opened_w_error(conf.DATABASE, "rb") as (serialized_database, err):
+        if err or serialized_database is None:
+            print(str(err))
+            exit(1)
+        else:
+            database = pickle.load(serialized_database)
     return database
 
 
@@ -28,8 +46,12 @@ def bloom_export():
     for sha1 in base["files"].values():
         bf.add(sha1.upper().encode("utf-8"))
     export_location = conf.BLOOM_LOCATION + "bloomfilter.bf"
-    with open(export_location, "wb") as f:
-        bf.write(f)
+    with opened_w_error(export_location, "wb") as (f, err):
+        if err:
+            print(str(err))
+            exit(1)
+        else:
+            bf.write(f)
     print(f"Bloom filter generated and stored: {export_location}")
     return bf
 

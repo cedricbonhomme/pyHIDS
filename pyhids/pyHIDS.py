@@ -11,7 +11,6 @@ import sys
 import syslog
 import threading
 import time
-from contextlib import contextmanager
 from email.mime.text import MIMEText
 from queue import Queue
 
@@ -132,19 +131,6 @@ def compare_command_hash(command: str, expected_hash: str, verbose: bool = True)
             Q.put(message + "\n")
 
 
-@contextmanager
-def opened_w_error(filename: str, mode: str = "r"):
-    try:
-        f = open(filename, mode)
-    except OSError as err:
-        yield None, err
-    else:
-        try:
-            yield f, None
-        finally:
-            f.close()
-
-
 def log(message, display=False):
     """
     Print and save the log in the log file.
@@ -157,7 +143,7 @@ def log(message, display=False):
     except Exception as e:
         log_syslog("There was a problem opening the logs: " + str(e))
         print("There was a problem opening the logs: " + str(e))
-        exit(0)
+        exit(1)
     try:
         log_file.write(message + "\n")
     except Exception as e:
@@ -203,24 +189,24 @@ def log_irker(target, message):
 def main(check_signature: bool = False, verbose: bool = False):
     if check_signature:
         print("Verifying the integrity of the base of hashes...")
-        with opened_w_error(conf.PUBLIC_KEY, "rb") as (public_key_dump, err):
+        with utils.opened_w_error(conf.PUBLIC_KEY, "rb") as (public_key_dump, err):
             if err:
                 print(str(err))
-                exit(0)
+                exit(1)
             else:
                 public_key = pickle.load(public_key_dump)
 
-        with opened_w_error(conf.DATABASE_SIG, "rb") as (signature_file, err):
+        with utils.opened_w_error(conf.DATABASE_SIG, "rb") as (signature_file, err):
             if err:
                 print(str(err))
-                exit(0)
+                exit(1)
             else:
                 signature = signature_file.read()
 
-        with opened_w_error(conf.DATABASE, "rb") as (msgfile, err):
+        with utils.opened_w_error(conf.DATABASE, "rb") as (msgfile, err):
             if err:
                 print(str(err))
-                exit(0)
+                exit(1)
             else:
                 try:
                     rsa.verify(msgfile, signature, public_key)
@@ -228,7 +214,7 @@ def main(check_signature: bool = False, verbose: bool = False):
                 except rsa.pkcs1.VerificationError:  # type: ignore
                     log_syslog("Integrity check of the base of hashes failed.")
                     print("Integrity check of the base of hashes failed.")
-                    exit(0)
+                    exit(1)
 
     print("Verifying the integrity of the files...")
     # open the log file
@@ -238,14 +224,11 @@ def main(check_signature: bool = False, verbose: bool = False):
     except Exception as e:
         log_syslog("There was a problem opening the logs: " + str(e))
         print("There was a problem opening the logs: " + str(e))
-        exit(0)
+        exit(1)
     log(time.strftime("[%d/%m/%y %H:%M:%S] HIDS starting.", time.localtime()))
 
     # dictionnary containing filenames and their hash value.
     base = utils.load_base()
-    if base is None:
-        print("Base of hash values can not be loaded.")
-        exit(1)
 
     report = ""
 
