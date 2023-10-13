@@ -70,4 +70,4 @@ warn_unreachable = true
 show_error_context = true
 pretty = true
 
-exclude = "build|dist|docs|stegano.egg-info"
+exclude = "build|dist|docs|"
