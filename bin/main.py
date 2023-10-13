@@ -20,9 +20,7 @@ def main():
 
     parser.add_argument(
         "--version",
-        dest="display_version",
-        default=False,
-        action=argparse.BooleanOptionalAction,
+        action="store_true",
         help="Display the version of pyHIDS.",
     )
 
@@ -46,9 +44,7 @@ def main():
     )
     parser_gen_base.add_argument(
         "--sign",
-        dest="sign_database",
-        default=False,
-        action=argparse.BooleanOptionalAction,
+        action="store_true",
         help="Specify if the database must be signed.",
     )
 
@@ -58,16 +54,12 @@ def main():
     )
     parser_run.add_argument(
         "--check-signature",
-        dest="check_signature",
-        default=False,
-        action=argparse.BooleanOptionalAction,
+        action="store_true",
         help="Specify if the signature of the database must be checked.",
     )
     parser_run.add_argument(
         "--verbose",
-        dest="verbose",
-        default=False,
-        action=argparse.BooleanOptionalAction,
+        action="store_true",
         help="Specify if the output must be verbose.",
     )
 
@@ -93,28 +85,24 @@ def main():
     parser_export = subparsers.add_parser("export", help="Provide export functions.")
     parser_export.add_argument(
         "--bloom-filter",
-        dest="bloom_filter",
-        default=False,
-        action=argparse.BooleanOptionalAction,
+        action="store_true",
         help="Export the database in a Bloom filter.",
     )
     parser_export.add_argument(
         "--cuckoo-filter",
-        dest="cuckoo_filter",
-        default=False,
-        action=argparse.BooleanOptionalAction,
+        action="store_true",
         help="Export the database in a Cuckoo filter.",
     )
 
     arguments = parser.parse_args()
 
-    if arguments.display_version:
+    if arguments.version:
         return __version__
 
     if arguments.command == "gen-keys":
         genKeys(arguments.nb_bits)
     elif arguments.command == "gen-base":
-        genBase(arguments.sign_database)
+        genBase(arguments.sign)
     elif arguments.command == "run":
         run(arguments.check_signature, arguments.verbose)
     elif arguments.command == "hashlookup":
@@ -133,7 +121,7 @@ def main():
         else:
             return "Unknown export format."
     else:
-        return "Unknown sub-command."
+        return "Unknown arguments or options.\nFor help type:\n\tpyhids --help"
 
 
 if __name__ == "__main__":

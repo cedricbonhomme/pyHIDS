@@ -26,9 +26,10 @@ def bloom_export():
     bf = BloomFilter(n=conf.BLOOM_CAPACITY, p=conf.BLOOM_FALSE_POSITIVE_PROBABILITY)
     for sha1 in base["files"].values():
         bf.add(sha1.upper().encode("utf-8"))
-    with open(conf.BLOOM_LOCATION + "bloomfilter.bf", "wb") as f:
+    export_location = conf.BLOOM_LOCATION + "bloomfilter.bf"
+    with open(export_location, "wb") as f:
         bf.write(f)
-    print(f"Bloom filter generated and stored: {conf.BLOOM_LOCATION}")
+    print(f"Bloom filter generated and stored: {export_location}")
     return bf
 
 
@@ -43,8 +44,9 @@ def cuckoo_export():
     )
     for sha1 in base["files"].values():
         cuckoo.insert(sha1.upper().encode("utf-8"))
-    serialized_cuckoo = open(conf.CUCKOO_LOCATION + "cuckoofilter.cf", "wb")
+    export_location = conf.CUCKOO_LOCATION + "cuckoofilter.cf"
+    serialized_cuckoo = open(export_location, "wb")
     pickle.dump(cuckoo, serialized_cuckoo)
     serialized_cuckoo.close()
-    print(f"Cuckoo filter generated and stored: {conf.CUCKOO_LOCATION}")
+    print(f"Cuckoo filter generated and stored: {export_location}")
     return cuckoo

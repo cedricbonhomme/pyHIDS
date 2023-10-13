@@ -16,7 +16,7 @@ def search_files(motif, root_path):
     """
     Return a list of files.
 
-    Search fo files containing 'motif' that
+    Search for file names containing 'motif' that
     aren't symbolic links.
     """
     result = []

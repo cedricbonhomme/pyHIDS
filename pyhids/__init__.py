@@ -31,6 +31,8 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 def get_version():
+    """Returns the version of the software.
+    Checks if the Python package is installed or uses the Git tag."""
     version = (
         os.environ.get("PKGVER")
         or subprocess.run(
