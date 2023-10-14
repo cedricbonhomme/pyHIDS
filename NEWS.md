@@ -1,6 +1,15 @@
 # pyHIDS project news
 
 
+### 0.9.2 (2023-10-14)
+
+#### Changes
+
+- improved files handling and exit codes;
+- improved checks on the loaded database;
+- route errors from subprocess.run() to /dev/null.
+
+
 ### 0.9.2 (2023-10-13)
 
 #### Fix
