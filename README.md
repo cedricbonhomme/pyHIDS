@@ -3,13 +3,8 @@
 ### Presentation
 
 [pyHIDS](https://github.com/cedricbonhomme/pyHIDS) is a
-[HIDS](http://en.wikipedia.org/wiki/Host-based_intrusion_detection_system)
+[HIDS](https://en.wikipedia.org/wiki/Host-based_intrusion_detection_system)
 (host-based intrusion detection system) for verifying the integrity of a system.
-
-It is possible to use an RSA signature to check the integrity of its database.
-
-Alerts are written in the logs of the system and can be sent via email
-to a list of users. You can define rules to specify files to be checked.
 
 It is recommended to use Python >= 3.11.
 
@@ -30,11 +25,12 @@ It is recommended to use Python >= 3.11.
   [YARA](https://github.com/virustotal/yara);
 * possibility to export the database in a Bloom or a Cuckoo filter.
 
+You can define rules to specify files to be checked.
+
 
 ### Installation
 
-You can simply use [pipx](https://pypa.github.io/pipx/)
-or [poetry](https://python-poetry.org/).
+You can use [pipx](https://pypa.github.io/pipx/).
 
 ```bash
 $ pipx install pyHIDS
@@ -138,7 +134,6 @@ $ tail -f /var/log/syslog
 ```
 
 
-
 ### Other features
 
 #### Checks with external tools
@@ -174,7 +169,7 @@ In your shell enter the command:
 $ crontab -e
 ```
 
-And add the following line to check the integrity of the system every fifty
+Add the following line to check the integrity of the system every fifty
 minutes:
 
 ```bash
