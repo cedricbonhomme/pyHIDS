@@ -6,6 +6,7 @@ syntax: glob
 *~
 *.db
 *.cfg
+.vscode/
 
 # Virtualenv
 venv
@@ -35,8 +36,4 @@ eproject.cfg
 # Log files:
 *.log
 
-database
-database.sig
-log
-pyhids_rsa
-pyhids_rsa.pub
+var/
