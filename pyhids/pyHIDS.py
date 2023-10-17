@@ -57,7 +57,7 @@ def compare_file_hash(target_file: str, expected_hash: str, verbose: bool = Fals
             + target_file
             + " does not exist. "
             + "Or not enough privilege to read it.",
-            verbose,
+            True,
         )
     finally:
         if opened_file is not None:
@@ -187,6 +187,8 @@ def log_irker(target, message):
 
 
 def main(check_signature: bool = False, verbose: bool = False):
+    globals()["warning"] = globals().get("warning", 0)
+    globals()["error"] = globals().get("error", 0)
     if check_signature:
         print("Verifying the integrity of the base of hashes...")
         with utils.opened_w_error(conf.PUBLIC_KEY, "rb") as (public_key_dump, err):
@@ -251,7 +253,10 @@ def main(check_signature: bool = False, verbose: bool = False):
 
         else:
             globals()["error"] = globals().get("error", 0) + 1
-            log(file + " does not exist. " + "Or not enought privilege to read it.")
+            log(
+                file + " does not exist. " + "Or not enought privilege to read it.",
+                True,
+            )
 
     # Check the integrity of commands output
     for command in list(base["commands"].keys()):
