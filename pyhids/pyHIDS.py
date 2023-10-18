@@ -55,8 +55,8 @@ def compare_file_hash(target_file: str, expected_hash: str, verbose: bool = Fals
             local_time
             + " [error] "
             + target_file
-            + " does not exist. "
-            + "Or not enough privilege to read it.",
+            + " does not exist"
+            + " or not enough rights to read it.",
             True,
         )
     finally:
@@ -254,7 +254,7 @@ def main(check_signature: bool = False, verbose: bool = False):
         else:
             globals()["error"] = globals().get("error", 0) + 1
             log(
-                file + " does not exist. " + "Or not enought privilege to read it.",
+                file + " does not exist or not enought rights to read it.",
                 True,
             )
 
