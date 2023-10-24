@@ -32,6 +32,9 @@ include = [
     "bin/*",
 ]
 
+[tool.poetry.urls]
+"Changes" = "https://github.com/cedricbonhomme/pyHIDS/blob/master/NEWS.md"
+
 [tool.poetry.scripts]
 pyhids = "bin.main:main"
 
