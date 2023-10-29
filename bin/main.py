@@ -74,8 +74,13 @@ def main():
     )
 
     # Subparser: MISP
-    subparsers.add_parser(
+    parser_misp = subparsers.add_parser(
         "misp", help="Uses MISP in order to verify the hashes of the files."
+    )
+    parser_misp.add_argument(
+        "--pythonify",
+        action="store_true",
+        help="Returns a list of PyMISP Objects instead of the plain json output.",
     )
 
     # Subparser: Yara
@@ -110,7 +115,7 @@ def main():
     elif arguments.command == "pandora":
         pandora()
     elif arguments.command == "misp":
-        misp()
+        misp(arguments.pythonify)
     elif arguments.command == "yara":
         yara()
     elif arguments.command == "export":

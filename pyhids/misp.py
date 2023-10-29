@@ -12,25 +12,29 @@ misp_url = conf.MISP_URL
 misp_key = conf.MISP_KEY
 misp_verifycert = True
 relative_path = "attributes/restSearch"
-body = {
-    # "org": "CIRCL",
-    "returnFormat": "json",
-    "type": "filename|sha1",
-}
+# body = {
+#     # "org": "CIRCL",
+#     "returnFormat": "json",
+#     "type": "filename|sha1",
+# }
+values = {}
 
 
-def main():
+def main(pythonify: bool = False):
     misp = PyMISP(misp_url, misp_key, misp_verifycert)
-    alerts = []
+    # alerts = []
     base = utils.load_base()
+    i = 0
     for _path, sha1 in list(base["files"].items()):
+        i += 1
         # filename = os.path.basename(_path)
-        body["value"] = sha1
-        result = misp.direct_call(relative_path, body)
-        if result["Attribute"]:
-            alerts.append(result)
-    if alerts:
-        print(alerts)
+        values[f"value{i}"] = sha1
+        # result = misp.direct_call(relative_path, body)
+        # if result["Attribute"]:
+        #     alerts.append(result)
+    result = misp.search(controller="attributes", value=values, pythonify=pythonify)
+    if result:
+        print(result)
 
 
 if __name__ == "__main__":
