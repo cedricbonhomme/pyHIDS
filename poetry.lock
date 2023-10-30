@@ -379,19 +379,19 @@ wmi = ["wmi (>=1.5.1,<2.0.0)"]
 
 [[package]]
 name = "filelock"
-version = "3.12.4"
+version = "3.13.0"
 description = "A platform independent file lock."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "filelock-3.12.4-py3-none-any.whl", hash = "sha256:08c21d87ded6e2b9da6728c3dff51baf1dcecf973b768ef35bcbc3447edb9ad4"},
-    {file = "filelock-3.12.4.tar.gz", hash = "sha256:2e6f249f1f3654291606e046b09f1fd5eac39b360664c27f5aad072012f8bcbd"},
+    {file = "filelock-3.13.0-py3-none-any.whl", hash = "sha256:a552f4fde758f4eab33191e9548f671970f8b06d436d31388c9aa1e5861a710f"},
+    {file = "filelock-3.13.0.tar.gz", hash = "sha256:63c6052c82a1a24c873a549fbd39a26982e8f35a3016da231ead11a5be9dad44"},
 ]
 
 [package.extras]
-docs = ["furo (>=2023.7.26)", "sphinx (>=7.1.2)", "sphinx-autodoc-typehints (>=1.24)"]
-testing = ["covdefaults (>=2.3)", "coverage (>=7.3)", "diff-cover (>=7.7)", "pytest (>=7.4)", "pytest-cov (>=4.1)", "pytest-mock (>=3.11.1)", "pytest-timeout (>=2.1)"]
-typing = ["typing-extensions (>=4.7.1)"]
+docs = ["furo (>=2023.9.10)", "sphinx (>=7.2.6)", "sphinx-autodoc-typehints (>=1.24)"]
+testing = ["covdefaults (>=2.3)", "coverage (>=7.3.2)", "diff-cover (>=8)", "pytest (>=7.4.3)", "pytest-cov (>=4.1)", "pytest-mock (>=3.12)", "pytest-timeout (>=2.2)"]
+typing = ["typing-extensions (>=4.8)"]
 
 [[package]]
 name = "flake8"
@@ -443,13 +443,13 @@ lxml = ["lxml"]
 
 [[package]]
 name = "identify"
-version = "2.5.30"
+version = "2.5.31"
 description = "File identification library for Python"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "identify-2.5.30-py2.py3-none-any.whl", hash = "sha256:afe67f26ae29bab007ec21b03d4114f41316ab9dd15aa8736a167481e108da54"},
-    {file = "identify-2.5.30.tar.gz", hash = "sha256:f302a4256a15c849b91cfcdcec052a8ce914634b2f77ae87dad29cd749f2d88d"},
+    {file = "identify-2.5.31-py2.py3-none-any.whl", hash = "sha256:90199cb9e7bd3c5407a9b7e81b4abec4bb9d249991c79439ec8af740afc6293d"},
+    {file = "identify-2.5.31.tar.gz", hash = "sha256:7736b3c7a28233637e3c36550646fc6389bedd74ae84cb788200cc8e2dd60b75"},
 ]
 
 [package.extras]
@@ -911,13 +911,13 @@ virtualenv = ">=20.10.0"
 
 [[package]]
 name = "publicsuffixlist"
-version = "0.10.0.20231022"
+version = "0.10.0.20231030"
 description = "publicsuffixlist implement"
 optional = false
 python-versions = ">=2.6"
 files = [
-    {file = "publicsuffixlist-0.10.0.20231022-py2.py3-none-any.whl", hash = "sha256:97eb6e2f87d3ea913144ef218ea1851fe3e3241a7b2f0c84ac0b61d87816e2aa"},
-    {file = "publicsuffixlist-0.10.0.20231022.tar.gz", hash = "sha256:b179a7b6e92be26f3beb1e07bb8e6d1e54f4d6b236f25ed84f9f6ed935bc4d5e"},
+    {file = "publicsuffixlist-0.10.0.20231030-py2.py3-none-any.whl", hash = "sha256:07dd88d9f62c5fe1e836aacd1cb5bae261e246b7e1e4020ac7def9e7ea3b24cd"},
+    {file = "publicsuffixlist-0.10.0.20231030.tar.gz", hash = "sha256:d7246feb383d98a2538a7479ed01ef0b1ff49a2d1bd8edc291ca07d6fe10b8da"},
 ]
 
 [package.extras]
@@ -1005,19 +1005,19 @@ docs = ["Sphinx (>=5.1.1,<6.0.0)"]
 
 [[package]]
 name = "pymisp"
-version = "2.4.176"
+version = "2.4.178"
 description = "Python API for MISP."
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "pymisp-2.4.176-py3-none-any.whl", hash = "sha256:694c690c4cf242ce939b78720e8b82e9c8067404c9c70422a250d272c9475689"},
-    {file = "pymisp-2.4.176.tar.gz", hash = "sha256:c844b315245b3ae3c65ac1462e41460c2dda4263edb5bba259e495a42acd183a"},
+    {file = "pymisp-2.4.178-py3-none-any.whl", hash = "sha256:d078a2c47b797776356eadf4da12531adca91b6982a025a85835b5b15941ae4d"},
+    {file = "pymisp-2.4.178.tar.gz", hash = "sha256:64a3482a9bb3e3627bedd8879326909f039777ef7e3d02593fcfaaca99dd33aa"},
 ]
 
 [package.dependencies]
 deprecated = ">=1.2.14,<2.0.0"
-jsonschema = ">=4.19.0,<5.0.0"
-publicsuffixlist = ">=0.10.0.20230828,<0.11.0.0"
+jsonschema = ">=4.17.3"
+publicsuffixlist = ">=0.10.0.20231022,<0.11.0.0"
 python-dateutil = ">=2.8.2,<3.0.0"
 requests = ">=2.31.0,<3.0.0"
 
@@ -1027,7 +1027,7 @@ docs = ["Sphinx (<7.2)", "Sphinx (>=7.2,<8.0)", "recommonmark (>=0.7.1,<0.8.0)",
 email = ["RTFDE (>=0.1.0,<0.2.0)", "extract_msg (>=0.45.0,<0.46.0)", "oletools (>=0.60.1,<0.61.0)"]
 fileobjects = ["lief (>=0.13.2,<0.14.0)", "pydeep2 (>=0.5.1,<0.6.0)", "python-magic (>=0.4.27,<0.5.0)"]
 openioc = ["beautifulsoup4 (>=4.12.2,<5.0.0)"]
-pdfexport = ["reportlab (>=4.0.4,<5.0.0)"]
+pdfexport = ["reportlab (>=4.0.6,<5.0.0)"]
 url = ["pyfaup (>=1.2,<2.0)"]
 virustotal = ["validators (>=0.22.0,<0.23.0)"]
 

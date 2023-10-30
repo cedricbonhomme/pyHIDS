@@ -1,6 +1,17 @@
 # pyHIDS project news
 
 
+### 0.9.4 (2023-10-30)
+
+#### Changes
+
+- [MISP lookup] The SHA1 values are now submitted in a single query;
+- [MISP lookup] A new argument lets the user specify if the final output must
+  be returned as a list of PyMISP Objects instead of the plain json output;
+- [MISP lookup] Added possibility to specify the return format (json, stix2, csv, etc.);
+- [core] Errors are always displayed, even in non-verbose mode.
+
+
 ### 0.9.3 (2023-10-14)
 
 #### Changes
