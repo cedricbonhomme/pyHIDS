@@ -82,6 +82,31 @@ def main():
         action="store_true",
         help="Returns a list of PyMISP Objects instead of the plain json output.",
     )
+    parser_misp.add_argument(
+        "--return-format",
+        choices=[
+            "openioc",
+            "json",
+            "xml",
+            "suricata",
+            "snort",
+            "text",
+            "rpz",
+            "csv",
+            "cache",
+            "stix-xml",
+            "stix",
+            "stix2",
+            "yara",
+            "yara-json",
+            "attack",
+            "attack-sightings",
+            "context",
+            "context-markdown",
+        ],
+        default="json",
+        help="Set the return format of the search.",
+    )
 
     # Subparser: Yara
     subparsers.add_parser("yara", help="Uses Yara in order to verify the files.")
@@ -115,7 +140,7 @@ def main():
     elif arguments.command == "pandora":
         pandora()
     elif arguments.command == "misp":
-        misp(arguments.pythonify)
+        misp(return_format=arguments.return_format, pythonify=arguments.pythonify)
     elif arguments.command == "yara":
         yara()
     elif arguments.command == "export":

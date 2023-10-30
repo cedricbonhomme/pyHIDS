@@ -20,7 +20,7 @@ relative_path = "attributes/restSearch"
 values = {}
 
 
-def main(pythonify: bool = False):
+def main(return_format: str = "json", pythonify: bool = False):
     misp = PyMISP(misp_url, misp_key, misp_verifycert)
     # alerts = []
     base = utils.load_base()
@@ -32,7 +32,12 @@ def main(pythonify: bool = False):
         # result = misp.direct_call(relative_path, body)
         # if result["Attribute"]:
         #     alerts.append(result)
-    result = misp.search(controller="attributes", value=values, pythonify=pythonify)
+    result = misp.search(
+        controller="attributes",
+        value=values,
+        pythonify=pythonify,
+        return_format=return_format,
+    )
     if result:
         print(result)
 
