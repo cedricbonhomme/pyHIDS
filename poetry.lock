@@ -144,34 +144,34 @@ files = [
 
 [[package]]
 name = "cachecontrol"
-version = "0.13.1"
+version = "0.14.0"
 description = "httplib2 caching for requests"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "cachecontrol-0.13.1-py3-none-any.whl", hash = "sha256:95dedbec849f46dda3137866dc28b9d133fc9af55f5b805ab1291833e4457aa4"},
-    {file = "cachecontrol-0.13.1.tar.gz", hash = "sha256:f012366b79d2243a6118309ce73151bf52a38d4a5dac8ea57f09bd29087e506b"},
+    {file = "cachecontrol-0.14.0-py3-none-any.whl", hash = "sha256:f5bf3f0620c38db2e5122c0726bdebb0d16869de966ea6a2befe92470b740ea0"},
+    {file = "cachecontrol-0.14.0.tar.gz", hash = "sha256:7db1195b41c81f8274a7bbd97c956f44e8348265a1bc7641c37dfebc39f0c938"},
 ]
 
 [package.dependencies]
 filelock = {version = ">=3.8.0", optional = true, markers = "extra == \"filecache\""}
-msgpack = ">=0.5.2"
+msgpack = ">=0.5.2,<2.0.0"
 requests = ">=2.16.0"
 
 [package.extras]
-dev = ["CacheControl[filecache,redis]", "black", "build", "cherrypy", "mypy", "pytest", "pytest-cov", "sphinx", "tox", "types-redis", "types-requests"]
+dev = ["CacheControl[filecache,redis]", "black", "build", "cherrypy", "furo", "mypy", "pytest", "pytest-cov", "sphinx", "sphinx-copybutton", "tox", "types-redis", "types-requests"]
 filecache = ["filelock (>=3.8.0)"]
 redis = ["redis (>=2.10.5)"]
 
 [[package]]
 name = "certifi"
-version = "2023.11.17"
+version = "2024.2.2"
 description = "Python package for providing Mozilla's CA Bundle."
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "certifi-2023.11.17-py3-none-any.whl", hash = "sha256:e036ab49d5b79556f99cfc2d9320b34cfbe5be05c5871b51de9329f0603b0474"},
-    {file = "certifi-2023.11.17.tar.gz", hash = "sha256:9b469f3a900bf28dc19b8cfbf8019bf47f7fdd1a65a1d4ffb98fc14166beb4d1"},
+    {file = "certifi-2024.2.2-py3-none-any.whl", hash = "sha256:dc383c07b76109f368f6106eee2b593b04a011ea4d55f652c6ca24a754d1cdd1"},
+    {file = "certifi-2024.2.2.tar.gz", hash = "sha256:0569859f95fc761b18b45ef421b1290a0f65f147e92a1e5eb3e635f9a5e4e66f"},
 ]
 
 [[package]]
@@ -286,13 +286,13 @@ files = [
 
 [[package]]
 name = "cyclonedx-python-lib"
-version = "6.4.0"
+version = "6.4.1"
 description = "Python library for CycloneDX"
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "cyclonedx_python_lib-6.4.0-py3-none-any.whl", hash = "sha256:1bcfea62211bc074b94dee05aa1fc2610e1bb6b8c507182073f4344e3e807b39"},
-    {file = "cyclonedx_python_lib-6.4.0.tar.gz", hash = "sha256:a877784f5f1066398336b61cdb7413311e93a6bc46a5065ba0d8e0dddbc54103"},
+    {file = "cyclonedx_python_lib-6.4.1-py3-none-any.whl", hash = "sha256:42d50052c4604e8d6a91753e51bca33d668fb82adc1aab3f4eb54b89fa61cbc0"},
+    {file = "cyclonedx_python_lib-6.4.1.tar.gz", hash = "sha256:aca5d8cf10f8d8420ba621e0cf4a24b98708afb68ca2ca72d7f2cc6394c75681"},
 ]
 
 [package.dependencies]
@@ -776,13 +776,13 @@ files = [
 
 [[package]]
 name = "pip"
-version = "23.3.2"
+version = "24.0"
 description = "The PyPA recommended tool for installing Python packages."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "pip-23.3.2-py3-none-any.whl", hash = "sha256:5052d7889c1f9d05224cd41741acb7c5d6fa735ab34e339624a614eaaa7e7d76"},
-    {file = "pip-23.3.2.tar.gz", hash = "sha256:7fd9972f96db22c8077a1ee2691b172c8089b17a5652a44494a9ecb0d78f9149"},
+    {file = "pip-24.0-py3-none-any.whl", hash = "sha256:ba0d021a166865d2265246961bec0152ff124de910c5cc39f1156ce3fa7c69dc"},
+    {file = "pip-24.0.tar.gz", hash = "sha256:ea9bd1a847e8c5774a5777bb398c19e80bcd4e2aa16a4b301b718fe6f593aba2"},
 ]
 
 [[package]]
@@ -848,18 +848,18 @@ testing = ["aboutcode-toolkit (>=6.0.0)", "black", "pytest (>=6,!=7.0.0)", "pyte
 
 [[package]]
 name = "platformdirs"
-version = "4.1.0"
+version = "4.2.0"
 description = "A small Python package for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "platformdirs-4.1.0-py3-none-any.whl", hash = "sha256:11c8f37bcca40db96d8144522d925583bdb7a31f7b0e37e3ed4318400a8e2380"},
-    {file = "platformdirs-4.1.0.tar.gz", hash = "sha256:906d548203468492d432bcb294d4bc2fff751bf84971fbb2c10918cc206ee420"},
+    {file = "platformdirs-4.2.0-py3-none-any.whl", hash = "sha256:0614df2a2f37e1a662acbd8e2b25b92ccf8632929bc6d43467e17fe89c75e068"},
+    {file = "platformdirs-4.2.0.tar.gz", hash = "sha256:ef0cc731df711022c174543cb70a9b5bd22e5a9337c8624ef2c2ceb8ddad8768"},
 ]
 
 [package.extras]
-docs = ["furo (>=2023.7.26)", "proselint (>=0.13)", "sphinx (>=7.1.1)", "sphinx-autodoc-typehints (>=1.24)"]
-test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest (>=7.4)", "pytest-cov (>=4.1)", "pytest-mock (>=3.11.1)"]
+docs = ["furo (>=2023.9.10)", "proselint (>=0.13)", "sphinx (>=7.2.6)", "sphinx-autodoc-typehints (>=1.25.2)"]
+test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest (>=7.4.3)", "pytest-cov (>=4.1)", "pytest-mock (>=3.12)"]
 
 [[package]]
 name = "pre-commit"
@@ -881,13 +881,13 @@ virtualenv = ">=20.10.0"
 
 [[package]]
 name = "publicsuffixlist"
-version = "0.10.0.20240127"
+version = "0.10.0.20240205"
 description = "publicsuffixlist implement"
 optional = false
 python-versions = ">=2.6"
 files = [
-    {file = "publicsuffixlist-0.10.0.20240127-py2.py3-none-any.whl", hash = "sha256:54fc38d2fd319f9bf61148ac849d3d132aa953fc7ef224f596aaa0d2c1168de3"},
-    {file = "publicsuffixlist-0.10.0.20240127.tar.gz", hash = "sha256:e88a4d26c2e3e0894c5e812778cf45798716e8ad15ab9ffdedf3cae6364c1584"},
+    {file = "publicsuffixlist-0.10.0.20240205-py2.py3-none-any.whl", hash = "sha256:d8d15322b3813b0c34cbe13c6f626f85d7f89f0cb30de5c54f46508446510e0e"},
+    {file = "publicsuffixlist-0.10.0.20240205.tar.gz", hash = "sha256:cc7ab0562c25180aa53aec8fe3b4a47312aefaf15016201f593d0df94628cea1"},
 ]
 
 [package.extras]
@@ -976,13 +976,13 @@ docs = ["Sphinx (>=5.1.1,<6.0.0)"]
 
 [[package]]
 name = "pymisp"
-version = "2.4.183"
+version = "2.4.184"
 description = "Python API for MISP."
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "pymisp-2.4.183-py3-none-any.whl", hash = "sha256:104ead987cb069b87a9d335cf6ec8edccda386b281de57460a2450a143ffc822"},
-    {file = "pymisp-2.4.183.tar.gz", hash = "sha256:00abe5592f07bb1cd41ca803f9b0b8b2b70474004a779be53cd215280fd625b3"},
+    {file = "pymisp-2.4.184-py3-none-any.whl", hash = "sha256:ea91c8bcd896857b469f04a3eb4852eae9eb9a9e36771d20e7cdd40d4d573eb5"},
+    {file = "pymisp-2.4.184.tar.gz", hash = "sha256:fbd9089c867a63144562932862474910696ab57f4786a4b7c1a0b28ba204c0ae"},
 ]
 
 [package.dependencies]
@@ -993,23 +993,23 @@ requests = ">=2.31.0,<3.0.0"
 
 [package.extras]
 brotli = ["urllib3[brotli]"]
-docs = ["Sphinx (<7.2)", "Sphinx (>=7.2,<8.0)", "recommonmark (>=0.7.1,<0.8.0)", "sphinx-autodoc-typehints (>=1.25.2,<2.0.0)"]
+docs = ["Sphinx (<7.2)", "Sphinx (>=7.2,<8.0)", "recommonmark (>=0.7.1,<0.8.0)", "sphinx-autodoc-typehints (>=1.25.3,<2.0.0)"]
 email = ["RTFDE (>=0.1.1,<0.2.0)", "extract_msg (>=0.47.0,<0.48.0)", "oletools (>=0.60.1,<0.61.0)"]
-fileobjects = ["lief (>=0.13.2,<0.14.0)", "pydeep2 (>=0.5.1,<0.6.0)", "python-magic (>=0.4.27,<0.5.0)"]
-openioc = ["beautifulsoup4 (>=4.12.2,<5.0.0)"]
-pdfexport = ["reportlab (>=4.0.8,<5.0.0)"]
+fileobjects = ["lief (>=0.14,<0.15)", "pydeep2 (>=0.5.1,<0.6.0)", "python-magic (>=0.4.27,<0.5.0)"]
+openioc = ["beautifulsoup4 (>=4.12.3,<5.0.0)"]
+pdfexport = ["reportlab (>=4.0.9,<5.0.0)"]
 url = ["pyfaup (>=1.2,<2.0)"]
 virustotal = ["validators (>=0.22.0,<0.23.0)"]
 
 [[package]]
 name = "pypandora"
-version = "1.6.1"
+version = "1.8.0"
 description = "Python CLI and module for pandora"
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "pypandora-1.6.1-py3-none-any.whl", hash = "sha256:e90800be9be17be5ee2cd376d8e4ea045152a0d91e52d1ae4f26d208f1cc52cc"},
-    {file = "pypandora-1.6.1.tar.gz", hash = "sha256:6c80bb28fcb88bd979ba536e483fa6cdea2b552a65f5de8160a173b54cd097da"},
+    {file = "pypandora-1.8.0-py3-none-any.whl", hash = "sha256:42956eab2f789efcaba3631a436e2325295d9dcbca1c4e5ff32dd3607f640781"},
+    {file = "pypandora-1.8.0.tar.gz", hash = "sha256:e8d110588b9a1cec00b362140b10a60a5d152406f1e4ac7eb89c9f0d42826d84"},
 ]
 
 [package.dependencies]
@@ -1225,17 +1225,18 @@ files = [
 
 [[package]]
 name = "urllib3"
-version = "2.1.0"
+version = "2.2.0"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "urllib3-2.1.0-py3-none-any.whl", hash = "sha256:55901e917a5896a349ff771be919f8bd99aff50b79fe58fec595eb37bbc56bb3"},
-    {file = "urllib3-2.1.0.tar.gz", hash = "sha256:df7aa8afb0148fa78488e7899b2c59b5f4ffcfa82e6c54ccb9dd37c1d7b52d54"},
+    {file = "urllib3-2.2.0-py3-none-any.whl", hash = "sha256:ce3711610ddce217e6d113a2732fafad960a03fd0318c91faa79481e35c11224"},
+    {file = "urllib3-2.2.0.tar.gz", hash = "sha256:051d961ad0c62a94e50ecf1af379c3aba230c66c710493493560c0c223c49f20"},
 ]
 
 [package.extras]
 brotli = ["brotli (>=1.0.9)", "brotlicffi (>=0.8.0)"]
+h2 = ["h2 (>=4,<5)"]
 socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
 zstd = ["zstandard (>=0.18.0)"]
 
