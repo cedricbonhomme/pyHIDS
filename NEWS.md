@@ -1,6 +1,19 @@
 # pyHIDS project news
 
 
+### 0.9.5 (2024-08-08)
+
+#### Changes
+
+- Improved handling of authentication failure with the MISP server. (3c38012)
+- Improved handling of authentication failure with the Pandora server. (b86314a)
+
+#### Fix
+
+- The configuration file is now loaded with read_file which returns an
+  exception when the configuration file is not found. Closes #6.
+
+
 ### 0.9.4 (2023-10-30)
 
 #### Changes
