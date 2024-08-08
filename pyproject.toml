@@ -52,7 +52,7 @@ scalable-cuckoo-filter = "^1.1"
 flake8 = "^6.0.0"
 mypy = "^1.4.1"
 pre-commit = "^3.3.3"
-pip-audit = "^2.6.1"
+pip-audit = "^2.7.3"
 
 [build-system]
 requires = ["poetry-core"]
