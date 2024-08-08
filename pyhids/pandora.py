@@ -9,13 +9,18 @@ import conf
 from pyhids import utils
 
 
-def main():
+def main() -> None:
     base = utils.load_base()
     pandora = pypandora.PyPandora(root_url=conf.PANDORA_URL)
     api_key = pandora.get_apikey(conf.PANDORA_USERNAME, conf.PANDORA_PASSWORD)
-    pandora.init_apikey(
-        conf.PANDORA_USERNAME, conf.PANDORA_PASSWORD, api_key["authkey"]
-    )
+    try:
+        pandora.init_apikey(
+            conf.PANDORA_USERNAME, conf.PANDORA_PASSWORD, api_key["authkey"]
+        )
+    except Exception as e:
+        print("Unable to initialize the API key:")
+        print(e)
+        exit(1)
     alerts, hashes = [], list(base["files"].values())
     for hash_value in hashes:
         result = pandora.search(hash_value)
