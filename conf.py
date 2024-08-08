@@ -10,9 +10,12 @@ from typing import List, Tuple
 # load the configuration
 config = configparser.ConfigParser()
 try:
-    configs = config.read(os.environ.get("PYHIDS_CONFIG", "./conf.cfg"))
+    config = config.read_file(open(os.environ.get("PYHIDS_CONFIG", "./conf.cfg")))
 except Exception as exc:
     raise Exception("No configuration file provided.") from exc
+finally:
+    if not config:
+        raise Exception("No configuration file provided.")
 
 BASE_PATH = os.path.abspath(".")
 PATH = config.get("main", "path")
