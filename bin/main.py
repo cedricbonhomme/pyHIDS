@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
+import os
 
 from pyhids import get_version, utils
 from pyhids.genBase import main as genBase
@@ -22,6 +23,12 @@ def main():
         "--version",
         action="store_true",
         help="Display the version of pyHIDS.",
+    )
+
+    parser.add_argument(
+        "--config",
+        action="store_true",
+        help="Display the path of the configuration file.",
     )
 
     # Subparser: gen-keys
@@ -128,6 +135,11 @@ def main():
 
     if arguments.version:
         return get_version()
+    elif arguments.config:
+        return os.environ.get(
+            "PYHIDS_CONFIG",
+            "No config file or 'PYHIDS_CONFIG' environment variable not set.",
+        )
 
     if arguments.command == "gen-keys":
         genKeys(arguments.nb_bits)
