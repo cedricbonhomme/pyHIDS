@@ -1,16 +1,45 @@
-[tool.poetry]
+[build-system]
+requires = ["poetry-core>=2.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+[project]
 name = "pyHIDS"
 version = "0.9.5"
 description = "A host-based intrusion detection system."
-authors = ["Cédric Bonhomme <cedric@cedricbonhomme.org>"]
+authors = [
+    {name = "Cédric Bonhomme", email = "cedric@cedricbonhomme.org"}
+]
 license = "GPL-3.0-or-later"
 readme = "README.md"
-
-homepage = "https://github.com/cedricbonhomme/pyHIDS"
-repository = "https://github.com/cedricbonhomme/pyHIDS"
-
 keywords = ["hids", "security", "hashlookup", "integrity"]
+# classifieres is dynamic because we want to create Python classifiers automatically
+dynamic = ["classifiers"]
 
+requires-python = "^3.11"
+dependencies = [
+    "rsa (>=4.9)",
+    "pyhashlookup (>=1.2.1)",
+    "pypandora (>=1.5.0)",
+    "pymisp (>=2.4.176)",
+    "yara-python (>=4.3.1)",
+    "flor (>=1.1.3)",
+    "scalable-cuckoo-filter (>=1.1)",
+]
+
+
+[project.urls]
+Homepage = "https://github.com/cedricbonhomme/pyHIDS"
+Repository = "https://github.com/cedricbonhomme/pyHIDS"
+Changelog = "https://github.com/cedricbonhomme/pyHIDS/blob/master/NEWS.md"
+
+
+[project.scripts]
+pyhids = "bin.main:main"
+
+
+[tool.poetry]
+requires-poetry = ">=2.0"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
@@ -23,7 +52,6 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)"
 ]
-
 include = [
     "README.md",
     "NEWS.md",
@@ -32,21 +60,6 @@ include = [
     "bin/*",
 ]
 
-[tool.poetry.urls]
-"Changes" = "https://github.com/cedricbonhomme/pyHIDS/blob/master/NEWS.md"
-
-[tool.poetry.scripts]
-pyhids = "bin.main:main"
-
-[tool.poetry.dependencies]
-python = "^3.11"
-rsa = "^4.9"
-pyhashlookup = "^1.2.1"
-pypandora = "^1.5.0"
-pymisp = "^2.4.176"
-yara-python = "^4.3.1"
-flor = "^1.1.3"
-scalable-cuckoo-filter = "^1.1"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.0.0"
@@ -54,9 +67,6 @@ mypy = "^1.4.1"
 pre-commit = "^3.3.3"
 pip-audit = "^2.7.3"
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
 
 [tool.isort]
 profile = "black"
@@ -76,4 +86,4 @@ warn_unreachable = true
 show_error_context = true
 pretty = true
 
-exclude = "build|dist|docs|"
+exclude = "build|dist|docs"
