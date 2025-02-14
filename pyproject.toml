@@ -13,7 +13,7 @@ authors = [
 license = "GPL-3.0-or-later"
 readme = "README.md"
 keywords = ["hids", "security", "hashlookup", "integrity"]
-# classifieres is dynamic because we want to create Python classifiers automatically
+
 dynamic = ["classifiers"]
 
 requires-python = ">=3.10,<4.0"
