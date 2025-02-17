@@ -12,7 +12,7 @@ It is recommended to use Python >= 3.11.
 ### Features
 
 * checks the integrity of system's files with a list of rules;
-* checks the output of commands (*iptables*, ...);
+* checks the output of commands (*iptables*, etc.);
 * possibity to use RSA to sign to check the integrity of its database;
 * alerts are written in the logs of the system;
 * alerts can be sent via email to a list of users;
@@ -30,7 +30,7 @@ You can define rules to specify files to be checked.
 
 ### Installation
 
-You can use [pipx](https://pypa.github.io/pipx/).
+You can use [pipx](https://pypa.github.io/pipx).
 
 ```bash
 $ pipx install pyHIDS
@@ -52,18 +52,18 @@ With this file you can configure:
 
 ```bash
 $ pyhids gen-keys --size 2048
-Generating 2048 bits RSA keys ...
+Generating 2048 bits RSA keys…
 Dumping Keys
 Done.
 
 $ pyhids gen-base --sign
-Generating database...
+Generating database…
 2427 files in the database.
 
 $ pyhids run --check-signature
-Verifying the integrity of the base of hashes...
+Verifying the integrity of the base of hashes…
 Database integrity verified.
-Verifying the integrity of the files...
+Verifying the integrity of the files…
 [12/10/23 21:35:26] Error(s) : 0
 [12/10/23 21:35:26] Warning(s) : 0
 [12/10/23 21:35:26] HIDS finished.
@@ -77,7 +77,7 @@ Change a monitored file and relaunch the program:
 
 ```bash
 $ pyhids run
-Verifying the integrity of the files...
+Verifying the integrity of the files…
 [12/10/23 14:41:51] [warning] /bin/cifsdd changed.
 ```
 

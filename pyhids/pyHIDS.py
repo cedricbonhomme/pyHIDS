@@ -190,7 +190,7 @@ def main(check_signature: bool = False, verbose: bool = False):
     globals()["warning"] = globals().get("warning", 0)
     globals()["error"] = globals().get("error", 0)
     if check_signature:
-        print("Verifying the integrity of the base of hashes...")
+        print("Verifying the integrity of the base of hashes…")
         with utils.opened_w_error(conf.PUBLIC_KEY, "rb") as (public_key_dump, err):
             if err:
                 print(str(err))
@@ -218,7 +218,7 @@ def main(check_signature: bool = False, verbose: bool = False):
                     print("Integrity check of the base of hashes failed.")
                     exit(1)
 
-    print("Verifying the integrity of the files...")
+    print("Verifying the integrity of the files…")
     # open the log file
     log_file = None
     try:

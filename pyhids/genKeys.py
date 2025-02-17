@@ -8,7 +8,7 @@ import conf
 
 
 def main(nb_bits: int = 1024):
-    print("Generating", nb_bits, "bits RSA keys ...")
+    print("Generating", nb_bits, "bits RSA keys…")
     pub, priv = rsa.newkeys(nb_bits)
 
     public_key = open(conf.PUBLIC_KEY, "wb")

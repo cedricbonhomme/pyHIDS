@@ -5,7 +5,7 @@ build-backend = "poetry.core.masonry.api"
 
 [project]
 name = "pyHIDS"
-version = "0.9.5"
+version = "0.9.6"
 description = "A host-based intrusion detection system."
 authors = [
     {name = "Cédric Bonhomme", email = "cedric@cedricbonhomme.org"}
@@ -22,7 +22,7 @@ dependencies = [
     "pyhashlookup (>=1.2.1)",
     "pypandora (>=1.5.0)",
     "pymisp (>=2.4.176)",
-    "yara-python (>=4.3.1)",
+    "yara-python (>=4.5.1)",
     "flor (>=1.1.3)",
     "scalable-cuckoo-filter (>=1.1)",
 ]

@@ -68,7 +68,7 @@ def main(sign_database=False):
         list_of_files.extend(search_files(rules[0], rules[1]))
     number_of_files_to_scan = len(list_of_files)
 
-    print("Generating database...")
+    print("Generating database…")
     # Compute the hash values of each files
     for a_file in list_of_files:
         hash_value = hash_file(a_file)
