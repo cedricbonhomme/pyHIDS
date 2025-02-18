@@ -5,7 +5,6 @@
 import logging
 
 from pymisp import PyMISP
-from pymisp.api import SearchParameterTypes
 
 import conf
 from pyhids import utils
@@ -31,7 +30,7 @@ def main(return_format: str = "json", pythonify: bool = False) -> None:
         print(str(e))
         exit(1)
 
-    values: SearchParameterTypes = {}
+    values = {}
     base = utils.load_base()
     i = 0
     for _path, sha1 in list(base["files"].items()):
@@ -44,7 +43,7 @@ def main(return_format: str = "json", pythonify: bool = False) -> None:
         value=values,
         pythonify=pythonify,
         return_format=return_format,
-    )
+    )  # type: ignore
 
     if result:
         print(result)
