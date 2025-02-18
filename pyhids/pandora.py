@@ -1,7 +1,6 @@
 #! /usr/bin/env python
 
-"""Query a Pandora server in order to verify the hashes of the files.
-"""
+"""Query a Pandora server in order to verify the hashes of the files."""
 
 import pypandora
 

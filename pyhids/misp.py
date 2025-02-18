@@ -1,11 +1,11 @@
 #! /usr/bin/env python
 
-"""Query a MISP server in order to verify the hashes of the files.
-"""
+"""Query a MISP server in order to verify the hashes of the files."""
 
 import logging
 
 from pymisp import PyMISP
+from pymisp.api import SearchParameterTypes
 
 import conf
 from pyhids import utils
@@ -21,7 +21,6 @@ relative_path = "attributes/restSearch"
 #     "returnFormat": "json",
 #     "type": "filename|sha1",
 # }
-values = {}
 
 
 def main(return_format: str = "json", pythonify: bool = False) -> None:
@@ -31,19 +30,22 @@ def main(return_format: str = "json", pythonify: bool = False) -> None:
         print("Unable to instantiate PyMISP object:")
         print(str(e))
         exit(1)
-    # alerts = []
+
+    values: SearchParameterTypes = {}
     base = utils.load_base()
     i = 0
     for _path, sha1 in list(base["files"].items()):
         i += 1
         # filename = os.path.basename(_path)
         values[f"value{i}"] = sha1
+
     result = misp.search(
         controller="attributes",
         value=values,
         pythonify=pythonify,
         return_format=return_format,
     )
+
     if result:
         print(result)
 

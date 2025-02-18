@@ -1,7 +1,6 @@
 #! /usr/bin/env python
 
-"""Uses Yara in order to verify the files.
-"""
+"""Uses Yara in order to verify the files."""
 
 import glob
 import pprint

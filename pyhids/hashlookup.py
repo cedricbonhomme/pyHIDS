@@ -1,7 +1,6 @@
 #! /usr/bin/env python
 
-"""Query a Hashlookup server in order to verify the hashes of the files.
-"""
+"""Query a Hashlookup server in order to verify the hashes of the files."""
 
 from typing import Any, Dict, Optional, Tuple
 

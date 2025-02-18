@@ -1,7 +1,6 @@
 #! /usr/bin/env python
 
-"""This module is responsible for loading the configuration variables.
-"""
+"""This module is responsible for loading the configuration variables."""
 
 import configparser
 import os
