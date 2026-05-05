@@ -19,7 +19,7 @@ def main(nb_bits: int = 1024):
     pickle.dump(priv, private_key)
 
     public_key.close()
-    public_key.close()
+    private_key.close()
 
     print("Done.")
 
